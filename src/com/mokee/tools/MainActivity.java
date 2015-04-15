@@ -111,6 +111,9 @@ public class MainActivity extends Activity implements OnClickListener,
 			}
 			break;
 		case R.id.iv_Contact:
+			et_PhoneNumbers.setText("");
+			tv_PhoneInformation.setText("");
+			
 			Intent intent = new Intent(Intent.ACTION_PICK,
 					ContactsContract.Contacts.CONTENT_URI);
 			startActivityForResult(intent, GET_PHONE);
