@@ -22,22 +22,29 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int phone=0x7f020001;
-        public static final int search=0x7f020002;
-        public static final int search_nomal=0x7f020003;
-        public static final int search_pressed=0x7f020004;
+        public static final int contact=0x7f020000;
+        public static final int contact_nomal=0x7f020001;
+        public static final int contact_pressed=0x7f020002;
+        public static final int help=0x7f020003;
+        public static final int help_nomal=0x7f020004;
+        public static final int help_pressed=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int search=0x7f020007;
+        public static final int search_nomal=0x7f020008;
+        public static final int search_pressed=0x7f020009;
     }
     public static final class id {
-        public static final int action_settings=0x7f080005;
-        public static final int et_PhoneNumbers=0x7f080001;
-        public static final int ib_QueryPhone=0x7f080002;
+        public static final int action_settings=0x7f080006;
+        public static final int et_PhoneNumbers=0x7f080002;
+        public static final int ib_QueryPhone=0x7f080003;
+        public static final int iv_Contact=0x7f080001;
         public static final int layout_PhoneAttribution=0x7f080000;
-        public static final int tv_PhoneInformation=0x7f080003;
-        public static final int tv_SystemTime=0x7f080004;
+        public static final int tv_PhoneInformation=0x7f080004;
+        public static final int tv_SystemTime=0x7f080005;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
+        public static final int activity_help=0x7f030000;
+        public static final int activity_main=0x7f030001;
     }
     public static final class menu {
         public static final int main=0x7f070000;
@@ -47,6 +54,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int phone_attribution=0x7f050002;
         public static final int phone_information=0x7f050003;
+        public static final int string_help=0x7f050004;
     }
     public static final class style {
         /** 
