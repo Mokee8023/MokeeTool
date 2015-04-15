@@ -196,6 +196,9 @@ public class MainActivity extends Activity implements OnClickListener,
 							.show();
 				} else {
 					et_PhoneNumbers.setText(phone_Numbers);
+					MobileService getPhoneInfo = new MobileService(MyHandler,
+							phone_Numbers);
+					getPhoneInfo.start();
 				}
 			}
 			break;
