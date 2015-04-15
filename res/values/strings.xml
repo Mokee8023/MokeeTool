@@ -5,6 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="phone_attribution">Phone Numbers</string>
     <string name="phone_information">Phone Information</string>
+    <string name="translation">Translation</string>
+    <string name="home">Home</string>
+    <string name="other">Other</string>
     <string name="string_help">
         1.Query phone number attribution.\n\n2.Get the system time (Long press time to copy time).
     </string>
