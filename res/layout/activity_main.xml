@@ -6,29 +6,62 @@
     tools:context="com.mokee.tools.MainActivity" >
 
     <LinearLayout
-        android:id="@+id/layout_PhoneAttribution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:id="@+id/layout_PhoneAttribution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/phone" />
+
+            <EditText
+                android:id="@+id/et_PhoneNumbers"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/phone_attribution"
+                android:inputType="phone" />
+
+            <ImageButton
+                android:id="@+id/ib_QueryPhone"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                android:src="@drawable/search" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_PhoneInformation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone_information"
+            android:paddingTop="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp" >
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/phone" />
-
-        <EditText
-            android:id="@+id/et_PhoneNumbers"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:hint="@string/phone_attribution" />
-
-        <Button
-            android:id="@+id/btn_QueryPhone"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Query" />
+            android:text="System Time: " />
+
+        <TextView
+            android:id="@+id/tv_SystemTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </LinearLayout>
