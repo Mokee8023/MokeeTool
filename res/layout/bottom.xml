@@ -1,79 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:orientation="horizontal" >
+    android:layout_height="70dp"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/holo_blue_dark" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical" >
+        android:layout_margin="5dp"
+        android:orientation="horizontal" >
 
-        <ImageButton
-            android:id="@+id/ib_Translation"
-            android:layout_width="40dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/translation_nomal" />
-
-        <TextView
-            android:id="@+id/tv_Translation"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/translation" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <ImageButton
-            android:id="@+id/ib_Home"
-            android:layout_width="40dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/home_nomal" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tv_Home"
-            android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/ib_Translation"
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/tv_Translation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/translation" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/home" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <ImageButton
-            android:id="@+id/ib_Other"
-            android:layout_width="40dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/other_normal" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tv_Other"
-            android:layout_width="wrap_content"
+            <ImageButton
+                android:id="@+id/ib_Home"
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/tv_Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/home" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/other" />
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/ib_Other"
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/tv_Other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/other" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
