@@ -14,6 +14,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import com.mokee.API.API;
+
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -24,8 +26,6 @@ public class MobileService extends Thread {
 	private Handler handler;
 	private String phoneNumbers;
 
-	private static final int GET_PHONE_INFORMATION = 0;
-
 	public MobileService(Handler handler, String phoneNumbers) {
 		this.handler = handler;
 		this.phoneNumbers = phoneNumbers;
@@ -34,7 +34,7 @@ public class MobileService extends Thread {
 	@Override
 	public void run() {
 		Message message = new Message();
-		message.what = GET_PHONE_INFORMATION;
+		message.what = API.GET_PHONE_INFORMATION;
 		message.obj = GetPhoneInformation(phoneNumbers);
 		handler.sendMessage(message);
 	}

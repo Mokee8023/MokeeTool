@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mokee.API.API;
 import com.mokee.MobileService.MobileService;
 import com.mokee.TimeService.TimeService;
 import com.mokee.tools.R;
@@ -34,17 +35,13 @@ public class HomeFragment extends Fragment implements OnLongClickListener,
 	private TextView tv_SystemTime;
 	private ImageView iv_Contact;
 
-	private static final int GET_PHONE_INFORMATION = 0;// WebService获取Phone信息
-	private static final int TIMESERVICE = 1;// 系统时间获取
-	private static final int GET_PHONE = 2;// 获取联系人
-
-	private Handler MyHandler = new Handler() {
+	private Handler MyHomeHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 
 			switch (msg.what) {
-			case GET_PHONE_INFORMATION:
+			case API.GET_PHONE_INFORMATION:
 				if (msg.obj == null) {
 					Toast.makeText(getActivity(), "Query failed!",
 							Toast.LENGTH_SHORT).show();
@@ -52,7 +49,7 @@ public class HomeFragment extends Fragment implements OnLongClickListener,
 					tv_PhoneInformation.setText(msg.obj.toString());
 				}
 				break;
-			case TIMESERVICE:
+			case API.TIMESERVICE:
 				tv_SystemTime.setText(msg.obj.toString());
 				break;
 			default:
@@ -90,7 +87,7 @@ public class HomeFragment extends Fragment implements OnLongClickListener,
 	}
 
 	private void initThread() {
-		new TimeService(MyHandler).start();
+		new TimeService(MyHomeHandler).start();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -139,7 +136,7 @@ public class HomeFragment extends Fragment implements OnLongClickListener,
 				Toast.makeText(getActivity(), "Please Input 11-digit Number!",
 						Toast.LENGTH_SHORT).show();
 			} else {
-				MobileService getPhoneInfo = new MobileService(MyHandler,
+				MobileService getPhoneInfo = new MobileService(MyHomeHandler,
 						phoneNumbers);
 				getPhoneInfo.start();
 			}
@@ -150,7 +147,7 @@ public class HomeFragment extends Fragment implements OnLongClickListener,
 
 			Intent intent = new Intent(Intent.ACTION_PICK,
 					ContactsContract.Contacts.CONTENT_URI);
-			startActivityForResult(intent, GET_PHONE);
+			startActivityForResult(intent, API.GET_PHONE);
 			break;
 		default:
 			break;
@@ -163,7 +160,7 @@ public class HomeFragment extends Fragment implements OnLongClickListener,
 		super.onActivityResult(requestCode, resultCode, data);
 
 		switch (requestCode) {
-		case GET_PHONE:
+		case API.GET_PHONE:
 			if (resultCode == getActivity().RESULT_OK) {
 				Uri contact = data.getData();
 				@SuppressWarnings("deprecation")
@@ -177,7 +174,7 @@ public class HomeFragment extends Fragment implements OnLongClickListener,
 							.show();
 				} else {
 					et_PhoneNumbers.setText(phone_Numbers);
-					MobileService getPhoneInfo = new MobileService(MyHandler,
+					MobileService getPhoneInfo = new MobileService(MyHomeHandler,
 							phone_Numbers);
 					getPhoneInfo.start();
 				}
