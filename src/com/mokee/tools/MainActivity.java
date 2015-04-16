@@ -12,11 +12,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mokee.Fragment.HomeFragment;
 import com.mokee.Fragment.OtherFragment;
@@ -42,6 +44,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	// private OtherFragment otherFragment;
 
 	private List<Fragment> list;
+	private Long exitTime = 0L;
+	private static final int EXITINTERVAL = 2000;// 退出间隔
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		setOriginState();
 		setSelectedPager(1);
 	}
-	
+
 	private void initView() {
 
 		ib_Translation = (ImageButton) findViewById(R.id.ib_Translation);
@@ -65,7 +69,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		tv_Translation = (TextView) findViewById(R.id.tv_Translation);
 		tv_Home = (TextView) findViewById(R.id.tv_Home);
 		tv_Other = (TextView) findViewById(R.id.tv_Other);
-		
+
 		ib_Translation.setOnClickListener(this);
 		ib_Home.setOnClickListener(this);
 		ib_Other.setOnClickListener(this);
@@ -177,5 +181,26 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			viewPager.setCurrentItem(2);
 			break;
 		}
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if (System.currentTimeMillis() - exitTime > EXITINTERVAL) {// 2s
+				Toast.makeText(getApplicationContext(),
+						"Press again to exit the program！", Toast.LENGTH_SHORT)
+						.show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				// onDestroy();// 只是结束此Activity的生命周期
+				finish();// 将活动推向后台，并没有立即释放内存
+				System.exit(0);// 杀死了整个Application，活动所占的资源被释放
+			}
+			return true;
+		}
+
+		return super.onKeyDown(keyCode, event);
 	}
 }

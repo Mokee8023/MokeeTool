@@ -8,6 +8,8 @@
     <string name="translation">Translation</string>
     <string name="home">Home</string>
     <string name="other">Other</string>
+    <string name="btn_tranlate">Tranlate</string>
+    <string name="translate_text_hint">Please enter the text to be translated!</string>
     <string name="string_help">
         1.Query phone number attribution.\n\n2.Get the system time (Long press time to copy time).
     </string>

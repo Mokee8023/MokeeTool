@@ -17,7 +17,6 @@ import org.apache.http.util.EntityUtils;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 public class MobileService extends Thread {
 
