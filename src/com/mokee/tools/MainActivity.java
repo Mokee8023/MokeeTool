@@ -126,9 +126,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	public void setOriginState() {
-		ib_Translation.setBackgroundResource(R.drawable.translation_nomal);
-		ib_Home.setBackgroundResource(R.drawable.home_nomal);
-		ib_Other.setBackgroundResource(R.drawable.other_normal);
+		ib_Translation.setBackgroundResource(R.drawable.translate_nomal_gray);
+		ib_Home.setBackgroundResource(R.drawable.home_nomal_gray);
+		ib_Other.setBackgroundResource(R.drawable.other_normal_gray);
 
 		tv_Translation.setTextColor(Color.BLACK);
 		tv_Home.setTextColor(Color.BLACK);
@@ -139,15 +139,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		switch (position) {
 		case 0:
 			ib_Translation
-					.setBackgroundResource(R.drawable.translation_pressed);
+					.setBackgroundResource(R.drawable.translate_nomal_bright);
 			tv_Translation.setTextColor(Color.BLUE);
 			break;
 		case 1:
-			ib_Home.setBackgroundResource(R.drawable.home_pressed);
+			ib_Home.setBackgroundResource(R.drawable.home_nomal_bright);
 			tv_Home.setTextColor(Color.BLUE);
 			break;
 		case 2:
-			ib_Other.setBackgroundResource(R.drawable.other_pressed);
+			ib_Other.setBackgroundResource(R.drawable.other_nomal_bright);
 			tv_Other.setTextColor(Color.BLUE);
 			break;
 		default:
@@ -158,7 +158,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View view) {
-		Log.i(TAG, "view.getId()：" + view.getId());
 		switch (view.getId()) {
 		case R.id.ib_Help:
 			Intent intent = new Intent();

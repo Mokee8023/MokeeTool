@@ -13,10 +13,14 @@ public class API {
 	
 	
 	//Error code
-	
 	public static final String URL_ERROR = "URL Error";
 	public static final String URLENCODER_ERROR = "URLEncoder Error";
 	public static final String URLCONNECTION_ERROR = "URLConnection Error";
 	public static final String JSONEXCEPTION_ERROR = "JSONException Error";
+	public static final String TIMEOUT_ERROR = "TimeOut Error";
+	public static final String SYSTEM_ERROR = "System Error";
+	public static final String UNAUTHORIZED_USER_ERROR = "Unauthorized User Error";
+	public static final String PARAM_FROM_TO_OR_Q_EMPTY_ERROR = "Param From To OrQuery is Empty Error";
+	public static final String UNKNOW_ERROR = "Unknow Error";
 
 }

@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,9 +24,10 @@ import com.mokee.tools.R;
 public class TranslationFragment extends Fragment {
 
 	private EditText et_TranslateText;
+	private EditText et_ResultText;
 	private Spinner sp_SourceLang;
 	private Spinner sp_TargetLang;
-	private Button btn_tranlate;
+	private ImageButton ib_tranlate;
 
 	private String sourceLang = "auto";// 默认情况下是自动识别
 	private String targetLang = "auto";
@@ -39,9 +40,9 @@ public class TranslationFragment extends Fragment {
 			switch (msg.what) {
 			case API.GET_TRANSLATE_TEXT:
 				if(msg.obj != null){
-					et_TranslateText.setText(msg.obj.toString());
+					et_ResultText.setText(msg.obj.toString());
 				}else{
-					
+					Toast.makeText(getActivity(), "Result text is NULL!", Toast.LENGTH_SHORT).show();
 				}
 				break;
 			default:
@@ -62,13 +63,14 @@ public class TranslationFragment extends Fragment {
 
 	private void initView(View view) {
 		et_TranslateText = (EditText) view.findViewById(R.id.et_TranslateText);
+		et_ResultText = (EditText) view.findViewById(R.id.et_ResultText);
 		sp_SourceLang = (Spinner) view.findViewById(R.id.sp_SourceLang);
 		sp_TargetLang = (Spinner) view.findViewById(R.id.sp_TargetLang);
-		btn_tranlate = (Button) view.findViewById(R.id.btn_tranlate);
+		ib_tranlate = (ImageButton) view.findViewById(R.id.ib_tranlate);
 
 		String[] items = getResources().getStringArray(R.array.Language);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_spinner_item, items);
+				android.R.layout.simple_spinner_dropdown_item, items);
 
 		sp_SourceLang.setAdapter(adapter);
 		sp_TargetLang.setAdapter(adapter);
@@ -102,13 +104,13 @@ public class TranslationFragment extends Fragment {
 			}
 		});
 		
-		btn_tranlate.setOnClickListener(new OnClickListener() {
+		ib_tranlate.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				String text = et_TranslateText.getText().toString().trim();
 				if(text.isEmpty()||text.equals("")){
-					Toast.makeText(getActivity(), "Please enter the text to be translated!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), "Please enter the text!", Toast.LENGTH_SHORT).show();
 				}else{
 					TranslteThread translate = new TranslteThread(MyTranslateHandler, text, sourceLang, targetLang);
 					translate.start();

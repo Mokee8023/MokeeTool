@@ -10,6 +10,7 @@
     <string name="other">Other</string>
     <string name="btn_tranlate">Tranlate</string>
     <string name="translate_text_hint">Please enter the text to be translated!</string>
+    <string name="result_text_hint">Results text translation!</string>
     <string name="string_help">
         1.Query phone number attribution.\n\n2.Get the system time (Long press time to copy time).
     </string>

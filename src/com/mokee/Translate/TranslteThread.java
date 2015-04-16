@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,8 +81,30 @@ public class TranslteThread extends Thread {
 		}
 		try {
 			JSONObject jsonObject = new JSONObject(builder.toString());
-			text = jsonObject.getJSONArray("trans_result").getJSONObject(0).getString("dst");
-			return text;
+			if(jsonObject.has("error_msg")){
+				String resultError = jsonObject.getString("error_msg");
+				if(resultError.equals("TIMEOUT")){
+					return API.TIMEOUT_ERROR;
+				}else if(resultError.equals("SYSTEM ERROR")){
+					return API.SYSTEM_ERROR;
+				}else if(resultError.equals("UNAUTHORIZED USER")){
+					return API.UNAUTHORIZED_USER_ERROR;
+				}else if(resultError.equals("PARAM_FROM_TO_OR_Q_EMPTY")){
+					return API.PARAM_FROM_TO_OR_Q_EMPTY_ERROR;
+				}else{
+					return API.UNKNOW_ERROR;
+				}
+			}else{
+				StringBuilder textArray = new StringBuilder();
+				JSONArray jsonArray = jsonObject.getJSONArray("trans_result");
+				for(int i=0;i<jsonArray.length();i++){
+					String str = jsonArray.getJSONObject(i).getString("dst");
+					textArray.append(str);
+					textArray.append('\n');
+				}
+				text = textArray.toString();
+				return text;
+			}
 		} catch (JSONException e) {
 			return API.JSONEXCEPTION_ERROR;
 		} 
