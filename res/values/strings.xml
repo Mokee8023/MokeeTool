@@ -11,6 +11,14 @@
     <string name="btn_tranlate">Tranlate</string>
     <string name="translate_text_hint">Please enter the text to be translated!</string>
     <string name="result_text_hint">Results text translation!</string>
+    <string name="sweep">Sweep</string>
+    <string name="generate_qrcode">Generate Qrcode</string>
+    <string name="tv_input_qrcodetext">Please input a string:</string>
+    <string name="et_input_qrcodetext_hint">String...</string>
+    <string name="qrcode_size">Qrcode Size:</string>
+    <string name="sweep_result">Sweep Result:</string>
+    <string name="tips">Tips:</string>
+    <string name="sweep_result_tips">1.Long press to copy text.\n</string>
     <string name="string_help">
         1.Query phone number attribution.\n\n2.Get the system time (Long press time to copy time).
     </string>

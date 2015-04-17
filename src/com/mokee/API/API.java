@@ -12,6 +12,8 @@ public class API {
 	public static final int GET_TRANSLATE_TEXT = 0;// 翻译文字
 	
 	
+	public static final int SWEEP = 0;// 扫码
+	
 	//Error code
 	public static final String URL_ERROR = "URL Error";
 	public static final String URLENCODER_ERROR = "URLEncoder Error";
