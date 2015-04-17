@@ -39,6 +39,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true" >
+        
+        <ImageButton 
+            android:id="@+id/ib_Save"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:layout_margin="10dp"
+            android:visibility="invisible"
+            android:src="@drawable/save"/>
     </LinearLayout>
 
 </RelativeLayout>

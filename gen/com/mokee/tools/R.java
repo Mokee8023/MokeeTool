@@ -74,19 +74,22 @@ public final class R {
         public static final int other_normal_gray=0x7f020010;
         public static final int return_nomal=0x7f020011;
         public static final int return_pressed=0x7f020012;
-        public static final int search=0x7f020013;
-        public static final int search_nomal=0x7f020014;
-        public static final int search_pressed=0x7f020015;
-        public static final int sweep=0x7f020016;
-        public static final int sweep_nomal=0x7f020017;
-        public static final int sweep_pressed=0x7f020018;
-        public static final int translate=0x7f020019;
-        public static final int translate_nomal_bright=0x7f02001a;
-        public static final int translate_nomal_gray=0x7f02001b;
-        public static final int translate_pressed=0x7f02001c;
+        public static final int save=0x7f020013;
+        public static final int save_nomal=0x7f020014;
+        public static final int save_pressed=0x7f020015;
+        public static final int search=0x7f020016;
+        public static final int search_nomal=0x7f020017;
+        public static final int search_pressed=0x7f020018;
+        public static final int sweep=0x7f020019;
+        public static final int sweep_nomal=0x7f02001a;
+        public static final int sweep_pressed=0x7f02001b;
+        public static final int translate=0x7f02001c;
+        public static final int translate_nomal_bright=0x7f02001d;
+        public static final int translate_nomal_gray=0x7f02001e;
+        public static final int translate_pressed=0x7f02001f;
     }
     public static final class id {
-        public static final int action_settings=0x7f060030;
+        public static final int action_settings=0x7f060031;
         public static final int activity_Text=0x7f060029;
         /**  Messages IDs 
          */
@@ -102,17 +105,18 @@ public final class R {
         public static final int encode_succeeded=0x7f060005;
         public static final int et_PhoneNumbers=0x7f06001c;
         public static final int et_QrcodeText=0x7f060016;
-        public static final int et_ResultText=0x7f06002c;
-        public static final int et_SweepResult=0x7f06002a;
-        public static final int et_TranslateText=0x7f06002b;
+        public static final int et_ResultText=0x7f06002d;
+        public static final int et_SweepResult=0x7f06002b;
+        public static final int et_TranslateText=0x7f06002c;
         public static final int et_qr_string=0x7f060023;
         public static final int ib_Help=0x7f060020;
         public static final int ib_Home=0x7f06000f;
         public static final int ib_Other=0x7f060011;
         public static final int ib_QueryPhone=0x7f06001d;
         public static final int ib_Return=0x7f060028;
+        public static final int ib_Save=0x7f06002a;
         public static final int ib_Translation=0x7f06000d;
-        public static final int ib_tranlate=0x7f06002f;
+        public static final int ib_tranlate=0x7f060030;
         public static final int iv_Contact=0x7f06001b;
         public static final int iv_Qrcode=0x7f060019;
         public static final int iv_qr_image=0x7f060025;
@@ -127,8 +131,8 @@ public final class R {
         public static final int search_book_contents_failed=0x7f06000a;
         public static final int search_book_contents_succeeded=0x7f06000b;
         public static final int sp_QrcodeSize=0x7f060017;
-        public static final int sp_SourceLang=0x7f06002d;
-        public static final int sp_TargetLang=0x7f06002e;
+        public static final int sp_SourceLang=0x7f06002e;
+        public static final int sp_TargetLang=0x7f06002f;
         public static final int tv_Home=0x7f060010;
         public static final int tv_Other=0x7f060012;
         public static final int tv_PhoneInformation=0x7f06001e;
