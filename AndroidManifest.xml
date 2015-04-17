@@ -38,6 +38,7 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
+        <activity android:name="com.mokee.Qrcode.SaveQrcode"></activity>
     </application>
 
 </manifest>

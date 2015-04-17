@@ -18,6 +18,9 @@
     <string name="qrcode_size">Qrcode Size:</string>
     <string name="sweep_result">Sweep Result:</string>
     <string name="tips">Tips:</string>
+    <string name="save_name">Save Name:</string>
+    <string name="qrcode_save_hint">Qrcode Save Name...</string>
+    <string name="save_format">Format:</string>
     <string name="sweep_result_tips">1.Long press to copy text.\n</string>
     <string name="string_help">
         1.Query phone number attribution.\n\n2.Get the system time (Long press time to copy time).

@@ -1,14 +1,11 @@
 package com.mokee.Qrcode;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -120,8 +117,8 @@ public class GenerateQrcode extends Activity implements OnClickListener {
 				file.createNewFile();
 				FileOutputStream fos = new FileOutputStream(file);
 				qrCodeBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-//				fos.flush();
-//				fos.close();
+				fos.flush();
+				fos.close();
 				Toast.makeText(getApplicationContext(), "Save File success!",
 						Toast.LENGTH_SHORT).show();
 			} catch (IOException e) {

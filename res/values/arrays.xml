@@ -35,4 +35,9 @@
         <item >750</item>
         <item >800</item>
     </string-array>
+    
+    <string-array name="Format">
+        <item >JPEG</item>
+        <item >PNG</item>
+    </string-array>
 </resources>

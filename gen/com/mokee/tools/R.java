@@ -9,6 +9,7 @@ package com.mokee.tools;
 
 public final class R {
     public static final class array {
+        public static final int Format=0x7f080002;
         public static final int Language=0x7f080000;
         public static final int QrcodeSize=0x7f080001;
     }
@@ -145,16 +146,17 @@ public final class R {
     public static final class layout {
         public static final int activity_help=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int bottom=0x7f030002;
-        public static final int camera=0x7f030003;
-        public static final int generate_qrcode=0x7f030004;
-        public static final int home=0x7f030005;
-        public static final int layout_top=0x7f030006;
-        public static final int main=0x7f030007;
-        public static final int other=0x7f030008;
-        public static final int other_sub_top=0x7f030009;
-        public static final int sweep_qrcode=0x7f03000a;
-        public static final int translation=0x7f03000b;
+        public static final int activity_save=0x7f030002;
+        public static final int bottom=0x7f030003;
+        public static final int camera=0x7f030004;
+        public static final int generate_qrcode=0x7f030005;
+        public static final int home=0x7f030006;
+        public static final int layout_top=0x7f030007;
+        public static final int main=0x7f030008;
+        public static final int other=0x7f030009;
+        public static final int other_sub_top=0x7f03000a;
+        public static final int sweep_qrcode=0x7f03000b;
+        public static final int translation=0x7f03000c;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -174,12 +176,15 @@ public final class R {
         public static final int other=0x7f070007;
         public static final int phone_attribution=0x7f070003;
         public static final int phone_information=0x7f070004;
+        public static final int qrcode_save_hint=0x7f070013;
         public static final int qrcode_size=0x7f07000f;
         public static final int result_text_hint=0x7f07000a;
-        public static final int string_help=0x7f070013;
+        public static final int save_format=0x7f070014;
+        public static final int save_name=0x7f070012;
+        public static final int string_help=0x7f070016;
         public static final int sweep=0x7f07000b;
         public static final int sweep_result=0x7f070010;
-        public static final int sweep_result_tips=0x7f070012;
+        public static final int sweep_result_tips=0x7f070015;
         public static final int tips=0x7f070011;
         public static final int translate_text_hint=0x7f070009;
         public static final int translation=0x7f070005;
