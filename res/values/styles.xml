@@ -16,5 +16,10 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <style name="Save_dialog" parent="@android:style/Theme.Holo.Light.Dialog">
+	  <item name="android:background">@drawable/save_activity_style_shap</item><!--dialog背景样式--> 
+	  <item name="android:windowBackground">@color/transparent</item><!-- 背景透明 -->
+	</style>
 
 </resources>

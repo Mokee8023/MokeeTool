@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">Tools</string>
+    <string name="ok">OK</string>
+    <string name="cancle">Cancle</string>
     <string name="action_settings">Settings</string>
     <string name="phone_attribution">Phone Numbers</string>
     <string name="phone_information">Phone Information</string>
@@ -21,6 +23,7 @@
     <string name="save_name">Save Name:</string>
     <string name="qrcode_save_hint">Qrcode Save Name...</string>
     <string name="save_format">Format:</string>
+    <string name="save_activity_label">Save Qrcode</string>
     <string name="sweep_result_tips">1.Long press to copy text.\n</string>
     <string name="string_help">
         1.Query phone number attribution.\n\n2.Get the system time (Long press time to copy time).

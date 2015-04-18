@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.WriterException;
+import com.mokee.API.API;
 import com.mokee.tools.R;
 import com.zxing.encoding.EncodingHandler;
 
@@ -39,8 +41,6 @@ public class GenerateQrcode extends Activity implements OnClickListener {
 	private Bitmap qrCodeBitmap = null;
 	private Boolean isGenerateQrcode = false;
 
-	private String bmpSavePath = "/sdcard/MokeeToolsQrCode";
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,6 +48,13 @@ public class GenerateQrcode extends Activity implements OnClickListener {
 		setContentView(R.layout.generate_qrcode);
 
 		initView();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+//		et_QrcodeText.setText("");
 	}
 
 	private void initView() {
@@ -76,7 +83,21 @@ public class GenerateQrcode extends Activity implements OnClickListener {
 			// System.exit(0);
 			break;
 		case R.id.ib_Save:
-			SaveQrCodeBitmap(qrCodeBitmap);
+			generateText = et_QrcodeText.getText().toString().trim();
+			Intent saveIntent = new Intent(GenerateQrcode.this,SaveQrcode.class);
+			Bundle data = new Bundle();
+			if (generateText.equals("")) {
+				Toast.makeText(getApplicationContext(), "Text is Empty!",
+						Toast.LENGTH_SHORT).show();
+			} else if (!isGenerateQrcode || qrCodeBitmap == null) {
+				Toast.makeText(getApplicationContext(), "QrCode is Empty!",
+						Toast.LENGTH_SHORT).show();
+			} else {
+				byte[] dataByte = API.Bitmap2Byte(qrCodeBitmap);
+				data.putByteArray("qrcode", dataByte);
+				saveIntent.putExtra("qrcode", data);
+				startActivityForResult(saveIntent,API.SAVE_QRCODE_FLAG);
+			}
 			break;
 		case R.id.btn_GenerateQrcode:
 			generateText = et_QrcodeText.getText().toString().trim();
@@ -92,44 +113,6 @@ public class GenerateQrcode extends Activity implements OnClickListener {
 		}
 	}
 
-	private void SaveQrCodeBitmap(Bitmap qrCodeBitmap2) {
-		generateText = et_QrcodeText.getText().toString().trim();
-		File file = new File(bmpSavePath);
-		if (!file.exists()) {
-			file.mkdir();
-		}
-
-		if (generateText.equals("")) {
-			Toast.makeText(getApplicationContext(), "Text is Empty!",
-					Toast.LENGTH_SHORT).show();
-		} else if (!isGenerateQrcode || qrCodeBitmap == null) {
-			Toast.makeText(getApplicationContext(), "QrCode is Empty!",
-					Toast.LENGTH_SHORT).show();
-		} else {
-
-			String filePath = bmpSavePath
-					+ "/"
-					+ generateText
-					+ DateFormat.format("_yyyy_MM_dd_HH:mm:ss",
-							System.currentTimeMillis()) + ".jpg";
-			file = new File(filePath.trim());
-			try {
-				file.createNewFile();
-				FileOutputStream fos = new FileOutputStream(file);
-				qrCodeBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-				fos.flush();
-				fos.close();
-				Toast.makeText(getApplicationContext(), "Save File success!",
-						Toast.LENGTH_SHORT).show();
-			} catch (IOException e) {
-				Log.e(TAG, "Create File IOException:" + e.toString());
-				Toast.makeText(getApplicationContext(),
-						"Create File IOException:" + e.toString(),
-						Toast.LENGTH_SHORT).show();
-			}
-		}
-	}
-
 	private void GenerateQrcode(String text) {
 		try {
 			qrCodeBitmap = EncodingHandler.createQRCode(text,
@@ -140,6 +123,24 @@ public class GenerateQrcode extends Activity implements OnClickListener {
 			Toast.makeText(getApplicationContext(), "Generate Qrcode Error!",
 					Toast.LENGTH_SHORT).show();
 			Log.e(TAG, "Generate Qrcode Error:" + e.toString());
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+		case API.SAVE_QRCODE_FLAG:
+			if(resultCode == RESULT_OK){
+				et_QrcodeText.setText("");
+				iv_Qrcode.setImageBitmap(null);
+			}else{
+				//什么都不改变
+			}
+			break;
+
+		default:
+			break;
 		}
 	}
 }
