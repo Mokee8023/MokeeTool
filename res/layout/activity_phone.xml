@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tv_query_number_attribution " />
+            android:text="@string/tv_query_number_attribution" />
 
         <View
             android:layout_width="match_parent"
@@ -50,8 +50,8 @@
 
         <ImageButton
             android:id="@+id/ib_QueryPhone"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="@android:color/transparent"
             android:scaleType="fitXY"
             android:src="@drawable/search" />

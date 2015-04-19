@@ -8,7 +8,11 @@
     <string name="phone_attribution">Phone Numbers</string>
     <string name="phone_information">Phone Information</string>
     <string name="numbers_attribution">Phone Numbers Attribution</string>
-    <string name="tv_query_number_attribution ">Query Number Attribution</string>
+    <string name="idcard">ID Card Query</string>
+    <string name="tv_query_number_attribution">Query Number Attribution</string>
+    <string name="tv_query_idcard">Query IDCard Information</string>
+    <string name="input_idcard_number">Input IDCard Number...</string>
+    <string name="idcard_information">IDCard Information...</string>
     <string name="translation">Translation</string>
     <string name="home">Home</string>
     <string name="other">Other</string>

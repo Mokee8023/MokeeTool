@@ -70,103 +70,113 @@ public final class R {
         public static final int home_nomal_bright=0x7f02000b;
         public static final int home_nomal_gray=0x7f02000c;
         public static final int ic_launcher=0x7f02000d;
-        public static final int navbar=0x7f02000e;
-        public static final int other_nomal_bright=0x7f02000f;
-        public static final int other_normal_gray=0x7f020010;
-        public static final int phone_activity_style_shap=0x7f020011;
-        public static final int return_nomal=0x7f020012;
-        public static final int return_pressed=0x7f020013;
-        public static final int save=0x7f020014;
-        public static final int save_activity_style_shap=0x7f020015;
-        public static final int save_nomal=0x7f020016;
-        public static final int save_pressed=0x7f020017;
-        public static final int search=0x7f020018;
-        public static final int search_nomal=0x7f020019;
-        public static final int search_pressed=0x7f02001a;
-        public static final int sweep=0x7f02001b;
-        public static final int sweep_nomal=0x7f02001c;
-        public static final int sweep_pressed=0x7f02001d;
-        public static final int translate=0x7f02001e;
-        public static final int translate_nomal_bright=0x7f02001f;
-        public static final int translate_nomal_gray=0x7f020020;
-        public static final int translate_pressed=0x7f020021;
+        public static final int idcard=0x7f02000e;
+        public static final int idcard_nomal=0x7f02000f;
+        public static final int idcard_pressed=0x7f020010;
+        public static final int navbar=0x7f020011;
+        public static final int other_nomal_bright=0x7f020012;
+        public static final int other_normal_gray=0x7f020013;
+        public static final int phone_activity_style_shap=0x7f020014;
+        public static final int query_idcard_activity_style_shap=0x7f020015;
+        public static final int return_nomal=0x7f020016;
+        public static final int return_pressed=0x7f020017;
+        public static final int save=0x7f020018;
+        public static final int save_activity_style_shap=0x7f020019;
+        public static final int save_nomal=0x7f02001a;
+        public static final int save_pressed=0x7f02001b;
+        public static final int search=0x7f02001c;
+        public static final int search_nomal=0x7f02001d;
+        public static final int search_pressed=0x7f02001e;
+        public static final int sweep=0x7f02001f;
+        public static final int sweep_nomal=0x7f020020;
+        public static final int sweep_pressed=0x7f020021;
+        public static final int translate=0x7f020022;
+        public static final int translate_nomal_bright=0x7f020023;
+        public static final int translate_nomal_gray=0x7f020024;
+        public static final int translate_pressed=0x7f020025;
     }
     public static final class id {
-        public static final int action_settings=0x7f060038;
-        public static final int activity_Text=0x7f060030;
+        public static final int action_settings=0x7f06003c;
+        public static final int activity_Text=0x7f06003a;
         /**  Messages IDs 
          */
         public static final int auto_focus=0x7f060000;
-        public static final int btn_GenerateQrcode=0x7f060023;
-        public static final int btn_QueryPhoneCancle=0x7f060012;
-        public static final int btn_SaveCancle=0x7f060017;
-        public static final int btn_SvaeOk=0x7f060016;
-        public static final int btn_add_qrcode=0x7f06002a;
-        public static final int btn_cancel_scan=0x7f060020;
-        public static final int btn_scan_barcode=0x7f060027;
+        public static final int btn_GenerateQrcode=0x7f06000e;
+        public static final int btn_QueryIdCardCancle=0x7f060013;
+        public static final int btn_QueryPhoneCancle=0x7f06001a;
+        public static final int btn_SaveCancle=0x7f06001f;
+        public static final int btn_SvaeOk=0x7f06001e;
+        public static final int btn_add_qrcode=0x7f060037;
+        public static final int btn_cancel_scan=0x7f06002c;
+        public static final int btn_scan_barcode=0x7f060034;
         public static final int decode=0x7f060001;
         public static final int decode_failed=0x7f060002;
         public static final int decode_succeeded=0x7f060003;
         public static final int encode_failed=0x7f060004;
         public static final int encode_succeeded=0x7f060005;
-        public static final int et_PhoneNumbers=0x7f06000f;
-        public static final int et_QrcodeText=0x7f060021;
-        public static final int et_ResultText=0x7f060034;
-        public static final int et_SaveName=0x7f060014;
-        public static final int et_SweepResult=0x7f060032;
-        public static final int et_TranslateText=0x7f060033;
-        public static final int et_qr_string=0x7f060029;
-        public static final int ib_Help=0x7f060026;
-        public static final int ib_Home=0x7f06001a;
-        public static final int ib_Other=0x7f06001c;
-        public static final int ib_QueryPhone=0x7f060010;
-        public static final int ib_Return=0x7f06002f;
-        public static final int ib_Save=0x7f060031;
-        public static final int ib_Translation=0x7f060018;
-        public static final int ib_tranlate=0x7f060037;
-        public static final int iv_Contact=0x7f06000e;
-        public static final int iv_Qrcode=0x7f060024;
-        public static final int iv_QrcodeSave=0x7f060013;
-        public static final int iv_qr_image=0x7f06002b;
+        public static final int et_IdCard=0x7f060010;
+        public static final int et_PhoneNumbers=0x7f060017;
+        public static final int et_QrcodeText=0x7f06000c;
+        public static final int et_ResultText=0x7f060022;
+        public static final int et_SaveName=0x7f06001c;
+        public static final int et_SweepResult=0x7f060020;
+        public static final int et_TranslateText=0x7f060021;
+        public static final int et_qr_string=0x7f060036;
+        public static final int ib_Help=0x7f060033;
+        public static final int ib_Home=0x7f060026;
+        public static final int ib_Other=0x7f060028;
+        public static final int ib_QueryIdCard=0x7f060011;
+        public static final int ib_QueryPhone=0x7f060018;
+        public static final int ib_Return=0x7f060039;
+        public static final int ib_Save=0x7f06003b;
+        public static final int ib_tranlate=0x7f060025;
+        public static final int iv_Contact=0x7f060016;
+        public static final int iv_Qrcode=0x7f06000f;
+        public static final int iv_QrcodeSave=0x7f06001b;
+        public static final int iv_qr_image=0x7f060038;
         public static final int launch_product_query=0x7f060006;
-        public static final int layout_Contact=0x7f06002e;
-        public static final int layout_PhoneAttribution=0x7f06000d;
-        public static final int layout_QrCode=0x7f06002d;
-        public static final int layout_Sweep=0x7f06002c;
-        public static final int preview_view=0x7f06001e;
+        public static final int layout_Contact=0x7f060030;
+        public static final int layout_IdCard=0x7f060031;
+        public static final int layout_PhoneAttribution=0x7f060015;
+        public static final int layout_QrCode=0x7f06002f;
+        public static final int layout_Sweep=0x7f06002e;
+        public static final int layout_Translate=0x7f060032;
+        public static final int preview_view=0x7f06002a;
         public static final int quit=0x7f060007;
         public static final int restart_preview=0x7f060008;
         public static final int return_scan_result=0x7f060009;
         public static final int search_book_contents_failed=0x7f06000a;
         public static final int search_book_contents_succeeded=0x7f06000b;
-        public static final int sp_QrcodeSize=0x7f060022;
-        public static final int sp_SaveFormat=0x7f060015;
-        public static final int sp_SourceLang=0x7f060035;
-        public static final int sp_TargetLang=0x7f060036;
-        public static final int tv_Home=0x7f06001b;
-        public static final int tv_Other=0x7f06001d;
-        public static final int tv_PhoneInformation=0x7f060011;
-        public static final int tv_SystemTime=0x7f060025;
-        public static final int tv_Translation=0x7f060019;
-        public static final int tv_scan_result=0x7f060028;
-        public static final int viewfinder_view=0x7f06001f;
-        public static final int vp_ViewPager=0x7f06000c;
+        public static final int sp_QrcodeSize=0x7f06000d;
+        public static final int sp_SaveFormat=0x7f06001d;
+        public static final int sp_SourceLang=0x7f060023;
+        public static final int sp_TargetLang=0x7f060024;
+        public static final int tv_Home=0x7f060027;
+        public static final int tv_IdCardInfo=0x7f060012;
+        public static final int tv_Other=0x7f060029;
+        public static final int tv_PhoneInformation=0x7f060019;
+        public static final int tv_SystemTime=0x7f06002d;
+        public static final int tv_scan_result=0x7f060035;
+        public static final int viewfinder_view=0x7f06002b;
+        public static final int vp_ViewPager=0x7f060014;
     }
     public static final class layout {
-        public static final int activity_help=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_phone=0x7f030002;
-        public static final int activity_save=0x7f030003;
-        public static final int bottom=0x7f030004;
-        public static final int camera=0x7f030005;
-        public static final int generate_qrcode=0x7f030006;
-        public static final int home=0x7f030007;
-        public static final int layout_top=0x7f030008;
-        public static final int main=0x7f030009;
-        public static final int other=0x7f03000a;
-        public static final int other_sub_top=0x7f03000b;
-        public static final int sweep_qrcode=0x7f03000c;
-        public static final int translation=0x7f03000d;
+        public static final int activity_generate_qrcode=0x7f030000;
+        public static final int activity_help=0x7f030001;
+        public static final int activity_idcard=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_phone=0x7f030004;
+        public static final int activity_save=0x7f030005;
+        public static final int activity_sweep_qrcode=0x7f030006;
+        public static final int activity_translation=0x7f030007;
+        public static final int bottom=0x7f030008;
+        public static final int camera=0x7f030009;
+        public static final int fragment_home=0x7f03000a;
+        public static final int fragment_other=0x7f03000b;
+        public static final int layout_top=0x7f03000c;
+        public static final int main=0x7f03000d;
+        public static final int my_simple_spinner_item=0x7f03000e;
+        public static final int sub_layout_top=0x7f03000f;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -178,42 +188,48 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f070004;
         public static final int app_name=0x7f070001;
-        public static final int btn_tranlate=0x7f07000c;
+        public static final int btn_tranlate=0x7f070010;
         public static final int cancle=0x7f070003;
-        public static final int et_input_qrcodetext_hint=0x7f070012;
-        public static final int generate_qrcode=0x7f070010;
+        public static final int et_input_qrcodetext_hint=0x7f070016;
+        public static final int generate_qrcode=0x7f070014;
         public static final int hello=0x7f070000;
-        public static final int home=0x7f07000a;
+        public static final int home=0x7f07000e;
+        public static final int idcard=0x7f070008;
+        public static final int idcard_information=0x7f07000c;
+        public static final int input_idcard_number=0x7f07000b;
         public static final int numbers_attribution=0x7f070007;
         public static final int ok=0x7f070002;
-        public static final int other=0x7f07000b;
+        public static final int other=0x7f07000f;
         public static final int phone_attribution=0x7f070005;
         public static final int phone_information=0x7f070006;
-        public static final int qrcode_save_hint=0x7f070017;
-        public static final int qrcode_size=0x7f070013;
-        public static final int result_text_hint=0x7f07000e;
-        public static final int save_activity_label=0x7f070019;
-        public static final int save_format=0x7f070018;
-        public static final int save_name=0x7f070016;
-        public static final int string_help=0x7f07001b;
-        public static final int sweep=0x7f07000f;
-        public static final int sweep_result=0x7f070014;
-        public static final int sweep_result_tips=0x7f07001a;
-        public static final int tips=0x7f070015;
-        public static final int translate_text_hint=0x7f07000d;
-        public static final int translation=0x7f070009;
-        public static final int tv_input_qrcodetext=0x7f070011;
-        public static final int tv_query_number_attribution =0x7f070008;
+        public static final int qrcode_save_hint=0x7f07001b;
+        public static final int qrcode_size=0x7f070017;
+        public static final int result_text_hint=0x7f070012;
+        public static final int save_activity_label=0x7f07001d;
+        public static final int save_format=0x7f07001c;
+        public static final int save_name=0x7f07001a;
+        public static final int string_help=0x7f07001f;
+        public static final int sweep=0x7f070013;
+        public static final int sweep_result=0x7f070018;
+        public static final int sweep_result_tips=0x7f07001e;
+        public static final int tips=0x7f070019;
+        public static final int translate_text_hint=0x7f070011;
+        public static final int translation=0x7f07000d;
+        public static final int tv_input_qrcodetext=0x7f070015;
+        public static final int tv_query_idcard=0x7f07000a;
+        public static final int tv_query_number_attribution=0x7f070009;
     }
     public static final class style {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -235,6 +251,9 @@ public final class R {
         /**  背景透明 
          */
         public static final int Phone_dialog=0x7f0a0003;
+        /**  背景透明 
+         */
+        public static final int QueryIdCard_dialog=0x7f0a0004;
         /**  背景透明 
          */
         public static final int Save_dialog=0x7f0a0002;

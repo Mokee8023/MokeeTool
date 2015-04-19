@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +21,6 @@ import android.widget.Toast;
 
 import com.mokee.Fragment.HomeFragment;
 import com.mokee.Fragment.OtherFragment;
-import com.mokee.Fragment.TranslationFragment;
 import com.mokee.Help.HelpActivity;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
@@ -30,12 +28,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	private ViewPager viewPager;
 
-	private ImageButton ib_Translation;
 	private ImageButton ib_Home;
 	private ImageButton ib_Other;
 	private ImageButton ib_Help;
 
-	private TextView tv_Translation;
 	private TextView tv_Home;
 	private TextView tv_Other;
 
@@ -61,16 +57,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	private void initView() {
 
-		ib_Translation = (ImageButton) findViewById(R.id.ib_Translation);
 		ib_Home = (ImageButton) findViewById(R.id.ib_Home);
 		ib_Other = (ImageButton) findViewById(R.id.ib_Other);
 		ib_Help = (ImageButton) findViewById(R.id.ib_Help);
 
-		tv_Translation = (TextView) findViewById(R.id.tv_Translation);
 		tv_Home = (TextView) findViewById(R.id.tv_Home);
 		tv_Other = (TextView) findViewById(R.id.tv_Other);
 
-		ib_Translation.setOnClickListener(this);
 		ib_Home.setOnClickListener(this);
 		ib_Other.setOnClickListener(this);
 		ib_Help.setOnClickListener(this);
@@ -83,10 +76,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		list = new ArrayList<Fragment>();
 
 		HomeFragment home = new HomeFragment();
-		TranslationFragment translation = new TranslationFragment();
 		OtherFragment other = new OtherFragment();
 
-		list.add(translation);
 		list.add(home);
 		list.add(other);
 
@@ -126,11 +117,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	}
 
 	public void setOriginState() {
-		ib_Translation.setBackgroundResource(R.drawable.translate_nomal_gray);
 		ib_Home.setBackgroundResource(R.drawable.home_nomal_gray);
 		ib_Other.setBackgroundResource(R.drawable.other_normal_gray);
 
-		tv_Translation.setTextColor(Color.BLACK);
 		tv_Home.setTextColor(Color.BLACK);
 		tv_Other.setTextColor(Color.BLACK);
 	}
@@ -138,15 +127,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	public void setSelectedPager(int position) {
 		switch (position) {
 		case 0:
-			ib_Translation
-					.setBackgroundResource(R.drawable.translate_nomal_bright);
-			tv_Translation.setTextColor(Color.BLUE);
-			break;
-		case 1:
 			ib_Home.setBackgroundResource(R.drawable.home_nomal_bright);
 			tv_Home.setTextColor(Color.BLUE);
 			break;
-		case 2:
+		case 1:
 			ib_Other.setBackgroundResource(R.drawable.other_nomal_bright);
 			tv_Other.setTextColor(Color.BLUE);
 			break;
@@ -164,20 +148,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 			intent.setClass(MainActivity.this, HelpActivity.class);
 			startActivity(intent);
 			break;
-		case R.id.ib_Translation:
+		case R.id.ib_Home:
 			setOriginState();
 			setSelectedPager(0);
 			viewPager.setCurrentItem(0);
 			break;
-		case R.id.ib_Home:
+		case R.id.ib_Other:
 			setOriginState();
 			setSelectedPager(1);
 			viewPager.setCurrentItem(1);
-			break;
-		case R.id.ib_Other:
-			setOriginState();
-			setSelectedPager(2);
-			viewPager.setCurrentItem(2);
 			break;
 		}
 	}

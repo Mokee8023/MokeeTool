@@ -62,7 +62,7 @@ public class MobileService extends Thread {
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				// 解析返回的内容
 				String result = EntityUtils.toString(response.getEntity());
-				return filterHtml(result);
+				return API.filterHtml(result);
 			} else {
 				return null;
 			}
@@ -70,19 +70,5 @@ public class MobileService extends Thread {
 			Log.e(TAG, e.toString());
 			return null;
 		}
-	}
-
-	/**
-	 * 使用正则表达式过滤HTML标记
-	 * 
-	 * @param source
-	 *            待过滤内容
-	 * @return
-	 */
-	private String filterHtml(String source) {
-		if (null == source) {
-			return "";
-		}
-		return source.replaceAll("</?[^>]+>", "").trim();
 	}
 }

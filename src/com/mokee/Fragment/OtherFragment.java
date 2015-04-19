@@ -12,9 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.mokee.API.API;
+import com.mokee.IdCard.QueryIdCardInfo;
 import com.mokee.PhoneNumber.PhoneNumber;
 import com.mokee.Qrcode.GenerateQrcode;
 import com.mokee.Qrcode.Sweep;
+import com.mokee.Translate.Translate;
 import com.mokee.tools.R;
 import com.zxing.activity.CaptureActivity;
 
@@ -24,19 +26,25 @@ public class OtherFragment extends Fragment implements OnClickListener {
 	private LinearLayout layout_Sweep;
 	private LinearLayout layout_QrCode;
 	private LinearLayout layout_Contact;
+	private LinearLayout layout_IdCard;
+	private LinearLayout layout_Translate;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.other, container, false);
+		View view = inflater.inflate(R.layout.fragment_other, container, false);
 
 		layout_Sweep = (LinearLayout) view.findViewById(R.id.layout_Sweep);
 		layout_QrCode = (LinearLayout) view.findViewById(R.id.layout_QrCode);
 		layout_Contact = (LinearLayout) view.findViewById(R.id.layout_Contact);
+		layout_IdCard = (LinearLayout) view.findViewById(R.id.layout_IdCard);
+		layout_Translate = (LinearLayout) view.findViewById(R.id.layout_Translate);
 
 		layout_Sweep.setOnClickListener(this);
 		layout_QrCode.setOnClickListener(this);
 		layout_Contact.setOnClickListener(this);
+		layout_IdCard.setOnClickListener(this);
+		layout_Translate.setOnClickListener(this);
 
 		return view;
 	}
@@ -57,6 +65,14 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		case R.id.layout_Contact:
 			Intent contactIntent = new Intent(getActivity(), PhoneNumber.class);
 			startActivity(contactIntent);
+			break;
+		case R.id.layout_IdCard:
+			Intent idCardIntent = new Intent(getActivity(), QueryIdCardInfo.class);
+			startActivity(idCardIntent);
+			break;
+		case R.id.layout_Translate:
+			Intent translateCardIntent = new Intent(getActivity(), Translate.class);
+			startActivity(translateCardIntent);
 			break;
 		default:
 			break;

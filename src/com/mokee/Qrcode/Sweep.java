@@ -27,7 +27,7 @@ public class Sweep extends Activity implements OnLongClickListener, OnClickListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.sweep_qrcode);
+		setContentView(R.layout.activity_sweep_qrcode);
 
 		Intent intent = getIntent();
 		Bundle dataBundle = intent.getBundleExtra("result");

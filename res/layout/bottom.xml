@@ -22,29 +22,6 @@
             android:orientation="vertical" >
 
             <ImageButton
-                android:id="@+id/ib_Translation"
-                android:layout_width="40dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY" />
-
-            <TextView
-                android:id="@+id/tv_Translation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/translation" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <ImageButton
                 android:id="@+id/ib_Home"
                 android:layout_width="40dp"
                 android:layout_height="0dp"

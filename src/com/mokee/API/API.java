@@ -18,7 +18,8 @@ public class API {
 	public static final int GET_TRANSLATE_TEXT = 3;// 翻译文字
 
 	public static final int SWEEP = 4;// 扫码
-	public static final int SAVE_QRCODE_FLAG = 5;// 扫码
+	public static final int SAVE_QRCODE_FLAG = 5;// 保存二維碼
+	public static final int QUERY_IDCARD_INFO = 6;// 查詢號碼信息
 
 	// Error code
 	public static final String URL_ERROR = "URL Error";
@@ -30,6 +31,20 @@ public class API {
 	public static final String UNAUTHORIZED_USER_ERROR = "Unauthorized User Error";
 	public static final String PARAM_FROM_TO_OR_Q_EMPTY_ERROR = "Param From To OrQuery is Empty Error";
 	public static final String UNKNOW_ERROR = "Unknow Error";
+
+	/**
+	 * 使用正则表达式过滤HTML标记
+	 * 
+	 * @param source
+	 *            待过滤内容
+	 * @return
+	 */
+	public static String filterHtml(String source) {
+		if (null == source) {
+			return "";
+		}
+		return source.replaceAll("</?[^>]+>", "").trim();
+	}
 
 	/**
 	 * 将Bitmap转换为Byte[]形式
@@ -80,5 +95,25 @@ public class API {
 				file.mkdir();
 			}
 		}
+	}
+
+	/**
+	 * 判断字符串是否全为数字
+	 * 
+	 * @param str
+	 *            需要判断的字符串
+	 * @return 全为数字：true 不全为数字:false
+	 */
+	public static boolean StringISNum(String str) {
+		if(str != null){
+			for(int i=0;i<str.length();i++){
+				if(!Character.isDigit(str.charAt(i))){
+					return false;
+				}
+			}
+		}else{
+			return false;
+		}
+		return true;
 	}
 }

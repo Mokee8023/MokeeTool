@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.home, container, false);
+		View view = inflater.inflate(R.layout.fragment_home, container, false);
 
 		tv_SystemTime = (TextView) view.findViewById(R.id.tv_SystemTime);
 		tv_SystemTime.setOnLongClickListener(this);
