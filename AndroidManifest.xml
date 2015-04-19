@@ -47,6 +47,8 @@
             android:name="com.mokee.Qrcode.SaveQrcode"
             android:theme="@style/Save_dialog" >
         </activity>
+        <activity android:name="com.mokee.PhoneNumber.PhoneNumber"
+            android:theme="@style/Phone_dialog"></activity>
     </application>
 
 </manifest>

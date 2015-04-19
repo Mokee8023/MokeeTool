@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.mokee.API.API;
+import com.mokee.PhoneNumber.PhoneNumber;
 import com.mokee.Qrcode.GenerateQrcode;
 import com.mokee.Qrcode.Sweep;
 import com.mokee.tools.R;
@@ -22,6 +23,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 
 	private LinearLayout layout_Sweep;
 	private LinearLayout layout_QrCode;
+	private LinearLayout layout_Contact;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,9 +32,11 @@ public class OtherFragment extends Fragment implements OnClickListener {
 
 		layout_Sweep = (LinearLayout) view.findViewById(R.id.layout_Sweep);
 		layout_QrCode = (LinearLayout) view.findViewById(R.id.layout_QrCode);
+		layout_Contact = (LinearLayout) view.findViewById(R.id.layout_Contact);
 
 		layout_Sweep.setOnClickListener(this);
 		layout_QrCode.setOnClickListener(this);
+		layout_Contact.setOnClickListener(this);
 
 		return view;
 	}
@@ -49,6 +53,10 @@ public class OtherFragment extends Fragment implements OnClickListener {
 			Intent qrcodeIntent = new Intent(getActivity(),
 					GenerateQrcode.class);
 			startActivity(qrcodeIntent);
+			break;
+		case R.id.layout_Contact:
+			Intent contactIntent = new Intent(getActivity(), PhoneNumber.class);
+			startActivity(contactIntent);
 			break;
 		default:
 			break;
