@@ -58,7 +58,7 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setFinishOnTouchOutside(false);//设置点击Dialog之外空白区域不关闭Dialog
+		setFinishOnTouchOutside(false);// 设置点击Dialog之外空白区域不关闭Dialog
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_phone);
 
@@ -126,7 +126,7 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 					.trim();
 
 			if (!phone_Information.equals("")) {
-				cbm.setText(tv_PhoneInformation.getText().toString().trim());
+				cbm.setText(phone_Information);
 				Toast.makeText(getApplicationContext(),
 						"Phone information has been copied!",
 						Toast.LENGTH_SHORT).show();

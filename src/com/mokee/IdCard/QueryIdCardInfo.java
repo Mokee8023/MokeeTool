@@ -1,11 +1,14 @@
 package com.mokee.IdCard;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +19,8 @@ import android.widget.Toast;
 import com.mokee.API.API;
 import com.mokee.tools.R;
 
-public class QueryIdCardInfo extends Activity implements OnClickListener {
+public class QueryIdCardInfo extends Activity implements OnClickListener,
+		OnLongClickListener {
 	private static final String TAG = "QueryIdCardInfo";
 
 	private EditText et_IdCard;
@@ -67,6 +71,7 @@ public class QueryIdCardInfo extends Activity implements OnClickListener {
 
 		ib_QueryIdCard.setOnClickListener(this);
 		btn_QueryIdCardCancle.setOnClickListener(this);
+		tv_IdCardInfo.setOnLongClickListener(this);
 	}
 
 	@Override
@@ -83,12 +88,12 @@ public class QueryIdCardInfo extends Activity implements OnClickListener {
 				Toast.makeText(getApplicationContext(),
 						"Please enter 18 digit ID number!", Toast.LENGTH_SHORT)
 						.show();
-			} else if(!(API.StringISNum(idCardNumber.substring(0, idCardNumber.length()-2)))){
+			} else if (!(API.StringISNum(idCardNumber.substring(0,
+					idCardNumber.length() - 2)))) {
 				Toast.makeText(getApplicationContext(),
 						"Can't contain letters before 17!", Toast.LENGTH_SHORT)
 						.show();
-			}
-			else{
+			} else {
 				IdCardService service = new IdCardService(MyQueryIdCardInfo,
 						idCardNumber);
 				service.start();
@@ -102,5 +107,29 @@ public class QueryIdCardInfo extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public boolean onLongClick(View view) {
+		switch (view.getId()) {
+		case R.id.tv_IdCardInfo:
+			ClipboardManager cbm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+			String idCardInfo = tv_IdCardInfo.getText().toString().trim();
+			if (idCardInfo == null || idCardInfo.equals("")) {
+				Toast.makeText(getApplicationContext(),
+						"IdCard Information is Empty!", Toast.LENGTH_SHORT)
+						.show();
+			} else {
+				cbm.setText(idCardInfo);
+				Toast.makeText(getApplicationContext(),
+						"IdCard information has been copied!",
+						Toast.LENGTH_SHORT).show();
+			}
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 }
