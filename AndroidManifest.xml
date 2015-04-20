@@ -55,7 +55,10 @@
             android:name="com.mokee.IdCard.QueryIdCardInfo"
             android:theme="@style/QueryIdCard_dialog" >
         </activity>
-        <activity android:name="com.mokee.Translate.Translate"></activity>
+        <activity android:name="com.mokee.Translate.Translate" >
+        </activity>
+        <activity android:name="com.mokee.Express.QueryExpress" >
+        </activity>
     </application>
 
 </manifest>

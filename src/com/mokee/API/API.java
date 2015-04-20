@@ -11,6 +11,9 @@ public class API {
 	// 翻译API使用频率为每个IP 1000次/小时,支持免费扩容
 	public static String BaiDuTranslate_API_KEY = "qcRZbAEg4UCESop90Bpgzoe7";
 	public static String BaiDuTranslate_SECRET_KEY = "GaHbRUQKWCGmkdtC5PZef0le4web0fjz";
+	// http://www.kuaidiapi.cn	调用次数200次每天
+	public static String KUAIDI_API_KEY = "2b0fd0a6d69742c3a6812739e8f1b9c0";
+	public static String KUAIDI_UID = "28980";
 
 	public static final int GET_PHONE_INFORMATION = 0;// WebService获取Phone信息
 	public static final int TIMESERVICE = 1;// 系统时间获取
@@ -20,6 +23,7 @@ public class API {
 	public static final int SWEEP = 4;// 扫码
 	public static final int SAVE_QRCODE_FLAG = 5;// 保存二維碼
 	public static final int QUERY_IDCARD_INFO = 6;// 查詢號碼信息
+	public static final int QUERY_EXPRESS_INFO = 7;// 查詢快递
 
 	// Error code
 	public static final String URL_ERROR = "URL Error";
@@ -105,13 +109,13 @@ public class API {
 	 * @return 全为数字：true 不全为数字:false
 	 */
 	public static boolean StringISNum(String str) {
-		if(str != null){
-			for(int i=0;i<str.length();i++){
-				if(!Character.isDigit(str.charAt(i))){
+		if (str != null) {
+			for (int i = 0; i < str.length(); i++) {
+				if (!Character.isDigit(str.charAt(i))) {
 					return false;
 				}
 			}
-		}else{
+		} else {
 			return false;
 		}
 		return true;

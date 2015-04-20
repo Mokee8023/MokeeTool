@@ -1,43 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array name="Language">
-        <item >自动检测</item>
-        <item >中文</item>
-        <item >英语</item>
-        <item >日语</item>
-        <item >韩语</item>
-        <item >文言文</item>
-        <item >白话文</item>
-        <item >西班牙语</item>
-        <item >法语</item>
-        <item >泰语</item>
-        <item >阿拉伯语</item>
-        <item >俄罗斯语</item>
-        <item >葡萄牙语</item>
-        <item >粤语</item>
-        <item >德语</item>
-        <item >意大利语</item>
-        <item >荷兰语</item>
-        <item >希腊语</item>
+        <item>自动检测</item>
+        <item>中文</item>
+        <item>英语</item>
+        <item>日语</item>
+        <item>韩语</item>
+        <item>文言文</item>
+        <item>白话文</item>
+        <item>西班牙语</item>
+        <item>法语</item>
+        <item>泰语</item>
+        <item>阿拉伯语</item>
+        <item>俄罗斯语</item>
+        <item>葡萄牙语</item>
+        <item>粤语</item>
+        <item>德语</item>
+        <item>意大利语</item>
+        <item>荷兰语</item>
+        <item>希腊语</item>
     </string-array>
-    
     <string-array name="QrcodeSize">
-        <item >250</item>
-        <item >300</item>
-        <item >350</item>
-        <item >400</item>
-        <item >450</item>
-        <item >500</item>
-        <item >550</item>
-        <item >600</item>
-        <item >650</item>
-        <item >700</item>
-        <item >750</item>
-        <item >800</item>
+        <item>250</item>
+        <item>300</item>
+        <item>350</item>
+        <item>400</item>
+        <item>450</item>
+        <item>500</item>
+        <item>550</item>
+        <item>600</item>
+        <item>650</item>
+        <item>700</item>
+        <item>750</item>
+        <item>800</item>
     </string-array>
-    
     <string-array name="Format">
-        <item >JPEG</item>
-        <item >PNG</item>
+        <item>JPEG</item>
+        <item>PNG</item>
+    </string-array>
+    <string-array name="Express_Name">
+        <item>顺丰</item>
+        <item>申通</item>
+        <item>圆通</item>
+        <item>韵达</item>
+        <item>中通</item>
+        <item>天天</item>
+        <item>京东</item>
+        <item>汇通</item>
+        <item>全峰</item>
+        <item>宅急送</item>
+        <item>EMS</item>
+        <item>国通</item>
+        <item>速通</item>
+        <item>中铁</item>
+        <item>城际</item>
+        <item>高铁</item>
+        <item>UPS</item>
+        <item>布谷鸟</item>
+        <item>宇鑫</item>
+        <item>飞邦</item>
+        <item>快捷</item>
+        <item>民航</item>
+        <item>OCS</item>
+        <item>万象</item>
+        <item>运通</item>
+        <item>中邮</item>
     </string-array>
 </resources>

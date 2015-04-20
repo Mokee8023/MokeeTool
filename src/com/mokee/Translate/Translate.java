@@ -75,9 +75,6 @@ public class Translate extends Activity implements OnClickListener {
 		activity_Text = (TextView) findViewById(R.id.activity_Text);
 
 		String[] items = getResources().getStringArray(R.array.Language);
-//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//				getApplicationContext(),
-//				android.R.layout.simple_spinner_dropdown_item, items);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				getApplicationContext(),
 				R.layout.my_simple_spinner_item, items);

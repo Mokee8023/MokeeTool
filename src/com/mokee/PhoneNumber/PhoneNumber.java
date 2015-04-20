@@ -22,7 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mokee.API.API;
-import com.mokee.MobileService.MobileService;
 import com.mokee.tools.R;
 
 public class PhoneNumber extends Activity implements OnLongClickListener,

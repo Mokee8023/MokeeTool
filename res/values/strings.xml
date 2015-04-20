@@ -14,6 +14,10 @@
     <string name="input_idcard_number">Input IDCard Number...</string>
     <string name="idcard_information">IDCard Information...</string>
     <string name="translation">Translation</string>
+    <string name="express_query">Express Query</string>
+    <string name="express_num">Express Num:</string>
+    <string name="express_name">Express Name:</string>
+    <string name="express_query_result">Express Query Result...</string>
     <string name="home">Home</string>
     <string name="other">Other</string>
     <string name="btn_tranlate">Tranlate</string>
