@@ -42,10 +42,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="number"
             android:digits="1234567890xyzXYZ"
-            android:maxLength="18"
-            android:hint="@string/input_idcard_number" />
+            android:hint="@string/input_idcard_number"
+            android:inputType="number"
+            android:maxLength="18" />
 
         <ImageButton
             android:id="@+id/ib_QueryIdCard"
@@ -56,18 +56,24 @@
             android:src="@drawable/search" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:orientation="vertical" >
+        android:layout_weight="1" >
 
-        <TextView
-            android:id="@+id/tv_IdCardInfo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/idcard_information" />
-    </LinearLayout>
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_IdCardInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/idcard_information" />
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"

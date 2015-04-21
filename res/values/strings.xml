@@ -15,8 +15,8 @@
     <string name="idcard_information">IDCard Information...</string>
     <string name="translation">Translation</string>
     <string name="express_query">Express Query</string>
-    <string name="express_num">Express Num:</string>
-    <string name="express_name">Express Name:</string>
+    <string name="express_num">Num:</string>
+    <string name="express_name">Name:</string>
     <string name="express_query_result">Express Query Result...</string>
     <string name="home">Home</string>
     <string name="other">Other</string>

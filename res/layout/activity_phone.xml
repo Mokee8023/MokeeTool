@@ -3,8 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     android:layout_marginTop="20dp"
     android:orientation="vertical" >
 
@@ -57,12 +57,18 @@
             android:src="@drawable/search" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_PhoneInformation"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/phone_information"
-        android:paddingTop="10dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:id="@+id/tv_PhoneInformation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/phone_information" />
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"

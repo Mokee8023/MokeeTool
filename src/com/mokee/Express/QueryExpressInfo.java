@@ -12,10 +12,7 @@ import org.apache.http.util.EntityUtils;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
-
 import com.mokee.API.API;
-import com.mokee.tools.R;
 
 public class QueryExpressInfo extends Thread {
 	private static final String TAG = "QueryExpressInfo";
@@ -35,10 +32,10 @@ public class QueryExpressInfo extends Thread {
 	public void run() {
 		Message msg = new Message();
 		msg.what = API.QUERY_EXPRESS_INFO;
-		// 定义待请求的URL
+
 		String repuestURL = QueryExpressAPI.GetQueryExpressURL(expressNumber,
 				expressName);
-		Log.i(TAG, "請求的Url：" + repuestURL);
+		Log.i(TAG, "Request Url：" + repuestURL);
 
 		HttpGet request = new HttpGet(repuestURL);
 		HttpParams params = new BasicHttpParams();
@@ -47,14 +44,18 @@ public class QueryExpressInfo extends Thread {
 			HttpResponse response = httpClient.execute(request);
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				String result = EntityUtils.toString(response.getEntity());
-				msg.obj = result;
+				String resultString = QueryExpressAPI
+						.AnalyzeExpressJSON(result);
+				msg.obj = resultString;
 			} else {
-				msg.obj = "111";
+				msg.obj = "response.getStatusLine().getStatusCode() != HttpStatus.SC_OK:"
+						+ response.getStatusLine().getStatusCode();
 			}
 
 		} catch (Exception e) {
-			msg.obj = "222";
+			msg.obj = "httpClient.execute(request):" + e.toString();
 		} finally {
+			Log.i(TAG, msg.obj.toString());
 			httpClient.getConnectionManager().shutdown();
 			handler.sendMessage(msg);
 		}

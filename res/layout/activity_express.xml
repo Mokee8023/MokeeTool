@@ -20,10 +20,10 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dip"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical|center_horizontal"
                 android:text="@string/express_num"
                 android:textStyle="bold" />
 
@@ -53,10 +53,11 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="50dip"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                android:gravity="center_vertical|center_horizontal"
                 android:text="@string/express_name"
                 android:textStyle="bold" />
 
@@ -64,8 +65,8 @@
                 android:id="@+id/sp_ExpressName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:textStyle="bold" />
 
             <ImageButton
@@ -79,14 +80,19 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_ExpressQueryResult"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:hint="@string/express_query_result" />
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/tv_ExpressQueryResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/express_query_result" />
+    </ScrollView>
 
 </LinearLayout>
