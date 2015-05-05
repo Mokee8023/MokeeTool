@@ -3,13 +3,10 @@ package com.mokee.PriceCompare;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mokee.SQLite.Goods;
-import com.mokee.SQLite.SQLiteDBManager;
-import com.mokee.Util.StringUtil;
-import com.mokee.tools.R;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -17,6 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mokee.SQLite.Goods;
+import com.mokee.SQLite.SQLiteDBManager;
+import com.mokee.Util.StringUtil;
+import com.mokee.tools.R;
 
 public class AddGoodsActivity extends Activity implements OnClickListener {
 	private static final String TAG = "AddGoodsActivity";
@@ -33,12 +35,21 @@ public class AddGoodsActivity extends Activity implements OnClickListener {
 	SQLiteDBManager dbManager;
 	List<Goods> goodsList = new ArrayList<Goods>();
 	Goods goods = new Goods();
+	
+	String requestCode;
+	Bundle data;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.goods_detail);
+		
+		Intent intent = getIntent();
+		requestCode = intent.getStringExtra("requestCode");
+		if(requestCode.equals("edit")){
+			data = intent.getBundleExtra("data");
+		}
 		
 		dbManager = new SQLiteDBManager(this);
 
@@ -65,27 +76,69 @@ public class AddGoodsActivity extends Activity implements OnClickListener {
 	protected void onResume() {
 		super.onResume();
 		
-		activity_Text.setText(getResources().getString(R.string.add_goods_detail_title));
+		if(requestCode.equals("add")){
+			activity_Text.setText(getResources().getString(R.string.add_goods_detail_title));
+		} else if(requestCode.equals("edit")){
+			activity_Text.setText(getResources().getString(R.string.edit_goods_detail_title));
+			SetGoodsDetail();
+		}
 		ib_Save.setVisibility(View.VISIBLE);
 		ib_Save.setOnClickListener(this);
 		ib_Return.setOnClickListener(this);
+	}
+
+	private void SetGoodsDetail() {
+		if(data != null){
+			et_InputGoodsName.setText(data.getString("name"));
+			et_InputGoodsBarcode.setText(data.getString("barcode"));
+			et_InputSuperMarket1.setText(data.getString("supermarketname1"));
+			et_InputSuperMarket2.setText(data.getString("supermarketname2"));
+			et_InputSuperMarket3.setText(data.getString("supermarketname3"));
+			
+			if(data.getFloat("price1") != -1){
+				et_InputPrice1.setText(data.getFloat("price1") + "");
+			}
+			if(data.getFloat("price2") != -1){
+				et_InputPrice2.setText(data.getFloat("price2") + "");
+			}
+			if(data.getFloat("price3") != -1){
+				et_InputPrice3.setText(data.getFloat("price3") + "");
+			}
+			
+			et_InputInfo.setText(data.getString("info"));
+		}
 	}
 
 	@Override
 	public void onClick(View v) {
 		
 		goods = GetValue();
+		Log.i(TAG, "goods:"+goods.toString());
 		goodsList.clear();
 		goodsList.add(goods);
 
 		switch (v.getId()) {
 		case R.id.ib_Save:
-			if(!StringUtil.isNullOrEmpty(goods.getGoodsName()) 
-					&& !StringUtil.isNullOrEmpty(goods.getSuperMarketName1()) 
-					&& goods.getPrice1() != -1){
-				dbManager.add(goodsList);
+			if (!StringUtil.isNullOrEmpty(goods.getGoodsName())
+					&& !StringUtil.isNullOrEmpty(goods.getSuperMarketName1())
+					&& goods.getPrice1() != -1) {
+				if(requestCode != null && requestCode.equals("add")){
+					dbManager.add(goodsList);
+				} else if(requestCode != null && requestCode.equals("edit")){
+					if(goods.getGoodsName().equals(data.getString("name"))){
+						dbManager.updateGoods(goods);
+					} else {
+						dbManager.deleteOldGoods(data.getString("name"));
+						dbManager.add(goodsList);
+					}
+				}
+				
+				finish();
+				onDestroy();
 			} else {
-				Toast.makeText(this, "Please input goods name and super1 and price1!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this,
+						"Please input goods name and super1 and price1!",
+						Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.ib_Return:
@@ -144,10 +197,11 @@ public class AddGoodsActivity extends Activity implements OnClickListener {
 			good.setPrice1(price1);
 		}
 		if(price2 != -1){
-			good.setPrice1(price2);
+			good.setPrice2(price2);
+			Log.i(TAG, "price2:"+price2);
 		}
 		if(price3 != -1){
-			good.setPrice1(price3);
+			good.setPrice3(price3);
 		}
 		
 		return good;

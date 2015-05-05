@@ -8,9 +8,12 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -21,7 +24,7 @@ import com.mokee.SQLite.Goods;
 import com.mokee.SQLite.SQLiteDBManager;
 import com.mokee.tools.R;
 
-public class GoodsPriceListActivity extends Activity implements OnClickListener {
+public class GoodsPriceListActivity extends Activity implements OnClickListener, OnItemClickListener {
 	private static final String TAG = "GoodsPriceListActivity";
 	
 	private ListView lv_goodsDetail;
@@ -55,6 +58,11 @@ public class GoodsPriceListActivity extends Activity implements OnClickListener 
 	protected void onResume() {
 		super.onResume();
 		
+		if(list.size() > 0){
+			Log.i(TAG, "list:"+list.size());
+			list.clear();
+		}
+		
 		activity_Text.setText("Goods Price");
 		ib_Save.setVisibility(View.VISIBLE);
 		ib_Save.setImageDrawable(getResources().getDrawable(R.drawable.other));
@@ -81,6 +89,7 @@ public class GoodsPriceListActivity extends Activity implements OnClickListener 
 		
 		ib_Return.setOnClickListener(this);
 		ib_Save.setOnClickListener(this);
+		lv_goodsDetail.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -93,6 +102,7 @@ public class GoodsPriceListActivity extends Activity implements OnClickListener 
 			
 		case R.id.ib_Save:
 			Intent intent = new Intent(GoodsPriceListActivity.this,AddGoodsActivity.class);
+			intent.putExtra("requestCode", "add");
 			startActivity(intent);
 			break;
 
@@ -121,5 +131,40 @@ public class GoodsPriceListActivity extends Activity implements OnClickListener 
 			
 			list.add(map);
 		}
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+		Map<String, Object> map = (Map<String, Object>) arg0.getItemAtPosition(position);
+
+//		Goods goods = new Goods();
+//		goods.goodsName = (String) map.get("name");
+//		goods.barCode = (String) map.get("barcode");
+//		goods.superMarketName1 = (String) map.get("supermarketname1");
+//		goods.price1 = (Float) map.get("price1");
+//		goods.superMarketName2 = (String) map.get("supermarketname2");
+//		goods.price2 = (Float) map.get("price2");
+//		goods.superMarketName3 = (String) map.get("supermarketname3");
+//		goods.price3 = (Float) map.get("price3");
+//		goods.info = (String) map.get("info");
+		
+		Bundle data = new Bundle();
+//		data.putString("requestCode","edit");
+		
+		data.putString("name", (String) map.get("name"));
+		data.putString("supermarketname1", (String) map.get("supermarketname1"));
+		data.putString("supermarketname2", (String) map.get("supermarketname2"));
+		data.putString("supermarketname3", (String) map.get("supermarketname3"));
+		data.putString("barcode", (String) map.get("barcode"));
+		data.putString("info", (String) map.get("info"));
+		
+		data.putFloat("price1", (Float) map.get("price1"));
+		data.putFloat("price2", (Float) map.get("price2"));
+		data.putFloat("price3", (Float) map.get("price3"));
+		
+		Intent intent = new Intent(this, AddGoodsActivity.class);
+		intent.putExtra("requestCode", "edit");
+		intent.putExtra("data", data);
+		startActivity(intent);
 	}
 }

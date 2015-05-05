@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:textColor="#000000"
+            android:textSize="20dp"
             android:textStyle="bold" />
 
         <TextView
@@ -39,17 +40,50 @@
             android:layout_weight="1"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/tv_SuperMarketName1"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tv_Price1"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Shop:"
+                    android:textColor="#0000ff" />
+
+                <TextView
+                    android:id="@+id/tv_SuperMarketName1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:textColor="#0000ff" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Price:"
+                    android:textColor="#0000ff" />
+
+                <TextView
+                    android:id="@+id/tv_Price1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:textColor="#0000ff" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -59,17 +93,50 @@
             android:layout_weight="1"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/tv_SuperMarketName2"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tv_Price2"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Shop:"
+                    android:textColor="#ff0000" />
+
+                <TextView
+                    android:id="@+id/tv_SuperMarketName2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:textColor="#ff0000" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Price:"
+                    android:textColor="#ff0000" />
+
+                <TextView
+                    android:id="@+id/tv_Price2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:textColor="#ff0000" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -79,17 +146,50 @@
             android:layout_weight="1"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/tv_SuperMarketName3"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/tv_Price3"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Shop:"
+                    android:textColor="#CD00CD" />
+
+                <TextView
+                    android:id="@+id/tv_SuperMarketName3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:textColor="#CD00CD" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Price:"
+                    android:textColor="#CD00CD" />
+
+                <TextView
+                    android:id="@+id/tv_Price3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:textColor="#CD00CD" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -98,6 +198,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textColor="#000000" />
+        android:textColor="#363636" />
 
 </LinearLayout>

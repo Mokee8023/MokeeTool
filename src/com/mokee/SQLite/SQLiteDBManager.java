@@ -28,20 +28,18 @@ public class SQLiteDBManager {
         db.beginTransaction();  //开始事务  
         try {  
             for (Goods good : goods) {  
-//            	if(good.getGoodsName() != null && good.getBarCode() != null && good.getInfo() != null 
-//            		&& good.getSuperMarketName1() != null && good.getPrice1() != null 
-//            		&& good.getSuperMarketName2() != null && good.getPrice2() != null 
-//            		&& good.getSuperMarketName3() != null && good.getPrice3() != null ){
-//            		db.execSQL("INSERT INTO Goods VALUES(null, ?, ?, ?)", new Object[]{person.name, person.age, person.info}); 
-//            	} else {
-//            		continue;
-//            	}
-            	db.execSQL("INSERT INTO Goods VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-            			new Object[]{good.getGoodsName(), good.getBarCode(), 
-            			good.getSuperMarketName1(), good.getPrice1(),
-            			good.getSuperMarketName2(), good.getPrice2(),
-            			good.getSuperMarketName3(), good.getPrice3(),
-            			good.getInfo()}); 
+            	Cursor c = queryName(good.getGoodsName());
+            	if(c.moveToNext()){
+            		updateGoods(good);
+            	} else {
+            		db.execSQL("INSERT INTO Goods VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+                			new Object[]{good.getGoodsName(), good.getBarCode(), 
+                			good.getSuperMarketName1(), good.getPrice1(),
+                			good.getSuperMarketName2(), good.getPrice2(),
+                			good.getSuperMarketName3(), good.getPrice3(),
+                			good.getInfo()}); 
+            	}
+            	
             }  
             db.setTransactionSuccessful();  //设置事务成功完成  
         } finally {  
@@ -50,55 +48,60 @@ public class SQLiteDBManager {
     }  
     
     /** 
-     * Update SuperMarket1
+     * Update Goods (Except: GoodsName )
      * @param goods 
-     */  
-    public void updateSuperMarket1(Goods goods) {  
-        ContentValues cv = new ContentValues();  
-        cv.put("SupermarketName1", goods.getSuperMarketName1());  
-        cv.put("Price1", goods.getPrice1());  
-        db.update("Goods", cv, "name = ?", new String[]{goods.getGoodsName()});  
+     */
+    public void updateGoods(Goods goods) {  
+        ContentValues cv = new ContentValues(); 
+        if(goods.getBarCode() != null && !goods.getBarCode().equals("")){
+        	cv.put("BarCode", goods.getBarCode());  
+        }
+        
+        if(goods.getSuperMarketName1() != null && !goods.getSuperMarketName1().equals("")){
+        	cv.put("SupermarketName1", goods.getSuperMarketName1()); 
+        }
+         
+        if(goods.getSuperMarketName2() != null && !goods.getSuperMarketName2().equals("")){
+        	cv.put("SupermarketName2", goods.getSuperMarketName2());  
+        }
+        
+        if(goods.getSuperMarketName3() != null && !goods.getSuperMarketName3().equals("")){
+        	cv.put("SupermarketName3", goods.getSuperMarketName3());  
+        }
+        
+        if(goods.getInfo() != null && !goods.getInfo().equals("")){
+        	cv.put("info", goods.getInfo());  
+        }
+        
+        if(goods.getPrice1() != -1){
+        	cv.put("Price1", goods.getPrice1());
+        }
+        
+        if(goods.getPrice2() != -1){
+        	cv.put("Price2", goods.getPrice2());
+        }
+        
+        if(goods.getPrice3() != -1){
+        	cv.put("Price3", goods.getPrice3());
+        }
+         
+        db.update("Goods", cv, "GoodsName = ?", new String[]{goods.getGoodsName()});  
     }
-    
-    /** 
-     * Update SuperMarket2
-     * @param goods 
-     */  
-    public void updateSuperMarket2(Goods goods) {  
-        ContentValues cv = new ContentValues();  
-        cv.put("SupermarketName2", goods.getSuperMarketName3());  
-        cv.put("Price2", goods.getPrice2());  
-        db.update("Goods", cv, "name = ?", new String[]{goods.getGoodsName()});  
-    }
-    
-    /** 
-     * Update SuperMarket3
-     * @param goods
-     */  
-    public void updateSuperMarket3(Goods goods) {  
-        ContentValues cv = new ContentValues();  
-        cv.put("SupermarketName3", goods.getSuperMarketName3());  
-        cv.put("Price3", goods.getPrice3());  
-        db.update("Goods", cv, "name = ?", new String[]{goods.getGoodsName()});  
-    }
-    
-    /** 
-     * Update Info
-     * @param goods 
-     */  
-    public void updateInfo(Goods goods) {  
-        ContentValues cv = new ContentValues();  
-        cv.put("info", goods.getInfo());  
-        db.update("Goods", cv, "name = ?", new String[]{goods.getGoodsName()});  
-    }
-    
     
     /** 
      * Delete goods 
-     * @param goods 
+     * @param Goods 
      */  
     public void deleteOldGoods(Goods goods) {  
-        db.delete("Goods", "name = ?", new String[]{goods.getGoodsName()});  
+        db.delete("Goods", "GoodsName = ?", new String[]{goods.getGoodsName()});  
+    } 
+    
+    /** 
+     * Delete goods 
+     * @param goodsName 
+     */  
+    public void deleteOldGoods(String goodsName) {  
+        db.delete("Goods", "GoodsName = ?", new String[]{goodsName});  
     } 
     
     /** 
@@ -135,7 +138,16 @@ public class SQLiteDBManager {
         Cursor c = db.rawQuery("SELECT * FROM Goods", null);  
         return c;  
     }  
-    
+
+    /**
+     * 根据名称查询
+     * @param goodsName 商品名称
+     * @return 查询到的Cursor
+     */
+    public Cursor queryName(String goodsName){
+    	Cursor c = db.query("Goods", new String[]{"GoodsName"}, "GoodsName=?", new String[]{goodsName}, null, null, null);
+    			return c;
+    }
     /** 
      * Close database 
      */  

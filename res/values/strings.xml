@@ -41,6 +41,7 @@
     </string>
     
     <string name="add_goods_detail_title">Add Goods</string>
+    <string name="edit_goods_detail_title">Edit Goods</string>
     <string name="goods_name_tv">Name:</string>
     <string name="goods_barcode_tv">Barcode:</string>
     <string name="supermarket_name_tv">SuperMarket</string>
