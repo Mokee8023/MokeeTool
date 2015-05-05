@@ -5,7 +5,8 @@
     android:layout_margin="10dp"
     android:orientation="vertical" >
 
-    <include layout="@layout/sub_layout_top"/>
+    <include layout="@layout/sub_layout_top" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -117,24 +118,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:hint="@string/price1_et_hint"
-                android:digits="1234567890." />
+                android:digits="1234567890."
+                android:hint="@string/price1_et_hint" />
 
             <EditText
                 android:id="@+id/et_InputPrice2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="@string/price2_et_hint"
-                android:digits="1234567890."  />
+                android:digits="1234567890."
+                android:hint="@string/price2_et_hint" />
 
             <EditText
                 android:id="@+id/et_InputPrice3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="@string/price3_et_hint"
-                android:digits="1234567890."  />
+                android:digits="1234567890."
+                android:hint="@string/price3_et_hint" />
         </LinearLayout>
     </LinearLayout>
 
@@ -160,8 +161,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
-    <In>
-    </In>
 
 </LinearLayout>
