@@ -10,8 +10,8 @@ import java.util.List;
 import android.os.Environment;
 import android.util.Log;
 
-public class FilaPath {
-	private static final String TAG = "FilaPath";
+public class FilePath {
+	private static final String TAG = "FilePath";
 
 	/**
 	 * 获得系统的路径

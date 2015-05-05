@@ -19,7 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.mokee.API.API;
-import com.mokee.FilePath.FilaPath;
+import com.mokee.FilePath.FilePath;
 import com.mokee.tools.R;
 
 public class SaveQrcode extends Activity implements OnClickListener {
@@ -76,7 +76,7 @@ public class SaveQrcode extends Activity implements OnClickListener {
 		switch (view.getId()) {
 		case R.id.btn_SvaeOk:
 
-			bmpSavePath = FilaPath.GetFilePath();
+			bmpSavePath = FilePath.GetFilePath();
 			if (bmpSavePath == null) {
 				bmpSavePath = "/sdcard/MokeeQrCode";
 				Toast.makeText(getApplicationContext(),
