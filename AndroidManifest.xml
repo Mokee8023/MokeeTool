@@ -59,6 +59,8 @@
         </activity>
         <activity android:name="com.mokee.Express.QueryExpress" >
         </activity>
+        <activity android:name="com.mokee.PriceCompare.GoodsPriceListActivity"></activity>
+        <activity android:name="com.mokee.PriceCompare.AddGoodsActivity"></activity>
     </application>
 
 </manifest>

@@ -2,15 +2,15 @@ package com.mokee.SQLite;
 
 public class Goods {
 	public int _id;
-	public String goodsName;
-	public String superMarketName1;
-	public String superMarketName2;
-	public String superMarketName3;
-	public String info;
-	public String barCode;
-	public float price1;
-	public float price2;
-	public float price3;
+	public String goodsName = "";
+	public String superMarketName1 = "";
+	public String superMarketName2 = "";
+	public String superMarketName3 = "";
+	public String info = "";
+	public String barCode = "";
+	public float price1 = -1;
+	public float price2 = -1;
+	public float price3 = -1;
 	
 	public Goods(){
 	}

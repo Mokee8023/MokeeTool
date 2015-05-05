@@ -15,6 +15,7 @@ import com.mokee.API.API;
 import com.mokee.Express.QueryExpress;
 import com.mokee.IdCard.QueryIdCardInfo;
 import com.mokee.PhoneNumber.PhoneNumber;
+import com.mokee.PriceCompare.GoodsPriceListActivity;
 import com.mokee.Qrcode.GenerateQrcode;
 import com.mokee.Qrcode.Sweep;
 import com.mokee.Translate.Translate;
@@ -28,6 +29,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 	private LinearLayout layout_QrCode;
 	private LinearLayout layout_Contact;
 	private LinearLayout layout_IdCard;
+	private LinearLayout layout_GoodsPrice;
 	private LinearLayout layout_Translate;
 	private LinearLayout layout_QueryExpress;
 
@@ -40,6 +42,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		layout_QrCode = (LinearLayout) view.findViewById(R.id.layout_QrCode);
 		layout_Contact = (LinearLayout) view.findViewById(R.id.layout_Contact);
 		layout_IdCard = (LinearLayout) view.findViewById(R.id.layout_IdCard);
+		layout_GoodsPrice = (LinearLayout) view.findViewById(R.id.layout_GoodsPrice);
 		layout_Translate = (LinearLayout) view.findViewById(R.id.layout_Translate);
 		layout_QueryExpress = (LinearLayout) view.findViewById(R.id.layout_QueryExpress);
 
@@ -47,6 +50,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		layout_QrCode.setOnClickListener(this);
 		layout_Contact.setOnClickListener(this);
 		layout_IdCard.setOnClickListener(this);
+		layout_GoodsPrice.setOnClickListener(this);
 		layout_Translate.setOnClickListener(this);
 		layout_QueryExpress.setOnClickListener(this);
 
@@ -73,6 +77,10 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		case R.id.layout_IdCard:
 			Intent idCardIntent = new Intent(getActivity(), QueryIdCardInfo.class);
 			startActivity(idCardIntent);
+			break;
+		case R.id.layout_GoodsPrice:
+			Intent goodsPriceIntent = new Intent(getActivity(), GoodsPriceListActivity.class);
+			startActivity(goodsPriceIntent);
 			break;
 		case R.id.layout_Translate:
 			Intent translateIntent = new Intent(getActivity(), Translate.class);

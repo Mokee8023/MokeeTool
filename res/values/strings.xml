@@ -9,6 +9,7 @@
     <string name="phone_information">Phone Information</string>
     <string name="numbers_attribution">Phone Numbers Attribution</string>
     <string name="idcard">ID Card Query</string>
+    <string name="goods_price">Goods Price</string>
     <string name="tv_query_number_attribution">Query Number Attribution</string>
     <string name="tv_query_idcard">Query IDCard Information</string>
     <string name="input_idcard_number">Input IDCard Number...</string>
@@ -38,5 +39,18 @@
     <string name="string_help">
         1.Query phone number attribution.\n\n2.Get the system time (Long press time to copy time).
     </string>
+    
+    <string name="add_goods_detail_title">Add Goods</string>
+    <string name="goods_name_tv">Name:</string>
+    <string name="goods_barcode_tv">Barcode:</string>
+    <string name="supermarket_name_tv">SuperMarket</string>
+    <string name="supermarket1_name_et_hint">SuperMarket1 Name</string>
+    <string name="supermarket2_name_et_hint">SuperMarket2 Name</string>
+    <string name="supermarket3_name_et_hint">SuperMarket3 Name</string>
+    <string name="price_tv">Price</string>
+    <string name="price1_et_hint">Price one</string>
+    <string name="price2_et_hint">Price two</string>
+    <string name="price3_et_hint">Price three</string>
+    <string name="info_tv">Goods Info:</string>
 
 </resources>

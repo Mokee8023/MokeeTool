@@ -97,7 +97,7 @@ public class SQLiteDBManager {
      * Delete goods 
      * @param goods 
      */  
-    public void deleteOldPerson(Goods goods) {  
+    public void deleteOldGoods(Goods goods) {  
         db.delete("Goods", "name = ?", new String[]{goods.getGoodsName()});  
     } 
     
