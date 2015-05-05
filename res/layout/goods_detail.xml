@@ -26,6 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:singleLine="true"
             android:layout_weight="4" />
     </LinearLayout>
 
@@ -47,6 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:singleLine="true"
             android:layout_weight="4" />
     </LinearLayout>
 
@@ -81,6 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:singleLine="true"
                 android:hint="@string/supermarket1_name_et_hint" />
 
             <EditText
@@ -88,6 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:singleLine="true"
                 android:hint="@string/supermarket2_name_et_hint" />
 
             <EditText
@@ -95,6 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:singleLine="true"
                 android:hint="@string/supermarket3_name_et_hint" />
         </LinearLayout>
 
@@ -119,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:digits="1234567890."
+                android:singleLine="true"
                 android:hint="@string/price1_et_hint" />
 
             <EditText
@@ -127,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:digits="1234567890."
+                android:singleLine="true"
                 android:hint="@string/price2_et_hint" />
 
             <EditText
@@ -135,6 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:digits="1234567890."
+                android:singleLine="true"
                 android:hint="@string/price3_et_hint" />
         </LinearLayout>
     </LinearLayout>
