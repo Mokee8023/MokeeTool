@@ -67,4 +67,8 @@
         <item>运通</item>
         <item>中邮</item>
     </string-array>
+    
+    <string-array name="GoodsListDelete">
+        <item >删除该商品</item>
+    </string-array>
 </resources>

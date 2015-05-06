@@ -13,4 +13,13 @@
         android:layout_margin="10dp" >
     </ListView>
 
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="No goods data, please add goods information!" />
+
 </LinearLayout>

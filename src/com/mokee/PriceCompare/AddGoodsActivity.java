@@ -206,4 +206,10 @@ public class AddGoodsActivity extends Activity implements OnClickListener {
 		
 		return good;
 	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		dbManager.closeDB();
+	}
 }

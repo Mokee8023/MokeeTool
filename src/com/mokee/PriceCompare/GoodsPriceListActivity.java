@@ -6,14 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -24,7 +29,7 @@ import com.mokee.SQLite.Goods;
 import com.mokee.SQLite.SQLiteDBManager;
 import com.mokee.tools.R;
 
-public class GoodsPriceListActivity extends Activity implements OnClickListener, OnItemClickListener {
+public class GoodsPriceListActivity extends Activity implements OnClickListener, OnItemClickListener, OnItemLongClickListener {
 	private static final String TAG = "GoodsPriceListActivity";
 	
 	private ListView lv_goodsDetail;
@@ -58,15 +63,23 @@ public class GoodsPriceListActivity extends Activity implements OnClickListener,
 	protected void onResume() {
 		super.onResume();
 		
-		if(list.size() > 0){
-			Log.i(TAG, "list:"+list.size());
-			list.clear();
-		}
-		
+		lv_goodsDetail.setEmptyView(findViewById(R.id.empty));
 		activity_Text.setText("Goods Price");
 		ib_Save.setVisibility(View.VISIBLE);
 		ib_Save.setImageDrawable(getResources().getDrawable(R.drawable.other));
 		
+		LoadingData();
+		
+		ib_Return.setOnClickListener(this);
+		ib_Save.setOnClickListener(this);
+		lv_goodsDetail.setOnItemClickListener(this);
+		lv_goodsDetail.setOnItemLongClickListener(this);
+	}
+
+	/**
+	 * 加载数据到ListView
+	 */
+	private void LoadingData() {
 		/** 从数据库查询数据   */
 		SetListData();
 		
@@ -86,10 +99,6 @@ public class GoodsPriceListActivity extends Activity implements OnClickListener,
 		} else {
 			lv_goodsDetail.setAdapter(adapter);
 		}
-		
-		ib_Return.setOnClickListener(this);
-		ib_Save.setOnClickListener(this);
-		lv_goodsDetail.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -115,6 +124,12 @@ public class GoodsPriceListActivity extends Activity implements OnClickListener,
 	 * 从数据库查询数据
 	 */
 	private void SetListData() {
+		
+		if(list.size() > 0){
+			Log.i(TAG, "list:" + list.size());
+			list.clear();
+		}
+		
 		List<Goods> goodsList = dbManager.query();
 		for(Goods item : goodsList){
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -137,19 +152,8 @@ public class GoodsPriceListActivity extends Activity implements OnClickListener,
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
 		Map<String, Object> map = (Map<String, Object>) arg0.getItemAtPosition(position);
 
-//		Goods goods = new Goods();
-//		goods.goodsName = (String) map.get("name");
-//		goods.barCode = (String) map.get("barcode");
-//		goods.superMarketName1 = (String) map.get("supermarketname1");
-//		goods.price1 = (Float) map.get("price1");
-//		goods.superMarketName2 = (String) map.get("supermarketname2");
-//		goods.price2 = (Float) map.get("price2");
-//		goods.superMarketName3 = (String) map.get("supermarketname3");
-//		goods.price3 = (Float) map.get("price3");
-//		goods.info = (String) map.get("info");
 		
 		Bundle data = new Bundle();
-//		data.putString("requestCode","edit");
 		
 		data.putString("name", (String) map.get("name"));
 		data.putString("supermarketname1", (String) map.get("supermarketname1"));
@@ -166,5 +170,42 @@ public class GoodsPriceListActivity extends Activity implements OnClickListener,
 		intent.putExtra("requestCode", "edit");
 		intent.putExtra("data", data);
 		startActivity(intent);
+	}
+
+	@Override
+	public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		final Map<String, Object> map = (Map<String, Object>) arg0.getItemAtPosition(arg2);
+		Log.i(TAG, "map:" + map.toString());
+		
+		AlertDialog.Builder builder = new Builder(GoodsPriceListActivity.this);
+		builder.setItems(getResources().getStringArray(R.array.GoodsListDelete),new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				switch (which) {
+				case 0:
+					dbManager.deleteOldGoods((String) map.get("name"));
+					break;
+
+				default:
+					break;
+				}
+				dialog.dismiss();
+				
+				/* 在这里要知道Adapter是和list进行绑定的，只需要更改List的值，不能new，就可以更新ListView */
+				SetListData();
+				adapter.notifyDataSetChanged();  
+				/**************************************************************************************/
+			}
+		});
+		builder.show();
+		
+		return true;
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		dbManager.closeDB();
 	}
 }
