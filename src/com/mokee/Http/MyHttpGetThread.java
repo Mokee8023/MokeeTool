@@ -11,6 +11,16 @@ public class MyHttpGetThread extends Thread {
 	private String url;
 	private int getCode;
 
+	/**
+	 * HttpGet请求线程，当请求结果返回为null时，返回的给handler主线程的内容为空字符串:""
+	 * 
+	 * @param handler
+	 *            用于接受线程返回的消息的handler
+	 * @param url
+	 *            http://openapi.baidu.com/public/2.0/bmt/translate?client_id=YourApiKey&q=today&from=auto&to=auto
+	 * @param getCode
+	 *            用于区别请求线程，请求HttpGet标记
+	 */
 	public MyHttpGetThread(Handler handler, String url,int getCode) {
 		this.handler = handler;
 		this.url = url;
@@ -21,7 +31,7 @@ public class MyHttpGetThread extends Thread {
 	public void run() {
 		Message msg = new Message();
 		msg.what = getCode;
-		String result = HttpUtil.get(url);
+		String result = HttpUtil.httpGet(url);
 		if (result != null) {
 			msg.obj = result;
 		} else {
