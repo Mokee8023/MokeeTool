@@ -38,7 +38,7 @@ public class MyHttpPostThread extends Thread {
 	public void run() {
 		Message msg = new Message();
 		msg.what = postCode;
-		String result = HttpUtil.post(url, content);
+		String result = HttpUtil.httpPost(url, content);
 		if (result != null) {
 			msg.obj = result;
 		} else {

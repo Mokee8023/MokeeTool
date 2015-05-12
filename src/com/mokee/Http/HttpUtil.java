@@ -5,11 +5,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.apache.http.HttpStatus;
 
 import com.mokee.Util.StringUtil;
@@ -48,24 +43,20 @@ public class HttpUtil {
 				int num = 0;
 				while ((line = bufferedReader.readLine()) != null) {
 					num++;
-					if (num >= 2) {
-						stringBuffer.append("\n");
-					}
+					if (num >= 2) { stringBuffer.append("\n"); }
 					stringBuffer.append(line);
 				}
 				String result = stringBuffer.toString();
 				Log.i(TAG, "HttpUtil.httpGet.Http Result:" + result);
 				if (StringUtil.isNullOrEmpty(result) || "empty".equalsIgnoreCase(result)) {
 					return StringUtil.empty;
-				} else {
-					return result;
-				}
+				} else { return result; }
 			} else {
 				Log.e(TAG, "HttpUtil.httpGet.getResponseCode:" + httpURLConnection.getResponseCode());
 				return null;
 			}
 		} catch (Exception e) {
-			Log.e(TAG, "HttpUtil.httpGet-->Exception:" + e.toString());
+			Log.e(TAG, "HttpUtil.httpGet.catch-->Exception:" + e.toString());
 			return null;
 		} finally {
 			try {
@@ -75,7 +66,7 @@ public class HttpUtil {
 					bufferedReader.close();
 				}
 			} catch (Exception e) {
-				Log.e(TAG, "HttpUtil.httpGet-->Exception:" + e.toString());
+				Log.e(TAG, "HttpUtil.httpGet.finally.catch-->Exception:" + e.toString());
 			}
 		}
 	}
@@ -89,51 +80,48 @@ public class HttpUtil {
 	 *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
 	 * @return 所代表远程资源的响应结果
 	 */
-	public static String post(String urlStr, String param) {
+	public static String httpPost(String urlStr, String param) {
 		PrintWriter out = null;
 		BufferedReader in = null;
+		HttpURLConnection connection = null;
 		String result = "";
 		try {
 			URL url = new URL(urlStr);
 			// 打开和URL之间的连接
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("POST");
-			conn.setDoOutput(true);
-			out = new PrintWriter(conn.getOutputStream());
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("POST");
+			connection.setDoOutput(true);
+			out = new PrintWriter(connection.getOutputStream());
 			// 发送请求参数
 			out.print(param);
 			// flush输出流的缓冲
 			out.flush();
-			int responseCode = conn.getResponseCode();
-			if(responseCode==200){
-				in = new BufferedReader( new InputStreamReader(conn.getInputStream(),"UTF-8"));
+			int responseCode = connection.getResponseCode();
+			if (responseCode == HttpStatus.SC_OK) {
+				in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
 				String line;
-				while ((line = in.readLine()) != null) {
-					result += line;
-				}
+				while ((line = in.readLine()) != null) {result += line; }
+				
 				return result;
-			}else{
-				System.out.println("responseCode:"+responseCode);
+			} else {
+				Log.e(TAG, "HttpUtil.httpPost.responseCode:" + responseCode);
+				
 				return null;
 			}
 		} catch (Exception e) {
-			Log.e(TAG, "HttpUtil.post-->Exception:" + e.toString());
-			System.out.println("Exception:"+e);
+			Log.e(TAG, "HttpUtil.httpPost.catch-->Exception:" + e.toString());
 			e.printStackTrace();
+			
 			return null;
-		}
-		//使用finally块来关闭输出流、输入流
-		finally{
-			try{
-				if(out!=null){
-					out.close();
-				}
-				if(in!=null){
-					in.close();
-				}
-			}
-			catch(Exception ex){
-				Log.e(TAG, "HttpUtil.post-->Exception:" + ex.toString());
+		} finally {
+			try {
+				
+				if(connection != null){ connection.disconnect(); }
+				if (out != null) { out.close(); }
+				if (in != null) { in.close(); }
+				
+			} catch (Exception ex) {
+				Log.e(TAG, "HttpUtil.httpPost.finally-->Exception:" + ex.toString());
 				ex.printStackTrace();
 			}
 		}
