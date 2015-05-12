@@ -1,4 +1,4 @@
-package cn.mokee.NetConnect;
+package com.mokee.NetConnect;
 
 import java.io.BufferedReader;
 import java.io.IOException;

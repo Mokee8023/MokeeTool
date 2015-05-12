@@ -1,4 +1,4 @@
-package cn.mokee.NetConnect;
+package com.mokee.NetConnect;
 
 public class ConstantUtil {
 	
