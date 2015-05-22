@@ -1,0 +1,103 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.mokee.test.Marquee.MyMarquee
+        android:id="@+id/marquee_Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#AA000000"
+        android:text="跑马灯效果"
+        android:textSize="20sp" >
+    </com.mokee.test.Marquee.MyMarquee>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/et_Speed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:text="3"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_Speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Speed" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/et_Direction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:digits="01"
+            android:hint="0 or 1"
+            android:layout_weight="1" />
+
+      <Button
+        android:id="@+id/btn_Direction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Direction" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/et_Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="跑马灯效果"
+            android:layout_weight="1" />
+
+       <Button
+        android:id="@+id/btn_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Text" />
+    </LinearLayout>
+    
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/et_Color"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Text Color：0xffff0000"
+            android:layout_weight="1" />
+
+       <Button
+        android:id="@+id/btn_Color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Color" />
+    </LinearLayout>
+    
+     <Button
+        android:id="@+id/btn_Stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
