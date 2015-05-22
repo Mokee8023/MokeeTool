@@ -61,13 +61,11 @@ public class OtherFragment extends Fragment implements OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.layout_Sweep:
-			Intent sweepIntent = new Intent(getActivity(),
-					CaptureActivity.class);
+			Intent sweepIntent = new Intent(getActivity(), CaptureActivity.class);
 			startActivityForResult(sweepIntent, API.SWEEP);
 			break;
 		case R.id.layout_QrCode:
-			Intent qrcodeIntent = new Intent(getActivity(),
-					GenerateQrcode.class);
+			Intent qrcodeIntent = new Intent(getActivity(), GenerateQrcode.class);
 			startActivity(qrcodeIntent);
 			break;
 		case R.id.layout_Contact:
