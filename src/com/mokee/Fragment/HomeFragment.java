@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -19,6 +20,7 @@ import com.mokee.API.API;
 import com.mokee.NetConnect.NetworkConnectionUtil;
 import com.mokee.NetConnect.WifiManagerUtil;
 import com.mokee.TimeService.TimeService;
+import com.mokee.Util.MobilePhoneUtil;
 import com.mokee.Util.SIMUtil;
 import com.mokee.tools.R;
 
@@ -30,8 +32,10 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 	private TextView tv_SIM;
 	
 	private StringBuilder sb;
-	private WifiManagerUtil wifi;
+	private WifiManagerUtil wifiUtil;
 	private NetworkConnectionUtil netUtil;
+	private SIMUtil simUtil;
+	private MobilePhoneUtil mobileUtil;
 
 	private Handler MyHomeHandler = new Handler() {
 		@Override
@@ -73,13 +77,15 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 	private void initEvent() {
 		
 		netUtil = NetworkConnectionUtil.getInstance(getActivity());
-		wifi = new WifiManagerUtil(getActivity());
+		wifiUtil = new WifiManagerUtil(getActivity());
+		simUtil = SIMUtil.getInstance(getActivity());
+		mobileUtil = MobilePhoneUtil.getInstance(getActivity());
 		sb = new StringBuilder();
 		
-		if(wifi.checkState() == WifiManager.WIFI_STATE_ENABLED){
-			sb.append("Ip Address：").append(WifiManagerUtil.intIPToStringIp(wifi.getIpAddress())).append("\n\n");
-			sb.append("Mac Address：").append(wifi.getMacAddress()).append("\n\n");
-			sb.append("BSSID：").append(wifi.getBSSID());
+		if(wifiUtil.checkState() == WifiManager.WIFI_STATE_ENABLED){
+			sb.append("Ip Address：").append(WifiManagerUtil.intIPToStringIp(wifiUtil.getIpAddress())).append("\n\n");
+			sb.append("Mac Address：").append(wifiUtil.getMacAddress()).append("\n\n");
+			sb.append("BSSID：").append(wifiUtil.getBSSID());
 		} else {
 			sb.append("Wifi did not open，please open Wifi.");
 		}
@@ -87,14 +93,38 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 		
 		sb.delete(0, sb.length());
 		
-		sb.append("Operator：" + SIMUtil.getInstance(getActivity()).getSimName() + "\n\n");
-		
+		sb.append("Operator：" + simUtil.getSimOperatorName() + "\n\n");
 		String netType = netUtil.getCurrentNetType();
 		if(netType.equals("null")){
-			sb.append("Network Type：").append("The network did not open.");
+			sb.append("Network Type：").append("The network did not open.").append("\n\n");
 		} else {
-			sb.append("Network Type：").append(netType);
+			sb.append("Network Type：").append(netType).append("\n\n");
 		}
+		
+		long[] romMemroy = mobileUtil.getRomMemroy();
+		long[] sdCardMemroy = mobileUtil.getSDCardMemory();
+		int[] runTimes = mobileUtil.getSystemRunTimes();
+		String[] version = mobileUtil.getVersion();
+		
+		sb.append("SIM Serial：" + simUtil.getSimSerialNumber()).append("\n\n");
+		sb.append("IMEI/MEID：" + mobileUtil.getImeiOrMeid()).append("\n\n");
+		sb.append("Phone Number：" + mobileUtil.getPhoneNumber()).append("\n\n");
+		sb.append("CPU Serial：" + mobileUtil.getCPUSerial()).append("\n\n");
+		sb.append("RAM：").append("\n\n");
+		sb.append("		Total：" + mobileUtil.getTotalMemory()).append("\n\n");
+		sb.append("		Avail：" + mobileUtil.getAvailMemory()).append("\n\n");
+		sb.append("Rom Memory：").append("\n\n");
+		sb.append("		Total：").append(Formatter.formatFileSize(getActivity(), romMemroy[0])).append("\n\n");
+		sb.append("		Avail：").append(Formatter.formatFileSize(getActivity(), romMemroy[1])).append("\n\n");
+		sb.append("SDCard Memory：").append("\n\n");
+		sb.append("		Total：").append(Formatter.formatFileSize(getActivity(), sdCardMemroy[0])).append("\n\n");
+		sb.append("		Avail：").append(Formatter.formatFileSize(getActivity(), sdCardMemroy[1])).append("\n\n");
+		sb.append("System Run Times：" + runTimes[0]).append(" Hour ").append(runTimes[1]).append(" Minute").append("\n\n");
+		sb.append("Version:\n\n");
+		sb.append("		Model Version：").append(version[2]).append("\n\n");
+		sb.append("		Firmware version：").append(version[1]).append("\n\n");
+		sb.append("		Kernel Version：").append(version[0]).append("\n\n");
+		sb.append("		System version：").append(version[3]).append("\n\n");
 		
 		tv_SIM.setText(sb.toString());
 	}
