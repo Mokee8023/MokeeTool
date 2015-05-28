@@ -22,8 +22,6 @@ import android.widget.Toast;
 import com.mokee.Fragment.HomeFragment;
 import com.mokee.Fragment.OtherFragment;
 import com.mokee.Help.HelpActivity;
-import com.mokee.NetConnect.NetworkConnection;
-import com.mokee.NetConnect.WifiManagerUtil;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
 	private final String TAG = "MainActivity";
@@ -56,7 +54,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		setOriginState();
 		setSelectedPager(1);
 		
-//		NetworkConnection.getInstance(MainActivity.this);
 	}
 
 	private void initView() {
