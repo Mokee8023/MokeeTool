@@ -21,7 +21,7 @@ import android.net.wifi.WifiManager.WifiLock;
 			5.adnroid.permission.CHANGE_WIFI_STATE
 			6.android.permission.MODIFY_PHONE_STATE
  */
-public class WifiAdmin {
+public class WifiManagerUtil {
 	private static final String TAG = "WifiAdmin";
 
 	private WifiManager mWifiManager;
@@ -30,7 +30,7 @@ public class WifiAdmin {
 	private List<WifiConfiguration> mWifiConfigurations;
 	private WifiLock mWifiLock = null;
 
-	public WifiAdmin(Context context) {
+	public WifiManagerUtil(Context context) {
 		mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 		mWifiInfo = mWifiManager.getConnectionInfo();
 	}

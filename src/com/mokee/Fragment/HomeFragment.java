@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mokee.API.API;
-import com.mokee.NetConnect.WifiAdmin;
+import com.mokee.NetConnect.WifiManagerUtil;
 import com.mokee.TimeService.TimeService;
 import com.mokee.tools.MainActivity;
 import com.mokee.tools.R;
@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 	private TextView tv_Wifi;
 	
 	private StringBuilder sb;
-	private WifiAdmin wifi;
+	private WifiManagerUtil wifi;
 
 	private Handler MyHomeHandler = new Handler() {
 		@Override
@@ -53,11 +53,11 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 		tv_SystemTime.setOnLongClickListener(this);
 		tv_Wifi.setOnLongClickListener(this);
 		
-		wifi = new WifiAdmin(getActivity());
+		wifi = new WifiManagerUtil(getActivity());
 		sb = new StringBuilder();
 		
 		if(wifi.checkState() == WifiManager.WIFI_STATE_ENABLED){
-			sb.append("Ip Address：").append(WifiAdmin.intIPToStringIp(wifi.getIpAddress())).append("\n\n");
+			sb.append("Ip Address：").append(WifiManagerUtil.intIPToStringIp(wifi.getIpAddress())).append("\n\n");
 			sb.append("Mac Address：").append(wifi.getMacAddress()).append("\n\n");
 			sb.append("BSSID：").append(wifi.getBSSID()).append("\n\n");
 		} else {
