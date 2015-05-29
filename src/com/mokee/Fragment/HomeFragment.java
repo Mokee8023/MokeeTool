@@ -102,7 +102,8 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 		}
 		
 		long[] romMemroy = mobileUtil.getRomMemroy();
-		long[] sdCardMemroy = mobileUtil.getSDCardMemory();
+		long[] internalSdCardMemroy = mobileUtil.getInternalSDCardMemory();
+		long[] externalSdCardMemroy = mobileUtil.getExternalSDCardMemory();
 		int[] runTimes = mobileUtil.getSystemRunTimes();
 		String[] version = mobileUtil.getVersion();
 		
@@ -111,14 +112,17 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 		sb.append("Phone Number：" + mobileUtil.getPhoneNumber()).append("\n\n");
 		sb.append("CPU Serial：" + mobileUtil.getCPUSerial()).append("\n\n");
 		sb.append("RAM：").append("\n\n");
-		sb.append("		Total：" + mobileUtil.getTotalMemory()).append("\n\n");
-		sb.append("		Avail：" + mobileUtil.getAvailMemory()).append("\n\n");
+		sb.append("		Total：" + mobileUtil.getRAMTotalMemory()).append("\n\n");
+		sb.append("		Avail：" + mobileUtil.getRAMAvailMemory()).append("\n\n");
 		sb.append("Rom Memory：").append("\n\n");
 		sb.append("		Total：").append(Formatter.formatFileSize(getActivity(), romMemroy[0])).append("\n\n");
 		sb.append("		Avail：").append(Formatter.formatFileSize(getActivity(), romMemroy[1])).append("\n\n");
-		sb.append("SDCard Memory：").append("\n\n");
-		sb.append("		Total：").append(Formatter.formatFileSize(getActivity(), sdCardMemroy[0])).append("\n\n");
-		sb.append("		Avail：").append(Formatter.formatFileSize(getActivity(), sdCardMemroy[1])).append("\n\n");
+		sb.append("Internal SDCard Memory：").append("\n\n");
+		sb.append("		Total：").append(Formatter.formatFileSize(getActivity(), internalSdCardMemroy[0])).append("\n\n");
+		sb.append("		Avail：").append(Formatter.formatFileSize(getActivity(), internalSdCardMemroy[1])).append("\n\n");
+		sb.append("External SDCard Memory：").append("\n\n");
+		sb.append("		Total：").append(Formatter.formatFileSize(getActivity(), externalSdCardMemroy[0])).append("\n\n");
+		sb.append("		Avail：").append(Formatter.formatFileSize(getActivity(), externalSdCardMemroy[1])).append("\n\n");
 		sb.append("System Run Times：" + runTimes[0]).append(" Hour ").append(runTimes[1]).append(" Minute").append("\n\n");
 		sb.append("Version:\n\n");
 		sb.append("		Model Version：").append(version[2]).append("\n\n");

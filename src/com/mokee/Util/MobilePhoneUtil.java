@@ -2,8 +2,10 @@ package com.mokee.Util;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
@@ -19,6 +21,7 @@ import android.text.format.Formatter;
 import android.util.Log;
 
 public class MobilePhoneUtil {
+	private static final String TAG = "MobilePhoneUtil";
 	
 	private static MobilePhoneUtil mInstance = null;
 	private static Context mContext;
@@ -99,7 +102,7 @@ public class MobilePhoneUtil {
 		return cpuAddress;
 	}
 	
-	public String getTotalMemory() {  
+	public String getRAMTotalMemory() {  
 		String str1 = "/proc/meminfo";// 系统内存信息文件
 		String str2;
 		String[] arrayOfString;
@@ -122,7 +125,7 @@ public class MobilePhoneUtil {
 		return Formatter.formatFileSize(mContext, initial_memory);// Byte转换为KB或者MB，内存大小规格化 
     }
 	
-	public String getAvailMemory() {// 获取android当前可用内存大小 
+	public String getRAMAvailMemory() {// 获取android当前可用内存大小 
 
 		ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
 		MemoryInfo mi = new MemoryInfo();
@@ -135,8 +138,10 @@ public class MobilePhoneUtil {
 	 * 获取Rom的大小(总大小和可用大小)
 	 * @return	long[0]:总大小	long[1]:可用大小
 	 */
+	@SuppressWarnings("deprecation")
 	public long[] getRomMemroy() {  
 		File path = Environment.getDataDirectory();  
+		Log.i(TAG, "Environment.getDataDirectory().getPath:" + path.getPath());
         StatFs stat = new StatFs(path.getPath());  
         long[] romInfo = new long[2];  
         
@@ -153,11 +158,12 @@ public class MobilePhoneUtil {
 	 * 获取SDCard的大小(总大小和可用大小)
 	 * @return	long[0]:总大小	long[1]:可用大小
 	 */
-	public long[] getSDCardMemory() {  
+	public long[] getInternalSDCardMemory() {  
 		long[] sdCardInfo = new long[2];
 		String state = Environment.getExternalStorageState();
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
 			File sdcardDir = Environment.getExternalStorageDirectory();
+			Log.i(TAG, "Environment.getInternalSDCardMemory().getPath:" + sdcardDir.getPath());
 			StatFs sf = new StatFs(sdcardDir.getPath());
 			long bSize = sf.getBlockSize();
 			long bCount = sf.getBlockCount();
@@ -168,6 +174,95 @@ public class MobilePhoneUtil {
 		}
 		return sdCardInfo; 
     }
+	
+	/**
+	 * 获取External SDCard的大小(总大小和可用大小)
+	 * @return	long[0]:总大小	long[1]:可用大小
+	 */
+	@SuppressWarnings("deprecation")
+	public long[] getExternalSDCardMemory() {  
+		long[] externalSdCardInfo = new long[2];
+		try {
+			String externalSDCardPath = getExtSDCardPath();
+			StatFs stat = new StatFs(externalSDCardPath);  
+			long bSize = stat.getBlockSize();
+			long bCount = stat.getBlockCount();
+			long availBlocks = stat.getAvailableBlocks();
+
+			externalSdCardInfo[0] = bSize * bCount;// 总大小
+			externalSdCardInfo[1] = bSize * availBlocks;// 可用大小
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.e(TAG, "getExternalSDCardMemory.Exception:" + e.toString());
+		}
+		
+		return externalSdCardInfo; 
+    }
+	
+	/**
+	 * 获取外置SD卡路径
+	 * 
+	 * @return 应该就一条记录或空
+	 */
+	public String getExtSDCardPath() {
+		String extPath = new String();
+		try {  
+            Runtime runtime = Runtime.getRuntime();  
+            Process proc = runtime.exec("mount");  
+            InputStream is = proc.getInputStream();  
+            InputStreamReader isr = new InputStreamReader(is);  
+            String line;  
+            BufferedReader br = new BufferedReader(isr);  
+            while ((line = br.readLine()) != null) {  
+                if (line.contains("fuse") && line.contains("storage") && line.contains("ext_sd")) {  
+                    String columns[] = line.split(" ");  
+                    if (columns != null && columns.length > 1) {  
+                    	extPath = columns[1];
+                    }  
+                }  
+            }  
+        } catch (FileNotFoundException e) {  
+            e.printStackTrace();  
+            Log.e(TAG, "getExternalSDCardMemory.FileNotFoundException:" + e.toString());
+        } catch (IOException e) {  
+            e.printStackTrace();  
+            Log.e(TAG, "getExternalSDCardMemory.IOException:" + e.toString());
+        }  
+		
+		Log.i(TAG, "lResult:" + extPath.toString());
+		return extPath.toString();
+	}
+	
+	
+	/**
+	 * 获取外置存储卡的根路径
+	 * @return		根路径		没有外置存储卡：null
+	 */
+	public String getExternalSDCardPath() {
+		String sdcard_path = null;
+		try {
+			Runtime runtime = Runtime.getRuntime();
+			Process proc = runtime.exec("mount");
+			InputStream is = proc.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is);
+			String line;
+			BufferedReader br = new BufferedReader(isr);
+			while ((line = br.readLine()) != null) {
+				if (line.contains("ext_sd")) {
+					String columns[] = line.split(" ");
+					if (columns != null && columns.length > 1) {
+						sdcard_path = columns[1];
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.e(TAG, "getExternalSDCardMemory.Exception:" + e.toString());
+		}
+		
+		Log.i(TAG, "sdcard_path:"+sdcard_path);
+		return sdcard_path;
+	}
 	
 	/**
 	 * 获取系统运行时间
