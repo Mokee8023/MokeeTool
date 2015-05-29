@@ -30,6 +30,7 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 	private TextView tv_SystemTime;
 	private TextView tv_Wifi;
 	private TextView tv_SIM;
+	private TextView tv_System;
 	
 	private StringBuilder sb;
 	private WifiManagerUtil wifiUtil;
@@ -68,10 +69,13 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 		tv_SystemTime = (TextView) view.findViewById(R.id.tv_SystemTime);
 		tv_Wifi = (TextView) view.findViewById(R.id.tv_Wifi);
 		tv_SIM = (TextView) view.findViewById(R.id.tv_SIM);
+		tv_System = (TextView) view.findViewById(R.id.tv_System);
 		
 		layout_HomeFragment.setOnLongClickListener(this);
 		tv_SystemTime.setOnLongClickListener(this);
 		tv_Wifi.setOnLongClickListener(this);
+		tv_SIM.setOnLongClickListener(this);
+		tv_System.setOnLongClickListener(this);
 	}
 	
 	private void initEvent() {
@@ -109,28 +113,27 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 		
 		sb.append("SIM Serial：" + simUtil.getSimSerialNumber()).append("\n\n");
 		sb.append("IMEI/MEID：" + mobileUtil.getImeiOrMeid()).append("\n\n");
-		sb.append("Phone Number：" + mobileUtil.getPhoneNumber()).append("\n\n");
-		sb.append("CPU Serial：" + mobileUtil.getCPUSerial()).append("\n\n");
-		sb.append("RAM：").append("\n\n");
-		sb.append("		Total：" + mobileUtil.getRAMTotalMemory()).append("\n\n");
-		sb.append("		Avail：" + mobileUtil.getRAMAvailMemory()).append("\n\n");
-		sb.append("Rom Memory：").append("\n\n");
-		sb.append("		Total：").append(Formatter.formatFileSize(getActivity(), romMemroy[0])).append("\n\n");
-		sb.append("		Avail：").append(Formatter.formatFileSize(getActivity(), romMemroy[1])).append("\n\n");
-		sb.append("Internal SDCard Memory：").append("\n\n");
-		sb.append("		Total：").append(Formatter.formatFileSize(getActivity(), internalSdCardMemroy[0])).append("\n\n");
-		sb.append("		Avail：").append(Formatter.formatFileSize(getActivity(), internalSdCardMemroy[1])).append("\n\n");
-		sb.append("External SDCard Memory：").append("\n\n");
-		sb.append("		Total：").append(Formatter.formatFileSize(getActivity(), externalSdCardMemroy[0])).append("\n\n");
-		sb.append("		Avail：").append(Formatter.formatFileSize(getActivity(), externalSdCardMemroy[1])).append("\n\n");
+		sb.append("Phone Number：" + mobileUtil.getPhoneNumber());
+		
+		tv_SIM.setText(sb.toString());
+		
+		sb.delete(0, sb.length());
+		
+		sb.append("RAM->").append("Total：" + mobileUtil.getRAMTotalMemory()).append("		Avail：" + mobileUtil.getRAMAvailMemory()).append("\n\n");
+		sb.append("Rom->").append("Total：").append(Formatter.formatFileSize(getActivity(), romMemroy[0])).append("		Avail：").append(Formatter.formatFileSize(getActivity(), romMemroy[1])).append("\n\n");
+		sb.append("Internal->").append("Total：").append(Formatter.formatFileSize(getActivity(), internalSdCardMemroy[0])).append("		Avail：").append(Formatter.formatFileSize(getActivity(), internalSdCardMemroy[1])).append("\n\n");
+		sb.append("External->").append("Total：").append(Formatter.formatFileSize(getActivity(), externalSdCardMemroy[0])).append("		Avail：").append(Formatter.formatFileSize(getActivity(), externalSdCardMemroy[1])).append("\n\n");
 		sb.append("System Run Times：" + runTimes[0]).append(" Hour ").append(runTimes[1]).append(" Minute").append("\n\n");
+		
+		sb.append("CPU Serial：" + mobileUtil.getCPUSerial()).append("\n\n");
+		
 		sb.append("Version:\n\n");
 		sb.append("		Model Version：").append(version[2]).append("\n\n");
 		sb.append("		Firmware version：").append(version[1]).append("\n\n");
 		sb.append("		Kernel Version：").append(version[0]).append("\n\n");
-		sb.append("		System version：").append(version[3]).append("\n\n");
+		sb.append("		System version：").append(version[3]);
 		
-		tv_SIM.setText(sb.toString());
+		tv_System.setText(sb.toString());
 	}
 	
 	@Override
@@ -164,6 +167,16 @@ public class HomeFragment extends Fragment implements OnLongClickListener {
 		case R.id.layout_HomeFragment:
 			initEvent();
 			Toast.makeText(getActivity(), "Refresh complete.", Toast.LENGTH_SHORT).show();
+			break;
+			
+		case R.id.tv_SIM:
+			cbm.setText(tv_SIM.getText().toString().trim());
+			Toast.makeText(getActivity(), "SIM info has been copied.", Toast.LENGTH_SHORT).show();
+			break;
+			
+		case R.id.tv_System:
+			cbm.setText(tv_System.getText().toString().trim());
+			Toast.makeText(getActivity(), "System info has been copied", Toast.LENGTH_SHORT).show();
 			break;
 			
 		default:

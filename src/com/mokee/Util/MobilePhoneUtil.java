@@ -73,7 +73,7 @@ public class MobilePhoneUtil {
 	 * @return CPU序列号(16位) 读取失败为"您的手机暂时无法获取CPU序列号"
 	 */
 	public String getCPUSerial() {
-		String str = "", strCPU = "", cpuAddress = "您的手机暂时无法获取CPU序列号";
+		String str = "", strCPU = "", cpuAddress = "Sorry,don't support query Serial.";
 		try {
 			// 读取CPU信息
 			Process pp = Runtime.getRuntime().exec("cat /proc/cpuinfo");
@@ -88,6 +88,9 @@ public class MobilePhoneUtil {
 						// 提取序列号
 						strCPU = str.substring(str.indexOf(":") + 1, str.length());
 						cpuAddress = strCPU.trim();
+						if(cpuAddress.equals("0000000000000000")){
+							cpuAddress = "Sorry,don't support query Serial.";
+						}
 						break;
 					}
 				} else {
