@@ -1,5 +1,9 @@
 package com.mokee.Express;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -39,8 +43,8 @@ public class QueryExpress extends Activity implements OnClickListener,
 	private EditText et_QueryExpressNumber;
 	private Spinner sp_ExpressName;
 
-	private String expressName = "shunfeng";// 默认顺丰
-
+	private String expressName = "shunfeng";
+	
 	private Handler MyQueryExpressHandler = new Handler() {
 
 		@Override
@@ -56,6 +60,47 @@ public class QueryExpress extends Activity implements OnClickListener,
 				} else {
 					tv_ExpressQueryResult.setText(result);
 				}
+				
+//			case API.QUERY_EXPRESS_LIST_INFO:
+//				Log.i(TAG, "返回的 Query Result：" + msg.obj);
+//				JSONObject returnData = (JSONObject) msg.obj;
+//				try {
+//					if(returnData.getInt("showapi_res_code") == 0){
+//						JSONObject body = returnData.getJSONObject("showapi_res_body");
+//						if(body.getString("flag").equals("true")){
+//							JSONArray list = body.getJSONArray("expressList");
+//							items = new String[list.length()];
+//							for (int i = 0; i < list.length(); i++) {
+//								items[i] = list.getJSONObject(i).getString("expName");
+//							}
+//							expressName = items[0];
+//							ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.my_simple_spinner_item, items);
+//							sp_ExpressName.setAdapter(adapter);
+//							sp_ExpressName.setOnItemSelectedListener(new OnItemSelectedListener() {
+//
+//								@Override
+//								public void onItemSelected(AdapterView<?> parent, View view,
+//										int position, long id) {
+////									expressName = APIExpressName.GetExpressCode(position);
+//									expressName = items[position];
+//									Log.i(TAG, "expressName:" + expressName);
+//								}
+//
+//								@Override
+//								public void onNothingSelected(AdapterView<?> arg0) {
+//								}
+//							});
+//						} else {
+//							Toast.makeText(getApplicationContext(), "Data is Null.", Toast.LENGTH_SHORT).show();
+//						}
+//					} else {
+//						Toast.makeText(getApplicationContext(), "Query company list failed.", Toast.LENGTH_SHORT).show();
+//					}
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
+//				
+//				break;
 
 			default:
 				break;
@@ -71,6 +116,9 @@ public class QueryExpress extends Activity implements OnClickListener,
 		setContentView(R.layout.activity_express);
 
 		initView();
+		
+		QueryExpressCompList compList = new QueryExpressCompList(MyQueryExpressHandler);
+		compList.start();
 	}
 
 	private void initView() {
@@ -90,9 +138,8 @@ public class QueryExpress extends Activity implements OnClickListener,
 
 		activity_Text.setText(R.string.express_query);
 
-		String[] items = getResources().getStringArray(R.array.Express_Name);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-				getApplicationContext(), R.layout.my_simple_spinner_item, items);
+		String[]items = getResources().getStringArray(R.array.Express_Name);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.my_simple_spinner_item, items);
 		sp_ExpressName.setAdapter(adapter);
 		sp_ExpressName.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -134,7 +181,7 @@ public class QueryExpress extends Activity implements OnClickListener,
 				Toast.makeText(getApplicationContext(),
 						"Please choice express!", Toast.LENGTH_SHORT).show();
 			} else {
-				QueryExpressInfo query = new QueryExpressInfo(
+				QueryShowAPIExpressInfo query = new QueryShowAPIExpressInfo(
 						MyQueryExpressHandler, queryNumber, expressName);
 				query.start();
 			}

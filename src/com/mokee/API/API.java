@@ -19,6 +19,9 @@ public class API {
 	public static String KUAIDI_API_KEY = "2b0fd0a6d69742c3a6812739e8f1b9c0";
 	public static String KUAIDI_UID = "28980";
 	
+	//https://www.showapi.com/app/editApp     ShowAPI的接口
+	public static String ShOWAPI_KUAIDI_secret = "8f4e447a431e4fe8bbbe28ff1ad29eb4";
+	public static String ShOWAPI_KUAIDI_appid = "106";
 
 	public static final int GET_PHONE_INFORMATION = 0;// WebService获取Phone信息
 	public static final int TIMESERVICE = 1;// 系统时间获取
@@ -29,6 +32,7 @@ public class API {
 	public static final int SAVE_QRCODE_FLAG = 5;// 保存二維碼
 	public static final int QUERY_IDCARD_INFO = 6;// 查詢號碼信息
 	public static final int QUERY_EXPRESS_INFO = 7;// 查詢快递
+	public static final int QUERY_EXPRESS_LIST_INFO = 8;// 查詢快递名称列表
 
 	// Error code
 	public static final String URL_ERROR = "URL Error";

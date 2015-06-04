@@ -21,6 +21,36 @@ public class QueryExpressAPI {
 	 *            快遞公司編碼
 	 * @return 生成的url
 	 */
+	public static String GetShowAPIQueryExpressURL(String number, String name) {
+		StringBuilder sb = new StringBuilder(
+				"http://route.showapi.com/64-19?showapi_appid=");
+		sb.append(API.ShOWAPI_KUAIDI_appid);
+		sb.append("&showapi_sign=");
+		sb.append("simple_");
+		sb.append(API.ShOWAPI_KUAIDI_secret);
+		sb.append("&showapi_timestamp=");
+		sb.append(DateFormat.format("yyyy-MM-dd HH:mm:ss",System.currentTimeMillis()));
+		sb.append("&com=");
+		sb.append(name);
+		sb.append("&nu=");
+		sb.append(number);
+		String url = sb.toString();
+		// url = url.replaceAll("&", "%26");
+		url = url.replaceAll(" ", "%20");
+
+		Log.i(TAG, "StringBuilder-->GetShowAPIQueryExpressURL:" + url);
+		return url;
+	}
+	
+	/**
+	 * 根據需要查詢的訂單號和快遞公司編號，生成url
+	 * 
+	 * @param number
+	 *            訂單號
+	 * @param name
+	 *            快遞公司編碼
+	 * @return 生成的url
+	 */
 	public static String GetQueryExpressURL(String number, String name) {
 		// http://www.kuaidiapi.cn/rest/?uid=10002&key=xxxxxxx&order=6108241734&id=dtwl
 		StringBuilder sb = new StringBuilder(
@@ -49,6 +79,64 @@ public class QueryExpressAPI {
 		Log.i(TAG, "StringBuilder-->GetQueryExpressURL:" + url);
 		return url;
 	}
+	
+	/**
+	 * ShowAPI网站根據需要查詢的訂單號和快遞公司編號，生成url
+	 * 
+	 * @return 生成的url
+	 */
+	public static String GetShowAPIQueryExpressListURL() {
+		StringBuilder sb = new StringBuilder(
+				"http://route.showapi.com/64-20?showapi_appid=");
+		sb.append(API.ShOWAPI_KUAIDI_appid);
+		sb.append("&showapi_sign=");
+		sb.append(API.ShOWAPI_KUAIDI_secret);
+		sb.append("&showapi_timestamp=");
+		sb.append(DateFormat.format("yyyy-MM-dd HH:mm:ss",System.currentTimeMillis()));
+		String url = sb.toString();
+		// url = url.replaceAll("&", "%26");
+		url = url.replaceAll(" ", "%20");
+
+		Log.i(TAG, "StringBuilder-->GetShowAPIQueryExpressURL:" + url);
+		return url;
+	}
+	
+	public static String ShowAPIAnalyzeExpressJSON(String data) {
+		StringBuilder sb = new StringBuilder();
+		if (data == null || data.equals("")) {
+			return "Query data is empty!";
+		} else {
+			try {
+				JSONObject originJSON = new JSONObject(data);
+				
+				if(originJSON.getInt("showapi_res_code") == 0){
+					originJSON.getJSONObject("showapi_res_body").getString("expTextName");
+					sb.append(originJSON.getJSONObject("showapi_res_body").getString("expTextName"));
+					sb.append("\n\n");
+					
+					JSONArray dataArray = originJSON.getJSONObject("showapi_res_body").getJSONArray("data");
+					sb.append("Express Status: ");
+					sb.append("\n\n");
+					for (int i = 0; i < dataArray.length(); i++) {
+						JSONObject item = dataArray.getJSONObject(i);
+						// sb.append(i);
+						// sb.append(".");
+						sb.append(item.getString("time"));
+						sb.append(":");
+						sb.append(item.getString("context"));
+						sb.append("\n\n");
+						}
+					Log.i(TAG, "JSONData:" + sb.toString());
+					return sb.toString();
+				} else {
+					return "获取失败，原因为：" + originJSON.getString("showapi_res_error");
+				}
+			} catch (Exception e) {
+				Log.e(TAG, "Data processing error:" + e.toString());
+				return "Data processing error:" + e.toString();
+			}
+		}
+	}
 
 	public static String AnalyzeExpressJSON(String data) {
 		StringBuilder sb = new StringBuilder();
@@ -60,12 +148,12 @@ public class QueryExpressAPI {
 				sb.append(originJSON.getString("name"));
 				sb.append(": ");
 				sb.append(originJSON.getString("order"));
-				sb.append("\n");
+				sb.append("\n\n");
 				String errorCode = originJSON.getString("errcode");
 				if (errorCode.equals("0000")) {
 					sb.append("Express Status: ");
 					sb.append(GetExpressStatus(originJSON.getInt("status")));
-					sb.append("\n");
+					sb.append("\n\n");
 					JSONArray dataArray = originJSON.getJSONArray("data");
 					for (int i = 0; i < dataArray.length(); i++) {
 						JSONObject item = dataArray.getJSONObject(i);
@@ -74,7 +162,7 @@ public class QueryExpressAPI {
 						sb.append(item.getString("time"));
 						sb.append(":");
 						sb.append(item.getString("content"));
-						sb.append("\n");
+						sb.append("\n\n");
 					}
 				} else {
 					sb.append(originJSON.getString("message"));
