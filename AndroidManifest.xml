@@ -62,7 +62,7 @@
         </activity>
         <activity android:name="com.mokee.Translate.Translate" >
         </activity>
-        <activity android:name="com.mokee.Express.QueryExpress" >
+        <activity android:name="com.mokee.Express.QueryExpressActivity" >
         </activity>
         <activity android:name="com.mokee.PriceCompare.GoodsPriceListActivity"></activity>
         <activity android:name="com.mokee.PriceCompare.AddGoodsActivity"></activity>

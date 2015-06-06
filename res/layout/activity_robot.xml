@@ -6,15 +6,34 @@
 
     <include layout="@layout/sub_layout_top" />
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="Chat with the robot："
-        android:textColor="#FF00FF"
-        android:textStyle="bold"
-        android:textSize="20dp" />
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Chat with the robot："
+            android:textColor="#FF00FF"
+            android:layout_alignParentLeft="true"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/ib_ClearChat"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/clear_nomal"
+            android:visibility="invisible" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,10 +73,10 @@
             android:layout_marginRight="3dp"
             android:layout_marginTop="3dp"
             android:layout_weight="1"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:background="@drawable/edittext_shap"
-            android:hint="Chat Content..." />
+            android:hint="Chat Content..."
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
 
         <Button
             android:id="@+id/btn_SendChat"

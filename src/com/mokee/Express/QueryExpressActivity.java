@@ -26,9 +26,8 @@ import com.mokee.API.APIExpressName;
 import com.mokee.tools.R;
 import com.zxing.activity.CaptureActivity;
 
-public class QueryExpress extends Activity implements OnClickListener,
-		OnLongClickListener {
-	private static final String TAG = "QueryExpress";
+public class QueryExpressActivity extends Activity implements OnClickListener, OnLongClickListener {
+	private static final String TAG = "QueryExpressActivity";
 
 	private ImageButton ib_Return;
 	private ImageButton ib_QueryExpress;
@@ -191,8 +190,7 @@ public class QueryExpress extends Activity implements OnClickListener,
 		switch (view.getId()) {
 		case R.id.tv_ExpressQueryResult:
 			ClipboardManager cbm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-			String expressInfo = tv_ExpressQueryResult.getText().toString()
-					.trim();
+			String expressInfo = tv_ExpressQueryResult.getText().toString().trim();
 
 			if (expressInfo == null || expressInfo.equals("")) {
 				Toast.makeText(getApplicationContext(),

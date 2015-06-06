@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.mokee.API.API;
-import com.mokee.Express.QueryExpress;
+import com.mokee.Express.QueryExpressActivity;
 import com.mokee.IdCard.QueryIdCardInfo;
 import com.mokee.PhoneNumber.PhoneNumber;
 import com.mokee.PriceCompare.GoodsPriceListActivity;
@@ -89,7 +89,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 			startActivity(translateIntent);
 			break;
 		case R.id.layout_QueryExpress:
-			Intent expressIntent = new Intent(getActivity(), QueryExpress.class);
+			Intent expressIntent = new Intent(getActivity(), QueryExpressActivity.class);
 			startActivity(expressIntent);
 			break;
 		case R.id.layout_RobotChat:
