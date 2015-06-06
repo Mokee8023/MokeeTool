@@ -22,6 +22,7 @@ public class HttpGetThread_Apache extends Thread {
 
 	private Handler mHandler;
 	private String mUrl;
+	private int mRrequestCode;
 
 	/**
 	 * HttpGetThread_Apache 构造函数，启动一个线程
@@ -31,9 +32,10 @@ public class HttpGetThread_Apache extends Thread {
 	 * @param url
 	 *            需要Get的url地址（完整的url）
 	 */
-	public HttpGetThread_Apache(Handler handler, String url) {
+	public HttpGetThread_Apache(Handler handler, String url, int requestCode) {
 		this.mHandler = handler;
 		this.mUrl = url;
+		this.mRrequestCode = requestCode;
 	}
 
 	@Override
@@ -41,7 +43,7 @@ public class HttpGetThread_Apache extends Thread {
 		super.run();
 		
 		Message message = new Message();
-		message.what = ConstantUtil.HTTPGET_THREAD_APACHE;
+		message.what = mRrequestCode;
 		
 		Bundle result = new Bundle();
 

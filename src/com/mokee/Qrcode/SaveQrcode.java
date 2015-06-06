@@ -79,9 +79,7 @@ public class SaveQrcode extends Activity implements OnClickListener {
 			bmpSavePath = FilePath.GetFilePath();
 			if (bmpSavePath == null) {
 				bmpSavePath = "/sdcard/MokeeQrCode";
-				Toast.makeText(getApplicationContext(),
-						"No External Sdcard,Save to '/sdcard/MokeeQrCode'",
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "No External Sdcard,Save to '/sdcard/MokeeQrCode'", Toast.LENGTH_SHORT).show();
 			} else {
 				/////////////////////Android 4.4之后的系统///////////////////////////////////////
 				
@@ -93,9 +91,7 @@ public class SaveQrcode extends Activity implements OnClickListener {
 				this.getExternalFilesDir(null);
 				
 				////////////////////////////////////////////////////////////////////////////////
-				bmpSavePath = bmpSavePath + "/Android/data/"
-						+ this.getApplicationContext().getPackageName()
-						+ "/MokeeQrCode";
+				bmpSavePath = bmpSavePath + "/Android/data/" + this.getApplicationContext().getPackageName() + "/MokeeQrCode";
 			}
 
 			String saveName = et_SaveName.getText().toString().trim();
@@ -104,13 +100,10 @@ public class SaveQrcode extends Activity implements OnClickListener {
 				if (qrcodeBitmap != null) {
 					SaveQrCodeBitmap(saveName, format);
 				} else {
-					Toast.makeText(getApplicationContext(),
-							"Byte[] to Bitmap Failed!", Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(getApplicationContext(), "Byte[] to Bitmap Failed!", Toast.LENGTH_SHORT).show();
 				}
 			} else {
-				Toast.makeText(getApplicationContext(),
-						"Please Input Save Name!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Please Input Save Name!", Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -131,8 +124,7 @@ public class SaveQrcode extends Activity implements OnClickListener {
 		}
 
 		if (qrcodeBitmap == null) {
-			Toast.makeText(getApplicationContext(), "QrCode is Empty!",
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "QrCode is Empty!", Toast.LENGTH_SHORT).show();
 		} else {
 			String filePath = bmpSavePath + File.separator + saveName + "."
 					+ format;
@@ -144,16 +136,13 @@ public class SaveQrcode extends Activity implements OnClickListener {
 				qrcodeBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
 				fos.flush();
 				fos.close();
-				Toast.makeText(getApplicationContext(), "Save File success! \nPath："+bmpSavePath,
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Save File success! \nPath："+bmpSavePath, Toast.LENGTH_SHORT).show();
 				this.setResult(RESULT_OK);
 				finish();
 				onDestroy();
 			} catch (IOException e) {
 				Log.e(TAG, "Create File IOException:" + e.toString());
-				Toast.makeText(getApplicationContext(),
-						"Create File IOException:" + e.toString(),
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Create File IOException:" + e.toString(), Toast.LENGTH_SHORT).show();
 			}
 		}
 	}

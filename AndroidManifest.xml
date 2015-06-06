@@ -66,6 +66,7 @@
         </activity>
         <activity android:name="com.mokee.PriceCompare.GoodsPriceListActivity"></activity>
         <activity android:name="com.mokee.PriceCompare.AddGoodsActivity"></activity>
+        <activity android:name="com.mokee.Robot.RobotActivity"></activity>
     </application>
 
 </manifest>
