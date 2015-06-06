@@ -1,9 +1,5 @@
 package com.mokee.Express;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -17,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -181,8 +176,7 @@ public class QueryExpress extends Activity implements OnClickListener,
 				Toast.makeText(getApplicationContext(),
 						"Please choice express!", Toast.LENGTH_SHORT).show();
 			} else {
-				QueryShowAPIExpressInfo query = new QueryShowAPIExpressInfo(
-						MyQueryExpressHandler, queryNumber, expressName);
+				QueryShowAPIExpressInfo query = new QueryShowAPIExpressInfo(MyQueryExpressHandler, queryNumber, expressName);
 				query.start();
 			}
 			break;

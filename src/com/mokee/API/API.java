@@ -15,11 +15,11 @@ public class API {
 	//百度定位CK
 	public static String BaiDuLocation_API_CK = "C8d9423757173cb90286e924b15ac47f";
 	
-	// http://www.kuaidiapi.cn	调用次数200次每天
+	// 已废弃     http://www.kuaidiapi.cn	调用次数200次每天
 	public static String KUAIDI_API_KEY = "2b0fd0a6d69742c3a6812739e8f1b9c0";
 	public static String KUAIDI_UID = "28980";
 	
-	//https://www.showapi.com/app/editApp     ShowAPI的接口
+	//https://www.showapi.com/app/editApp     ShowAPI(易源)的接口
 	public static String ShOWAPI_KUAIDI_secret = "8f4e447a431e4fe8bbbe28ff1ad29eb4";
 	public static String ShOWAPI_KUAIDI_appid = "106";
 

@@ -102,6 +102,7 @@ public class QueryExpressAPI {
 	}
 	
 	public static String ShowAPIAnalyzeExpressJSON(String data) {
+		Log.i(TAG, " ShowAPIAnalyzeExpressJSON.data:" + data);
 		StringBuilder sb = new StringBuilder();
 		if (data == null || data.equals("")) {
 			return "Query data is empty!";
@@ -114,22 +115,33 @@ public class QueryExpressAPI {
 					sb.append(originJSON.getJSONObject("showapi_res_body").getString("expTextName"));
 					sb.append("\n\n");
 					
-					JSONArray dataArray = originJSON.getJSONObject("showapi_res_body").getJSONArray("data");
+					JSONObject dataBody = originJSON.getJSONObject("showapi_res_body");
+					JSONArray dataArray = dataBody.getJSONArray("data");
 					sb.append("Express Status: ");
 					sb.append("\n\n");
-					for (int i = 0; i < dataArray.length(); i++) {
-						JSONObject item = dataArray.getJSONObject(i);
-						// sb.append(i);
-						// sb.append(".");
-						sb.append(item.getString("time"));
-						sb.append(":");
-						sb.append(item.getString("context"));
-						sb.append("\n\n");
+					if(dataBody.getBoolean("flag") && dataArray.length() > 0){
+						for (int i = 0; i < dataArray.length(); i++) {
+							JSONObject item = dataArray.getJSONObject(i);
+							// sb.append(i);
+							// sb.append(".");
+							sb.append(item.getString("time"));
+							sb.append(":");
+							sb.append(item.getString("context"));
+							sb.append("\n\n");
 						}
+					} else {
+						sb.append("Query Failed, Reason：");
+						sb.append(dataBody.getString("message"));
+						sb.append("\n\n");
+					}
+					
+					sb.append("Company Tel: ");
+					sb.append(dataBody.getString("tel"));
+					sb.append("\n\n");
 					Log.i(TAG, "JSONData:" + sb.toString());
 					return sb.toString();
 				} else {
-					return "获取失败，原因为：" + originJSON.getString("showapi_res_error");
+					return "Get fail, Reason：" + originJSON.getString("showapi_res_error");
 				}
 			} catch (Exception e) {
 				Log.e(TAG, "Data processing error:" + e.toString());

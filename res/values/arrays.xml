@@ -49,7 +49,6 @@
         <item>京东</item>
         <item>汇通</item>
         <item>全峰</item>
-        <item>宅急送</item>
         <item>EMS</item>
         <item>国通</item>
         <item>速通</item>
@@ -62,6 +61,7 @@
         <item>万象</item>
         <item>恒宇运通</item>
         <item>中邮</item>
+        <item>宅急送</item>
     </string-array>
     
     <string-array name="GoodsListDelete">

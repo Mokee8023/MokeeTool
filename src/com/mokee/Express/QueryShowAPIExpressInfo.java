@@ -48,8 +48,7 @@ public class QueryShowAPIExpressInfo extends Thread {
 				String resultString = QueryExpressAPI.ShowAPIAnalyzeExpressJSON(result);
 				msg.obj = resultString;
 			} else {
-				msg.obj = "response.getStatusLine().getStatusCode() != HttpStatus.SC_OK:"
-						+ response.getStatusLine().getStatusCode();
+				msg.obj = "response.getStatusLine().getStatusCode() != HttpStatus.SC_OK:" + response.getStatusLine().getStatusCode();
 			}
 
 		} catch (Exception e) {
