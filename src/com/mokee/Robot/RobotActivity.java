@@ -150,7 +150,6 @@ public class RobotActivity extends Activity implements OnClickListener, OnLongCl
 //			if(imm.isActive()){
 //				scrollToBottom(sv_ScrollView, tv_RobotData);
 //			}
-			Toast.makeText(this, "123", Toast.LENGTH_SHORT).show();
 			scrollToBottom(sv_ScrollView, tv_RobotData);
 			break;
 
