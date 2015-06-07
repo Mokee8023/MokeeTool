@@ -5,13 +5,17 @@ import com.mokee.API.ApiLanguage;
 import com.mokee.tools.R;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
@@ -22,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class Translate extends Activity implements OnClickListener {
+public class Translate extends Activity implements OnClickListener, OnLongClickListener {
 	private static final String TAG = "Translate";
 
 	private EditText et_TranslateText;
@@ -113,6 +117,7 @@ public class Translate extends Activity implements OnClickListener {
 		});
 		ib_tranlate.setOnClickListener(this);
 		ib_Return.setOnClickListener(this);
+		et_ResultText.setOnLongClickListener(this);
 	}
 
 	@Override
@@ -137,5 +142,23 @@ public class Translate extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public boolean onLongClick(View arg0) {
+		switch (arg0.getId()) {
+		case R.id.et_ResultText:
+			ClipboardManager cbm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+			String text = et_ResultText.getText().toString().trim();
+			if(!text.equals("")){
+				cbm.setText(text);
+				Toast.makeText(this, "Translate result has been copied.", Toast.LENGTH_SHORT).show();
+			}
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 }
