@@ -1,5 +1,8 @@
 package com.mokee.Robot;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -170,8 +173,15 @@ public class RobotActivity extends Activity implements OnClickListener, OnLongCl
 		sb.append(chat);
 		
 		String url = sb.toString();
+//		try {
+//			url = URLEncoder.encode(url, "utf-8");
+//		} catch (UnsupportedEncodingException e) {
+////			e.printStackTrace();
+//			Log.e(TAG, "RobotActivity.UnsupportedEncodingException:"+e.toString());
+//		}
 		url = url.replaceAll(" ", "%20");
-		Log.i(TAG, "ShowAPIChatThread.getChatURL:" + url);
+		url = url.replaceAll("\n", "%0a");
+		Log.i(TAG, "getChatURL.ShowAPIChatThread.getChatURL:" + url);
 		return url;
 	}
 	

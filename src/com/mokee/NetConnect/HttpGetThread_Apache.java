@@ -51,9 +51,9 @@ public class HttpGetThread_Apache extends Thread {
 		HttpClient mClient = new DefaultHttpClient();
 
 		/** 设置HttpGet请求参数  */
-		HttpConnectionParams.setConnectionTimeout(mClient.getParams(), 3 * 1000);/* 设置连接超时 */
-		HttpConnectionParams.setSoTimeout(mClient.getParams(), 3 * 1000);/* 设置读取数据时间超时 */
-		ConnManagerParams.setTimeout(mClient.getParams(), 3 * 1000);/* 设置从连接池中取连接超时 */
+		HttpConnectionParams.setConnectionTimeout(mClient.getParams(), 5 * 1000);/* 设置连接超时 */
+		HttpConnectionParams.setSoTimeout(mClient.getParams(), 5 * 1000);/* 设置读取数据时间超时 */
+		ConnManagerParams.setTimeout(mClient.getParams(), 5 * 1000);/* 设置从连接池中取连接超时 */
 
 		HttpGet mHttpGet = new HttpGet(mUrl);/* 获取请求 */
 		try {
