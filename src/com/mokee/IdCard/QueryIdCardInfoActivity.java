@@ -19,13 +19,13 @@ import android.widget.Toast;
 import com.mokee.API.API;
 import com.mokee.tools.R;
 
-public class QueryIdCardInfo extends Activity implements OnClickListener,
+public class QueryIdCardInfoActivity extends Activity implements OnClickListener,
 		OnLongClickListener {
-	private static final String TAG = "QueryIdCardInfo";
+	private static final String TAG = "QueryIdCardInfoActivity";
 
 	private EditText et_IdCard;
-	private Button btn_QueryIdCardCancle;
-	private ImageButton ib_QueryIdCard;
+//	private Button btn_QueryIdCardCancle;
+	private ImageButton ib_QueryIdCard, btn_Return;
 	private TextView tv_IdCardInfo;
 
 	String idCardNumber = null;
@@ -65,12 +65,14 @@ public class QueryIdCardInfo extends Activity implements OnClickListener,
 
 	private void initView() {
 		et_IdCard = (EditText) findViewById(R.id.et_IdCard);
-		btn_QueryIdCardCancle = (Button) findViewById(R.id.btn_QueryIdCardCancle);
+//		btn_QueryIdCardCancle = (Button) findViewById(R.id.btn_QueryIdCardCancle);
 		ib_QueryIdCard = (ImageButton) findViewById(R.id.ib_QueryIdCard);
+		btn_Return = (ImageButton) findViewById(R.id.btn_Return);
 		tv_IdCardInfo = (TextView) findViewById(R.id.tv_IdCardInfo);
 
 		ib_QueryIdCard.setOnClickListener(this);
-		btn_QueryIdCardCancle.setOnClickListener(this);
+//		btn_QueryIdCardCancle.setOnClickListener(this);
+		btn_Return.setOnClickListener(this);
 		tv_IdCardInfo.setOnLongClickListener(this);
 	}
 
@@ -99,7 +101,12 @@ public class QueryIdCardInfo extends Activity implements OnClickListener,
 				service.start();
 			}
 			break;
-		case R.id.btn_QueryIdCardCancle:
+//		case R.id.btn_QueryIdCardCancle:
+//			finish();
+//			onDestroy();
+//			break;
+			
+		case R.id.btn_Return:
 			finish();
 			onDestroy();
 			break;

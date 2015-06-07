@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:layout_marginTop="20dp"
     android:orientation="vertical" >
 
@@ -13,10 +13,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tv_query_number_attribution" />
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/btn_Return"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/btn_return" />
+            
+            <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/holo_blue_light" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_query_number_attribution" />
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -61,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingTop="10dp" >
+        android:paddingTop="20dp" >
 
         <TextView
             android:id="@+id/tv_PhoneInformation"
@@ -70,6 +91,7 @@
             android:hint="@string/phone_information" />
     </ScrollView>
 
+    <!--  
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -83,5 +105,6 @@
             android:background="@drawable/button_shap"
             android:text="@string/cancle" />
     </RelativeLayout>
+    -->
 
 </LinearLayout>

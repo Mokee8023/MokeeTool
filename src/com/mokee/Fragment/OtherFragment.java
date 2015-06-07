@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.mokee.API.API;
 import com.mokee.Express.QueryExpressActivity;
-import com.mokee.IdCard.QueryIdCardInfo;
+import com.mokee.IdCard.QueryIdCardInfoActivity;
 import com.mokee.PhoneNumber.PhoneNumber;
 import com.mokee.PriceCompare.GoodsPriceListActivity;
 import com.mokee.Qrcode.GenerateQrcode;
@@ -77,7 +77,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 			startActivity(contactIntent);
 			break;
 		case R.id.layout_IdCard:
-			Intent idCardIntent = new Intent(getActivity(), QueryIdCardInfo.class);
+			Intent idCardIntent = new Intent(getActivity(), QueryIdCardInfoActivity.class);
 			startActivity(idCardIntent);
 			break;
 		case R.id.layout_GoodsPrice:

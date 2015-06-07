@@ -28,8 +28,8 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 		OnClickListener {
 
 	private EditText et_PhoneNumbers;
-	private ImageButton ib_QueryPhone;
-	private Button btn_QueryPhoneCancle;
+	private ImageButton ib_QueryPhone,btn_Return;
+//	private Button btn_QueryPhoneCancle;
 	private TextView tv_PhoneInformation;
 	private ImageView iv_Contact;
 
@@ -67,7 +67,8 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 	private void initView() {
 		et_PhoneNumbers = (EditText) findViewById(R.id.et_PhoneNumbers);
 		ib_QueryPhone = (ImageButton) findViewById(R.id.ib_QueryPhone);
-		btn_QueryPhoneCancle = (Button) findViewById(R.id.btn_QueryPhoneCancle);
+//		btn_QueryPhoneCancle = (Button) findViewById(R.id.btn_QueryPhoneCancle);
+		btn_Return = (ImageButton) findViewById(R.id.btn_Return);
 		tv_PhoneInformation = (TextView) findViewById(R.id.tv_PhoneInformation);
 		iv_Contact = (ImageView) findViewById(R.id.iv_Contact);
 
@@ -75,7 +76,8 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 
 		ib_QueryPhone.setOnClickListener(this);
 		iv_Contact.setOnClickListener(this);
-		btn_QueryPhoneCancle.setOnClickListener(this);
+//		btn_QueryPhoneCancle.setOnClickListener(this);
+		btn_Return.setOnClickListener(this);
 	}
 
 	@Override
@@ -106,7 +108,11 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 					ContactsContract.Contacts.CONTENT_URI);
 			startActivityForResult(intent, API.GET_PHONE);
 			break;
-		case R.id.btn_QueryPhoneCancle:
+//		case R.id.btn_QueryPhoneCancle:
+//			finish();
+//			onDestroy();
+//			break;
+		case R.id.btn_Return:
 			finish();
 			onDestroy();
 			break;
