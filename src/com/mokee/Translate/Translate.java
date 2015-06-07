@@ -7,7 +7,6 @@ import com.mokee.tools.R;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,10 +14,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -30,11 +27,12 @@ public class Translate extends Activity implements OnClickListener, OnLongClickL
 	private static final String TAG = "Translate";
 
 	private EditText et_TranslateText;
-	private EditText et_ResultText;
+	private TextView tv_ResultText;
 	private Spinner sp_SourceLang;
 	private Spinner sp_TargetLang;
 	private ImageButton ib_tranlate;
 	private ImageButton ib_Return;
+	private ImageButton ib_ClearChat;
 	private TextView activity_Text;
 
 	private String sourceLang = "auto";// 默认情况下是自动识别
@@ -48,7 +46,7 @@ public class Translate extends Activity implements OnClickListener, OnLongClickL
 			switch (msg.what) {
 			case API.GET_TRANSLATE_TEXT:
 				if (msg.obj != null) {
-					et_ResultText.setText(msg.obj.toString());
+					tv_ResultText.setText(msg.obj.toString());
 				} else {
 					Toast.makeText(getApplicationContext(),
 							"Result text is NULL!", Toast.LENGTH_SHORT).show();
@@ -71,11 +69,12 @@ public class Translate extends Activity implements OnClickListener, OnLongClickL
 
 	private void initView() {
 		et_TranslateText = (EditText) findViewById(R.id.et_TranslateText);
-		et_ResultText = (EditText) findViewById(R.id.et_ResultText);
+		tv_ResultText = (TextView) findViewById(R.id.tv_ResultText);
 		sp_SourceLang = (Spinner) findViewById(R.id.sp_SourceLang);
 		sp_TargetLang = (Spinner) findViewById(R.id.sp_TargetLang);
 		ib_tranlate = (ImageButton) findViewById(R.id.ib_tranlate);
 		ib_Return = (ImageButton) findViewById(R.id.ib_Return);
+		ib_ClearChat = (ImageButton) findViewById(R.id.ib_ClearChat);
 		activity_Text = (TextView) findViewById(R.id.activity_Text);
 
 		String[] items = getResources().getStringArray(R.array.Language);
@@ -117,7 +116,8 @@ public class Translate extends Activity implements OnClickListener, OnLongClickL
 		});
 		ib_tranlate.setOnClickListener(this);
 		ib_Return.setOnClickListener(this);
-		et_ResultText.setOnLongClickListener(this);
+		ib_ClearChat.setOnClickListener(this);
+		tv_ResultText.setOnLongClickListener(this);
 	}
 
 	@Override
@@ -126,18 +126,22 @@ public class Translate extends Activity implements OnClickListener, OnLongClickL
 		case R.id.ib_tranlate:
 			String text = et_TranslateText.getText().toString().trim();
 			if (text.isEmpty() || text.equals("")) {
-				Toast.makeText(getApplicationContext(),
-						"Please enter the text!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getApplicationContext(), "Please enter the text!", Toast.LENGTH_SHORT).show();
 			} else {
 				TranslteThread translate = new TranslteThread(
 						MyTranslateHandler, text, sourceLang, targetLang);
 				translate.start();
 			}
 			break;
+			
 		case R.id.ib_Return:
 			finish();
 			onDestroy();
+			break;
+			
+		case R.id.ib_ClearChat:
+			et_TranslateText.setText("");
+			tv_ResultText.setText("");
 			break;
 		default:
 			break;
@@ -147,9 +151,9 @@ public class Translate extends Activity implements OnClickListener, OnLongClickL
 	@Override
 	public boolean onLongClick(View arg0) {
 		switch (arg0.getId()) {
-		case R.id.et_ResultText:
+		case R.id.tv_ResultText:
 			ClipboardManager cbm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-			String text = et_ResultText.getText().toString().trim();
+			String text = tv_ResultText.getText().toString().trim();
 			if(!text.equals("")){
 				cbm.setText(text);
 				Toast.makeText(this, "Translate result has been copied.", Toast.LENGTH_SHORT).show();

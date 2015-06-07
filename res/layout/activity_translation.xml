@@ -1,40 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <include layout="@layout/sub_layout_top"/>
+    android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <EditText
-            android:id="@+id/et_TranslateText"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:gravity="left|top"
-            android:hint="@string/translate_text_hint" />
-
-        <EditText
-            android:id="@+id/et_ResultText"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:gravity="left|top"
-            android:hint="@string/result_text_hint" />
-    </LinearLayout>
+    <include
+        android:id="@+id/include_Top"
+        layout="@layout/sub_layout_top" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_above="@+id/layout_Bottom"
+        android:layout_below="@id/include_Top"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="For Translation:"
+                    android:textColor="#0000ff"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/ib_ClearChat"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/clear" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/et_TranslateText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_shap"
+                android:gravity="left|top"
+                android:hint="@string/translate_text_hint"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Translate Result:"
+                android:textColor="#0000ff"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_shap" >
+
+                <TextView
+                    android:id="@+id/tv_ResultText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|top"
+                    android:hint="@string/result_text_hint"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_Bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
@@ -62,9 +124,10 @@
             android:id="@+id/ib_tranlate"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:scaleType="fitXY"
+            android:layout_gravity="center"
             android:background="@android:color/transparent"
+            android:scaleType="fitXY"
             android:src="@drawable/translate" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

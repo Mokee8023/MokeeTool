@@ -15,11 +15,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -60,13 +60,18 @@
             android:name="com.mokee.IdCard.QueryIdCardInfoActivity"
             android:theme="@style/QueryIdCard_dialog" >
         </activity>
-        <activity android:name="com.mokee.Translate.Translate" >
+        <activity
+            android:name="com.mokee.Translate.Translate"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity android:name="com.mokee.Express.QueryExpressActivity" >
         </activity>
-        <activity android:name="com.mokee.PriceCompare.GoodsPriceListActivity"></activity>
-        <activity android:name="com.mokee.PriceCompare.AddGoodsActivity"></activity>
-        <activity android:name="com.mokee.Robot.RobotActivity"></activity>
+        <activity android:name="com.mokee.PriceCompare.GoodsPriceListActivity" >
+        </activity>
+        <activity android:name="com.mokee.PriceCompare.AddGoodsActivity" >
+        </activity>
+        <activity android:name="com.mokee.Robot.RobotActivity" >
+        </activity>
     </application>
 
 </manifest>

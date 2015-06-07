@@ -27,11 +27,10 @@
             android:layout_height="30dp"
             android:background="@android:color/transparent"
             android:scaleType="fitXY"
-            android:layout_gravity="right"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/clear_nomal"
+            android:src="@drawable/clear"
             android:visibility="invisible" />
     </RelativeLayout>
 
