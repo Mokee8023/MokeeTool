@@ -3,6 +3,8 @@ package com.mokee.application.Socket;
 import java.io.ByteArrayOutputStream;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,6 +17,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -22,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +36,7 @@ import com.mokee.network.NetConnect.ConstantUtil;
 import com.mokee.network.NetConnect.SocketClientThread;
 import com.mokee.tools.R;
 
-public class SocketDebugActivity extends Activity implements OnClickListener {
+public class SocketDebugActivity extends Activity implements OnClickListener, OnLongClickListener {
 	private static final String tag = "SocketDebugActivity";
 
 	private ImageButton ib_Return;
@@ -40,11 +44,13 @@ public class SocketDebugActivity extends Activity implements OnClickListener {
 	private TextView activity_Text,tv_SocketResult;
 	private EditText et_SocketIp, et_SocketPort, et_SocketDataText;
 	private Spinner sp_SocketDataType, sp_SocketDataImageFrom;
+	private ImageView iv_SocketImage;
 	
 	private byte[] imageByte = null;
 	
 	private static final int SOCKET_CAMERA_IMAGE = 1;
 	private static final int SOCKET_PHONE_IMAGE = 2;
+	private int mPosition;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,8 @@ public class SocketDebugActivity extends Activity implements OnClickListener {
 		
 		sp_SocketDataType = (Spinner) findViewById(R.id.sp_SocketDataType);
 		sp_SocketDataImageFrom = (Spinner) findViewById(R.id.sp_SocketDataImageFrom);
+		
+		iv_SocketImage = (ImageView) findViewById(R.id.iv_SocketImage);
 	}
 
 	private void initEvent() {
@@ -81,6 +89,8 @@ public class SocketDebugActivity extends Activity implements OnClickListener {
 		btn_SendSocket.setOnClickListener(this);
 		btn_SetSocketIp.setOnClickListener(this);
 		btn_SetSocketPort.setOnClickListener(this);
+		iv_SocketImage.setOnClickListener(this);
+		tv_SocketResult.setOnLongClickListener(this);
 		
 		String[] dataType = getResources().getStringArray(R.array.SocketDataType);
 		ArrayAdapter<String> dataTypeAdapter = new ArrayAdapter<String>(this, R.layout.my_simple_spinner_item, dataType);
@@ -94,13 +104,13 @@ public class SocketDebugActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-						Log.i(tag, "sp_SocketDataType.position:" + position);
 						if (position == 0) {
 							imageByte = null;
 							et_SocketDataText.setVisibility(View.VISIBLE);
-							sp_SocketDataImageFrom
-									.setVisibility(View.INVISIBLE);
+							sp_SocketDataImageFrom.setVisibility(View.INVISIBLE);
+							iv_SocketImage.setVisibility(View.GONE);
 						} else {
+							sp_SocketDataImageFrom.setSelection(0);
 							et_SocketDataText.setVisibility(View.INVISIBLE);
 							sp_SocketDataImageFrom.setVisibility(View.VISIBLE);
 						}
@@ -117,19 +127,21 @@ public class SocketDebugActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+						mPosition = position;
+						imageByte = null;
+						iv_SocketImage.setVisibility(View.GONE);
 						Log.i(tag, "sp_SocketDataImageFrom.position:" + position);
-						if (position == 0 && sp_SocketDataType.getSelectedItemPosition() == 1) {
+						if (position == 1 && sp_SocketDataType.getSelectedItemPosition() == 1) {
 							// 调用android自带的照相机
 							Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 							startActivityForResult(intent, SOCKET_CAMERA_IMAGE);
-						} else if(position == 1 && sp_SocketDataType.getSelectedItemPosition() == 1){
+						} else if(position == 2 && sp_SocketDataType.getSelectedItemPosition() == 1){
 							// 调用android的图库
-							Intent intent = new Intent(Intent.ACTION_PICK,
-									android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+							Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 							startActivityForResult(intent, SOCKET_PHONE_IMAGE);
 						}
 			}
-
+			
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
@@ -143,20 +155,35 @@ public class SocketDebugActivity extends Activity implements OnClickListener {
 		switch (requestCode) {
 		case SOCKET_CAMERA_IMAGE:
 			if(resultCode == Activity.RESULT_OK){
-				imageByte = Bitmap2Bytes((Bitmap) data.getExtras().get("data"));
+				iv_SocketImage.setVisibility(View.VISIBLE);
+				Bitmap imageCamera = (Bitmap) data.getExtras().get("data");
+				imageByte = Bitmap2Bytes(imageCamera);
+				iv_SocketImage.setImageBitmap(imageCamera);
+			} else {
+				sp_SocketDataImageFrom.setSelection(0);
+				Toast.makeText(this, "Not select image", Toast.LENGTH_SHORT).show();
 			}
 			break;
 			
 		case SOCKET_PHONE_IMAGE:
 			if (resultCode == Activity.RESULT_OK) {
+				iv_SocketImage.setVisibility(View.VISIBLE);
+				
 				Cursor cursor = this.getContentResolver().query(data.getData(), null, null, null, null);
 				cursor.moveToFirst();
 				String imgPath = cursor.getString(1); // 图片文件路径
 				cursor.close();
+				
 				Options options = new BitmapFactory.Options();
 				options.inJustDecodeBounds = false;
 				options.inSampleSize = 5;
+				Bitmap imagePhone = BitmapFactory.decodeFile(imgPath, options);
+				
 				imageByte = Bitmap2Bytes(BitmapFactory.decodeFile(imgPath, options));
+				iv_SocketImage.setImageBitmap(imagePhone);
+			} else {
+				sp_SocketDataImageFrom.setSelection(0);
+				Toast.makeText(this, "Not select image", Toast.LENGTH_SHORT).show();
 			}
 			break;
 
@@ -227,10 +254,40 @@ public class SocketDebugActivity extends Activity implements OnClickListener {
 				Toast.makeText(this, "Please input Correct Port", Toast.LENGTH_SHORT).show();
 			}
 			break;
+			
+		case R.id.iv_SocketImage:
+			if (mPosition == 1) {
+				// 调用android自带的照相机
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent, SOCKET_CAMERA_IMAGE);
+			} else if(mPosition == 2){
+				// 调用android的图库
+				Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				startActivityForResult(intent, SOCKET_PHONE_IMAGE);
+			}
+			break;
 
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public boolean onLongClick(View arg0) {
+		switch (arg0.getId()) {
+		case R.id.tv_SocketResult:
+			String text = tv_SocketResult.getText().toString().trim();
+			if(text != null && !text.equals("")){
+				ClipboardManager cbm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+				cbm.setText(text);
+				Toast.makeText(this, "Text has been copied", Toast.LENGTH_SHORT).show();
+			}
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 	
 	public byte[] Bitmap2Bytes(Bitmap bitmap) {

@@ -74,6 +74,7 @@
     </string-array>
     
     <string-array name="SocketImageFrom">
+        <item >Please Select... </item>
         <item >From Camera</item>
         <item >From Phone</item>
     </string-array>
