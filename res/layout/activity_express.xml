@@ -43,7 +43,7 @@
                 android:layout_marginLeft="5dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                android:src="@drawable/express_2" />
+                android:src="@drawable/barcode" />
         </LinearLayout>
 
         <LinearLayout
