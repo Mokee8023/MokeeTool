@@ -19,7 +19,8 @@ import com.mokee.application.PriceCompare.GoodsPriceListActivity;
 import com.mokee.application.Qrcode.GenerateQrcode;
 import com.mokee.application.Qrcode.Sweep;
 import com.mokee.application.Robot.RobotActivity;
-import com.mokee.application.Translate.Translate;
+import com.mokee.application.Socket.SocketDebugActivity;
+import com.mokee.application.Translate.TranslateActivity;
 import com.mokee.tools.R;
 import com.zxing.activity.CaptureActivity;
 
@@ -34,6 +35,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 	private LinearLayout layout_Translate;
 	private LinearLayout layout_QueryExpress;
 	private LinearLayout layout_RobotChat;
+	private LinearLayout layout_Socket;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +43,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		View view = inflater.inflate(R.layout.fragment_other, container, false);
 
 		layout_Sweep = (LinearLayout) view.findViewById(R.id.layout_Sweep);
+		layout_Socket = (LinearLayout) view.findViewById(R.id.layout_Socket);
 		layout_QrCode = (LinearLayout) view.findViewById(R.id.layout_QrCode);
 		layout_IdCard = (LinearLayout) view.findViewById(R.id.layout_IdCard);
 		layout_Contact = (LinearLayout) view.findViewById(R.id.layout_Contact);
@@ -48,8 +51,9 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		layout_Translate = (LinearLayout) view.findViewById(R.id.layout_Translate);
 		layout_GoodsPrice = (LinearLayout) view.findViewById(R.id.layout_GoodsPrice);
 		layout_QueryExpress = (LinearLayout) view.findViewById(R.id.layout_QueryExpress);
-
+		
 		layout_Sweep.setOnClickListener(this);
+		layout_Socket.setOnClickListener(this);
 		layout_QrCode.setOnClickListener(this);
 		layout_IdCard.setOnClickListener(this);
 		layout_Contact.setOnClickListener(this);
@@ -85,7 +89,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 			startActivity(goodsPriceIntent);
 			break;
 		case R.id.layout_Translate:
-			Intent translateIntent = new Intent(getActivity(), Translate.class);
+			Intent translateIntent = new Intent(getActivity(), TranslateActivity.class);
 			startActivity(translateIntent);
 			break;
 		case R.id.layout_QueryExpress:
@@ -95,6 +99,10 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		case R.id.layout_RobotChat:
 			Intent robotChatIntent = new Intent(getActivity(), RobotActivity.class);
 			startActivity(robotChatIntent);
+			break;
+		case R.id.layout_Socket:
+			Intent socketIntent = new Intent(getActivity(), SocketDebugActivity.class);
+			startActivity(socketIntent);
 			break;
 		default:
 			break;

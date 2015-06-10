@@ -61,7 +61,7 @@
             android:theme="@style/QueryIdCard_dialog" >
         </activity>
         <activity
-            android:name="com.mokee.application.Translate.Translate"
+            android:name="com.mokee.application.Translate.TranslateActivity"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity android:name="com.mokee.application.Express.QueryExpressActivity" >
@@ -72,6 +72,7 @@
         </activity>
         <activity android:name="com.mokee.application.Robot.RobotActivity" >
         </activity>
+        <activity android:name="com.mokee.application.Socket.SocketDebugActivity"></activity>
     </application>
 
 </manifest>

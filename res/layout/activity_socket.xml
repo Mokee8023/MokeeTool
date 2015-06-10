@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/sub_layout_top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Socket IP: "
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_SocketIp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:digits="1234567890."
+                android:maxLength="15"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/btn_SetSocketIp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_shap"
+                android:text="Set" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Socket Port: "
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_SocketPort"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:digits="1234567890"
+                android:maxLength="5"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/btn_SetSocketPort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_shap"
+                android:text="Set" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal" >
+
+        <Spinner
+            android:id="@+id/sp_SocketDataType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sp_SocketDataType"
+            android:layout_toLeftOf="@+id/btn_SendSocket"
+            android:layout_toRightOf="@id/sp_SocketDataType"
+            android:layout_weight="1" >
+
+            <EditText
+                android:id="@+id/et_SocketDataText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Socket Text" />
+
+            <Spinner
+                android:id="@+id/sp_SocketDataImageFrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btn_SendSocket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sp_SocketDataType"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_shap"
+            android:text="Send" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:background="@drawable/edittext_shap"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Socket Communication Result："
+            android:textColor="#0000ff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="#aaaaaa"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_SocketResult"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>

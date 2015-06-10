@@ -67,4 +67,14 @@
     <string-array name="GoodsListDelete">
         <item >删除该商品</item>
     </string-array>
+    
+    <string-array name="SocketDataType">
+        <item >Text</item>
+        <item >Image</item>
+    </string-array>
+    
+    <string-array name="SocketImageFrom">
+        <item >From Camera</item>
+        <item >From Phone</item>
+    </string-array>
 </resources>

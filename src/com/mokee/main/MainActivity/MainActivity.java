@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mokee.database.SPSetting.MySharedPreferences;
 import com.mokee.main.Fragment.HomeFragment;
 import com.mokee.main.Fragment.OtherFragment;
 import com.mokee.main.Help.HelpActivity;
@@ -55,6 +56,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		setOriginState();
 		setSelectedPager(1);
 		
+		MySharedPreferences.init(this);
 	}
 
 	private void initView() {

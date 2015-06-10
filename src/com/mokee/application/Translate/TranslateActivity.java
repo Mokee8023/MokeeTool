@@ -23,8 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class Translate extends Activity implements OnClickListener, OnLongClickListener {
-	private static final String TAG = "Translate";
+public class TranslateActivity extends Activity implements OnClickListener, OnLongClickListener {
+	private static final String TAG = "TranslateActivity";
 
 	private EditText et_TranslateText;
 	private TextView tv_ResultText;
