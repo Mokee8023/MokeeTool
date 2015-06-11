@@ -43,8 +43,10 @@ public class SocketServerThread extends Thread {
 		
 		try {
 			server = new ServerSocket(serverPort);
+			Log.i(TAG, "Socket server thread start.");
 			
 			while (true) {
+				Log.i(TAG, "Socket server thread start accept data.");
 				/** 在此处会阻塞线程 */
 				socket = server.accept();
 				sb = new StringBuilder();

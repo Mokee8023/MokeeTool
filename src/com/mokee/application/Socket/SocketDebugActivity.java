@@ -34,6 +34,7 @@ import com.mokee.database.SPSetting.MyValuesInt;
 import com.mokee.database.SPSetting.MyValuesString;
 import com.mokee.network.NetConnect.ConstantUtil;
 import com.mokee.network.NetConnect.SocketClientThread;
+import com.mokee.network.NetConnect.SocketServerThread;
 import com.mokee.tools.R;
 
 public class SocketDebugActivity extends Activity implements OnClickListener, OnLongClickListener {
@@ -51,6 +52,30 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 	private static final int SOCKET_CAMERA_IMAGE = 1;
 	private static final int SOCKET_PHONE_IMAGE = 2;
 	private int mPosition;
+	private StringBuilder tv_sb = new StringBuilder();
+	
+	private Handler socketHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			
+			switch (msg.what) {
+			case ConstantUtil.SOCKET_CLIENT_THREAD:
+				tv_SocketResult.setText(msg.obj.toString());
+				break;
+				
+			case ConstantUtil.SOCKET_SERVER_THREAD:
+				tv_sb.append(msg.obj).append("\n");
+				tv_SocketResult.setText(tv_sb.toString());
+				break;
+
+			default:
+				break;
+			}
+		}
+		
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +85,10 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 		
 		initView();
 		initEvent();
+		
+		//开启Socket接受线程
+		SocketServerThread socketServer = new SocketServerThread(socketHandler, MyValuesInt.getSocketPort());
+		socketServer.start();
 	}
 
 	private void initView() {
@@ -192,23 +221,6 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 		}
 	}
 
-	private Handler socketHandler = new Handler(){
-
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			
-			switch (msg.what) {
-			case ConstantUtil.SOCKET_CLIENT_THREAD:
-				tv_SocketResult.setText(msg.obj.toString());
-				break;
-
-			default:
-				break;
-			}
-		}
-		
-	};
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -218,6 +230,9 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 			break;
 			
 		case R.id.btn_SendSocket:
+			tv_SocketResult.setText("");
+			tv_sb.delete(0, tv_sb.length());
+			
 			if(sp_SocketDataType.getSelectedItemPosition() == 0) {
 				String socketText = et_SocketDataText.getText().toString().trim();
 				if(socketText != null && !socketText.equals("")){
