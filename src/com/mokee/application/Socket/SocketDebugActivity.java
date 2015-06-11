@@ -34,13 +34,14 @@ import com.mokee.database.SPSetting.MyValuesInt;
 import com.mokee.database.SPSetting.MyValuesString;
 import com.mokee.network.NetConnect.ConstantUtil;
 import com.mokee.network.NetConnect.SocketClientThread;
+import com.mokee.network.NetConnect.SocketClientThread_Two;
 import com.mokee.network.NetConnect.SocketServerThread;
 import com.mokee.tools.R;
 
 public class SocketDebugActivity extends Activity implements OnClickListener, OnLongClickListener {
 	private static final String tag = "SocketDebugActivity";
 
-	private ImageButton ib_Return;
+	private ImageButton ib_Return, ib_Network;
 	private Button btn_SendSocket, btn_SetSocketIp, btn_SetSocketPort;
 	private TextView activity_Text,tv_SocketResult;
 	private EditText et_SocketIp, et_SocketPort, et_SocketDataText;
@@ -54,6 +55,8 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 	private int mPosition;
 	private StringBuilder tv_sb = new StringBuilder();
 	
+	SocketClientThread_Two sendTextSocket, sendImageSocket;
+	
 	private Handler socketHandler = new Handler(){
 
 		@Override
@@ -61,18 +64,27 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 			super.handleMessage(msg);
 			
 			switch (msg.what) {
-			case ConstantUtil.SOCKET_CLIENT_THREAD:
-				tv_SocketResult.setText(msg.obj.toString());
+			case ConstantUtil.SOCKET_CLIENT_THREAD_INIT:
+				if(msg.obj.equals("true")){
+					ib_Network.setImageResource(R.drawable.network_connect);
+				} else {
+					tv_sb.append(msg.obj).append("\n");
+				}
 				break;
 				
-			case ConstantUtil.SOCKET_SERVER_THREAD:
+			case ConstantUtil.SOCKET_CLIENT_THREAD_SEND:
 				tv_sb.append(msg.obj).append("\n");
-				tv_SocketResult.setText(tv_sb.toString());
+				break;
+				
+			case ConstantUtil.SOCKET_CLIENT_THREAD_ACCEPT:
+				tv_sb.append(msg.obj).append("\n");
 				break;
 
 			default:
 				break;
 			}
+			
+			tv_SocketResult.setText(msg.obj.toString());
 		}
 		
 	};
@@ -86,9 +98,9 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 		initView();
 		initEvent();
 		
-		//开启Socket接受线程
-		SocketServerThread socketServer = new SocketServerThread(socketHandler, MyValuesInt.getSocketPort());
-		socketServer.start();
+		// //开启Socket接受线程
+		// SocketServerThread socketServer = new SocketServerThread(socketHandler, MyValuesInt.getSocketPort());
+		// socketServer.start();
 	}
 
 	private void initView() {
@@ -96,6 +108,7 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 		btn_SetSocketIp = (Button) findViewById(R.id.btn_SetSocketIp);
 		btn_SetSocketPort = (Button) findViewById(R.id.btn_SetSocketPort);
 		ib_Return = (ImageButton) findViewById(R.id.ib_Return);
+		ib_Network = (ImageButton) findViewById(R.id.ib_Save);
 		activity_Text = (TextView) findViewById(R.id.activity_Text);
 		tv_SocketResult = (TextView) findViewById(R.id.tv_SocketResult);
 		
@@ -120,6 +133,10 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 		btn_SetSocketPort.setOnClickListener(this);
 		iv_SocketImage.setOnClickListener(this);
 		tv_SocketResult.setOnLongClickListener(this);
+		ib_Network.setOnClickListener(this);
+		
+		ib_Network.setVisibility(View.VISIBLE);
+		ib_Network.setImageResource(R.drawable.network_disconnect);
 		
 		String[] dataType = getResources().getStringArray(R.array.SocketDataType);
 		ArrayAdapter<String> dataTypeAdapter = new ArrayAdapter<String>(this, R.layout.my_simple_spinner_item, dataType);
@@ -233,10 +250,14 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 			tv_SocketResult.setText("");
 			tv_sb.delete(0, tv_sb.length());
 			
+			if(){
+				
+			}
+			
 			if(sp_SocketDataType.getSelectedItemPosition() == 0) {
 				String socketText = et_SocketDataText.getText().toString().trim();
 				if(socketText != null && !socketText.equals("")){
-					SocketClientThread sendTextSocket = new SocketClientThread(
+					sendTextSocket = new SocketClientThread_Two(
 							socketHandler, socketText, MyValuesString.getSocketIP(), MyValuesInt.getSocketPort());
 					sendTextSocket.start();
 					Toast.makeText(this, "Text Socket Sent", Toast.LENGTH_SHORT).show();
@@ -244,7 +265,7 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 					Toast.makeText(this, "Please input Text", Toast.LENGTH_SHORT).show();
 				}
 			} else if(imageByte != null){
-				SocketClientThread sendImageSocket = new SocketClientThread(
+				sendImageSocket = new SocketClientThread_Two(
 						socketHandler, imageByte, MyValuesString.getSocketIP(), MyValuesInt.getSocketPort());
 				sendImageSocket.start();
 			} else {
@@ -281,6 +302,17 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 				startActivityForResult(intent, SOCKET_PHONE_IMAGE);
 			}
 			break;
+			
+		case R.id.ib_Save:
+			if(ib_Network.getTag() == "1"){
+				sendTextSocket.isRunning = false;
+				sendImageSocket.isRunning = false;
+				ib_Network.setImageResource(R.drawable.network_disconnect);
+				ib_Network.setTag("2");
+			} else {
+				
+			}
+			break;
 
 		default:
 			break;
@@ -303,6 +335,14 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 			break;
 		}
 		return true;
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.i(tag, "onDestroy has been called");
+		
+		
 	}
 	
 	public byte[] Bitmap2Bytes(Bitmap bitmap) {

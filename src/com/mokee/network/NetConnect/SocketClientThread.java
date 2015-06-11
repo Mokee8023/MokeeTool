@@ -1,11 +1,8 @@
 package com.mokee.network.NetConnect;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -72,45 +69,25 @@ public class SocketClientThread extends Thread {
 		super.run();
 		
 		Message message = new Message();
-		message.what = ConstantUtil.SOCKET_CLIENT_THREAD;
+		message.what = ConstantUtil.SOCKET_CLIENT_THREAD_SEND;
 		
 		String result = null;
 		try {
 			socket = new Socket(ip, port);
-			StringBuilder sb = new StringBuilder();
 			
 			if(type == 1){
 				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 				writer.write(msg);
 				writer.flush();				
-				
-				String in;
-				BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
-				while((in = br.readLine()) != null){
-					sb.append(in);
-					sb.append("\n");
-				}
-				
 				writer.close();
-				br.close();
 			} else {
 				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 				dos.write(mData);
 				dos.flush();
-				
-				String in;
-				BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
-				while((in = br.readLine()) != null){					
-					sb.append(in);
-					sb.append("\n");
-				}
-				
 				dos.close(); 
-				br.close();
 			}
 			
-			Log.i(TAG, "Return Result:" + sb.toString());
-			result = ConstantUtil.NETWORK_STATUS_SUCCESS + "\n" + sb.toString();
+			result = ConstantUtil.NETWORK_STATUS_SUCCESS;
 			
 			Log.i(TAG, "SocketClientThread-->Send Socket Success:" + result);
 		} catch (UnknownHostException e) {
