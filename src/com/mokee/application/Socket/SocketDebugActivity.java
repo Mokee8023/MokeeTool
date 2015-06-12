@@ -1,6 +1,14 @@
 package com.mokee.application.Socket;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import android.app.Activity;
 import android.content.ClipboardManager;
@@ -33,8 +41,7 @@ import android.widget.Toast;
 import com.mokee.database.SPSetting.MyValuesInt;
 import com.mokee.database.SPSetting.MyValuesString;
 import com.mokee.network.NetConnect.ConstantUtil;
-import com.mokee.network.NetConnect.SocketClientThread;
-import com.mokee.network.NetConnect.SocketClientThread_Two;
+import com.mokee.network.NetConnect.SocketClientThread_Return;
 import com.mokee.network.NetConnect.SocketServerThread;
 import com.mokee.tools.R;
 
@@ -55,7 +62,8 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 	private int mPosition;
 	private StringBuilder tv_sb = new StringBuilder();
 	
-	SocketClientThread_Two sendTextSocket, sendImageSocket;
+	private Socket socket = null; 
+	SocketServerThread socketServer = null;
 	
 	private Handler socketHandler = new Handler(){
 
@@ -64,11 +72,23 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 			super.handleMessage(msg);
 			
 			switch (msg.what) {
-			case ConstantUtil.SOCKET_CLIENT_THREAD_INIT:
-				if(msg.obj.equals("true")){
+			case ConstantUtil.SOCKET_CLIENT_THREAD_OPEN:
+				tv_sb.append(msg.obj).append("\n");
+				if(((String)msg.obj).equals("Socket connect success")){
 					ib_Network.setImageResource(R.drawable.network_connect);
+					Toast.makeText(SocketDebugActivity.this, "Socket connect success", Toast.LENGTH_SHORT).show();
+				} else {					
+					Toast.makeText(SocketDebugActivity.this, "Socket connect fail", Toast.LENGTH_SHORT).show();
+				}
+				break;
+				
+			case ConstantUtil.SOCKET_CLIENT_THREAD_CLOSE:
+				tv_sb.append(msg.obj).append("\n");
+				if(((String)msg.obj).equals("Socket disconnect success")){
+					ib_Network.setImageResource(R.drawable.network_disconnect);					
+					Toast.makeText(SocketDebugActivity.this, "Socket disconnect success", Toast.LENGTH_SHORT).show();
 				} else {
-					tv_sb.append(msg.obj).append("\n");
+					Toast.makeText(SocketDebugActivity.this, "Socket disconnect fail", Toast.LENGTH_SHORT).show();
 				}
 				break;
 				
@@ -77,16 +97,22 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 				break;
 				
 			case ConstantUtil.SOCKET_CLIENT_THREAD_ACCEPT:
+				tv_sb.append("Accept data:").append(msg.obj).append("\n");
+				break;
+				
+			case ConstantUtil.SOCKET_CLIENT_THREAD_INIT:
 				tv_sb.append(msg.obj).append("\n");
+				break;
+				
+			case ConstantUtil.SOCKET_SERVER_THREAD:
+				tv_sb.append("Accept data:").append(msg.obj).append("\n");
 				break;
 
 			default:
 				break;
 			}
-			
-			tv_SocketResult.setText(msg.obj.toString());
+			tv_SocketResult.setText(tv_sb.toString());
 		}
-		
 	};
 	
 	@Override
@@ -96,11 +122,11 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 		setContentView(R.layout.activity_socket);
 		
 		initView();
-		initEvent();
+		initEvent();	
 		
-		// //开启Socket接受线程
-		// SocketServerThread socketServer = new SocketServerThread(socketHandler, MyValuesInt.getSocketPort());
-		// socketServer.start();
+		//监听端口
+		socketServer = new SocketServerThread(socketHandler, MyValuesInt.getSocketPort());
+		socketServer.start();
 	}
 
 	private void initView() {
@@ -137,6 +163,7 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 		
 		ib_Network.setVisibility(View.VISIBLE);
 		ib_Network.setImageResource(R.drawable.network_disconnect);
+		ib_Network.setTag("1");
 		
 		String[] dataType = getResources().getStringArray(R.array.SocketDataType);
 		ArrayAdapter<String> dataTypeAdapter = new ArrayAdapter<String>(this, R.layout.my_simple_spinner_item, dataType);
@@ -247,29 +274,29 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 			break;
 			
 		case R.id.btn_SendSocket:
-			tv_SocketResult.setText("");
-			tv_sb.delete(0, tv_sb.length());
-			
-			if(){
-				
-			}
-			
-			if(sp_SocketDataType.getSelectedItemPosition() == 0) {
-				String socketText = et_SocketDataText.getText().toString().trim();
-				if(socketText != null && !socketText.equals("")){
-					sendTextSocket = new SocketClientThread_Two(
-							socketHandler, socketText, MyValuesString.getSocketIP(), MyValuesInt.getSocketPort());
-					sendTextSocket.start();
-					Toast.makeText(this, "Text Socket Sent", Toast.LENGTH_SHORT).show();
-				} else {
-					Toast.makeText(this, "Please input Text", Toast.LENGTH_SHORT).show();
-				}
-			} else if(imageByte != null){
-				sendImageSocket = new SocketClientThread_Two(
-						socketHandler, imageByte, MyValuesString.getSocketIP(), MyValuesInt.getSocketPort());
-				sendImageSocket.start();
+			if(socket == null){
+				Toast.makeText(this, "Please connect socket.", Toast.LENGTH_SHORT).show();
 			} else {
-				Toast.makeText(this, "Please select image Or take pictures", Toast.LENGTH_SHORT).show();
+				if(sp_SocketDataType.getSelectedItemPosition() == 0) {
+					String socketText = et_SocketDataText.getText().toString().trim();
+					if(socketText != null && !socketText.equals("")){
+						SocketClientThread_Return socketThread = new SocketClientThread_Return(socketHandler, socketText, writer, reader);
+						socketThread.start();
+						Toast.makeText(this, "Text Socket Sent", Toast.LENGTH_SHORT).show();
+						
+						tv_sb.append("Send text:").append(socketText).append("\n");
+					} else {
+						Toast.makeText(this, "Please input Text", Toast.LENGTH_SHORT).show();
+					}
+				} else if(imageByte != null){
+					SocketClientThread_Return socketThread = new SocketClientThread_Return(socketHandler, imageByte, dos, reader);
+					socketThread.start();
+					Toast.makeText(this, "Image Socket Sent", Toast.LENGTH_SHORT).show();
+					
+					tv_sb.append("Send image.").append("\n");
+				} else {
+					Toast.makeText(this, "Please select image Or take pictures", Toast.LENGTH_SHORT).show();
+				}
 			}
 			break;
 			
@@ -304,18 +331,115 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 			break;
 			
 		case R.id.ib_Save:
-			if(ib_Network.getTag() == "1"){
-				sendTextSocket.isRunning = false;
-				sendImageSocket.isRunning = false;
-				ib_Network.setImageResource(R.drawable.network_disconnect);
-				ib_Network.setTag("2");
+			if(socket == null){
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						openSocket(MyValuesString.getSocketIP(), MyValuesInt.getSocketPort());
+					}
+				}).start();
+				tv_SocketResult.setText("");
+				tv_sb.delete(0, tv_sb.length());
 			} else {
-				
-			}
+				closeSocket();
+				tv_SocketResult.setText("");
+				tv_sb.delete(0, tv_sb.length());
+			}			
 			break;
 
 		default:
 			break;
+		}
+	}
+	
+	/**
+	 * 连接Socket
+	 */
+	private void openSocket(String ip, int port){
+		Message message = new Message();
+		message.what = ConstantUtil.SOCKET_CLIENT_THREAD_OPEN;
+		try {
+			socket = new Socket(ip, port);
+			socket.setKeepAlive(true);
+			message.obj = "Socket connect success";
+			socketHandler.sendMessage(message);
+			Log.i(tag, "SocketDebugActivity.openSocket success");
+			
+			initStreamClass();
+		} catch (UnknownHostException e) {
+			Log.e(tag, "SocketDebugActivity.openSocket-->UnknownHostException:" + e.toString());
+			message.obj = "SocketDebugActivity.openSocket-->UnknownHostException:" + e.toString();
+			socketHandler.sendMessage(message);
+		} catch (IOException e) {
+			Log.e(tag, "SocketDebugActivity.openSocket-->IOException:" + e.toString());
+			message.obj = "SocketDebugActivity.openSocket-->IOException:" + e.toString();
+			socketHandler.sendMessage(message);
+		}
+	}
+	
+	/**
+	 * 关闭Socket
+	 */
+	private void closeSocket(){
+		Message message = new Message();
+		message.what = ConstantUtil.SOCKET_CLIENT_THREAD_CLOSE;				
+		if(socket != null){
+			try {
+				socket.close();
+				socket = null;
+				message.obj = "Socket disconnect success";
+				
+				closeStreamClass();
+			} catch (IOException e) {
+				Log.e(tag, "SocketDebugActivity.closeSocket-->UnknownHostException:" + e.toString());
+				message.obj = "SocketDebugActivity.closeSocket-->UnknownHostException:" + e.toString();				
+			} finally {
+				socketHandler.sendMessage(message);
+			}
+		}
+	}
+	
+	private BufferedWriter writer = null;
+	private BufferedReader reader = null;
+	private DataOutputStream dos = null;
+	
+	/**
+	 * 初始化BufferedWriter、DataOutputStream、BufferedReader
+	 */
+	private void initStreamClass(){
+		Message initMessage = new Message();
+		try {
+			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			dos = new DataOutputStream(socket.getOutputStream());
+			reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+			
+			Log.i(tag, "initStreamClass is success");
+		} catch (IOException e) {
+			Log.e(tag, "SocketDebugActivity-->IOException:" + e.toString());
+			initMessage.what = ConstantUtil.SOCKET_CLIENT_THREAD_INIT;
+			initMessage.obj = ConstantUtil.NETWORK_STATUS_ERROR_IOException + ":" + e.toString();
+			socketHandler.sendMessage(initMessage);
+		}
+	}
+	/**
+	 * 关闭BufferedWriter、DataOutputStream、BufferedReader
+	 */
+	private void closeStreamClass(){
+		try {
+			if(writer != null){
+				writer.close();
+			}
+			if(writer != null){
+				dos.close();
+			}
+			if(writer != null){
+				reader.close();
+			}
+			writer = null;
+			dos = null;
+			reader = null;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -342,7 +466,8 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 		super.onDestroy();
 		Log.i(tag, "onDestroy has been called");
 		
-		
+		closeSocket();
+		closeStreamClass();
 	}
 	
 	public byte[] Bitmap2Bytes(Bitmap bitmap) {
