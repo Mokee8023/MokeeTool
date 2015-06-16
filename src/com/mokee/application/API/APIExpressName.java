@@ -33,42 +33,27 @@ public class APIExpressName {
 			codeLang = "quanfeng";
 			break;
 		case 9:
-			codeLang = "EMS";
+			codeLang = "ems";
 			break;
 		case 10:
 			codeLang = "guotong";
 			break;
 		case 11:
-			codeLang = "sutong";
-			break;
-		case 12:
 			codeLang = "zhongtie";
 			break;
-		case 13:
+		case 12:
 			codeLang = "ups";
 			break;
-		case 14:
-			codeLang = "feibang";
-			break;
-		case 15:
+		case 13:
 			codeLang = "kuaijie";
 			break;
-		case 16:
-			codeLang = "minhang";
-			break;
-		case 17:
+		case 14:
 			codeLang = "ocs";
 			break;
-		case 18:
-			codeLang = "wanxiang";
-			break;
-		case 19:
-			codeLang = "hengyu";
-			break;
-		case 20:
+		case 15:
 			codeLang = "zhongyou";
 			break;
-		case 21:
+		case 16:
 			codeLang = "zhaijisong";
 			break;
 		default:
