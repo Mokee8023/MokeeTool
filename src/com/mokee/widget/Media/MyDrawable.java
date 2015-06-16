@@ -1,4 +1,4 @@
-package com.mokee.widget.Image;
+package com.mokee.widget.Media;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

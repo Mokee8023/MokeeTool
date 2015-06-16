@@ -1,4 +1,4 @@
-package com.mokee.widget.MediaPlayer;
+package com.mokee.widget.Media;
 
 import java.io.IOException;
 
