@@ -72,7 +72,10 @@
         </activity>
         <activity android:name="com.mokee.application.Robot.RobotActivity" >
         </activity>
-        <activity android:name="com.mokee.application.Socket.SocketDebugActivity"></activity>
+        <activity android:name="com.mokee.application.Socket.SocketDebugActivity" >
+        </activity>
+        <activity android:name="com.mokee.widget.Camera.MyCameraActivity" >
+        </activity>
     </application>
 
 </manifest>
