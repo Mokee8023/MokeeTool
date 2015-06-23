@@ -161,6 +161,8 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 		tv_SocketResult.setOnLongClickListener(this);
 		ib_Network.setOnClickListener(this);
 		
+		activity_Text.setOnLongClickListener(this);
+		
 		ib_Network.setVisibility(View.VISIBLE);
 		ib_Network.setImageResource(R.drawable.network_disconnect);
 		ib_Network.setTag("1");
@@ -453,6 +455,10 @@ public class SocketDebugActivity extends Activity implements OnClickListener, On
 				cbm.setText(text);
 				Toast.makeText(this, "Text has been copied", Toast.LENGTH_SHORT).show();
 			}
+			break;
+		case R.id.activity_Text:
+			Intent singleSocket = new Intent(this, SocketSingleImageActivity.class);
+			startActivity(singleSocket);
 			break;
 
 		default:

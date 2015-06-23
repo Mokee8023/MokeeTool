@@ -11,6 +11,7 @@ public class ConstantUtil {
 	public static final int SOCKET_CLIENT_THREAD_CLOSE = 51;
 	public static final int SOCKET_CLIENT_THREAD_SEND = 6;
 	public static final int SOCKET_CLIENT_THREAD_ACCEPT = 7;
+	public static final int SOCKET_CLIENT_THREAD_ACCEPT_DATA = 71;
 	public static final int SOCKET_SERVER_THREAD = 8;
 	public static final int SOCKET_CLIENT_THREAD_INIT = 9;
 	
