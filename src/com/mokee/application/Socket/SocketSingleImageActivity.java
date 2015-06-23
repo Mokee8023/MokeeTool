@@ -148,6 +148,8 @@ public class SocketSingleImageActivity extends Activity implements OnClickListen
 		switch (v.getId()) {
 		case R.id.btn_SelectTestPic:
 			resultSB.delete(0, resultSB.length());
+			tv_SocketResult.setText(resultSB.toString());
+			
 			iv_SocketImage.setVisibility(View.GONE);
 			Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 			startActivityForResult(intent, Test_SOCKET_PHONE_IMAGE);		
