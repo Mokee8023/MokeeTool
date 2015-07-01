@@ -35,12 +35,9 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 	private TextView tv_PhoneInformation;
 	private ImageView iv_Contact;
 	
-	private Dialog queryDialog;
-
 	private Handler MyPhoneHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			queryDialog.dismiss();
 			super.handleMessage(msg);
 
 			switch (msg.what) {
@@ -67,8 +64,6 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 		setContentView(R.layout.activity_phone);
 
 		initView();
-		
-		queryDialog = CircleProgress.createCircleProgressDialog(this, "Query...");
 	}
 
 	private void initView() {
@@ -104,7 +99,6 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 			} else {
 				MobileService getPhoneInfo = new MobileService(MyPhoneHandler, phoneNumbers);
 				getPhoneInfo.start();
-				queryDialog.show();
 			}
 			break;
 		case R.id.iv_Contact:
@@ -120,9 +114,6 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 //			onDestroy();
 //			break;
 		case R.id.btn_Return:
-			if(queryDialog.isShowing()){
-				queryDialog.dismiss();
-			}
 			finish();
 			onDestroy();
 			break;
