@@ -35,7 +35,7 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch (msg.what) {
-			case API.QUERY_IDCARD_INFO:
+			case API.QUERY_IDCARD_INFO://该字段使用gpsso查询，暂时Service代码注销了
 				if (msg.obj == null) {
 					Toast.makeText(getApplicationContext(),
 							"Query IdCard Information Failed!",
@@ -44,6 +44,13 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 					tv_IdCardInfo.setText(msg.obj.toString());
 				}
 
+				break;
+			case API.BAIDU_QUERY_IDCARD_INFO://该字段使用百度接口查询
+				if (msg.obj == null) {
+					Toast.makeText(getApplicationContext(), "Query IdCard Information Failed!", Toast.LENGTH_SHORT).show();
+				} else {
+					tv_IdCardInfo.setText(msg.obj.toString());
+				}
 				break;
 
 			default:
@@ -96,8 +103,10 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 						"Can't contain letters before 17!", Toast.LENGTH_SHORT)
 						.show();
 			} else {
-				IdCardService service = new IdCardService(MyQueryIdCardInfo,
-						idCardNumber);
+				// IdCardService service = new IdCardService(MyQueryIdCardInfo, idCardNumber);
+				// service.start();
+				
+				BaiduIDCardService service = new BaiduIDCardService(MyQueryIdCardInfo, idCardNumber);
 				service.start();
 			}
 			break;
