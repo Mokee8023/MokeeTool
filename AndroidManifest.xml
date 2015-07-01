@@ -53,7 +53,7 @@
             android:theme="@style/Save_dialog" >
         </activity>
         <activity
-            android:name="com.mokee.application.PhoneNumber.PhoneNumber"
+            android:name="com.mokee.application.PhoneNumber.PhoneNumberActivity"
             android:theme="@style/QueryIdCard_dialog" >
         </activity>
         <activity

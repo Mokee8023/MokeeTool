@@ -1,6 +1,7 @@
 package com.mokee.application.IdCard;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,14 +11,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mokee.application.API.API;
+import com.mokee.main.MainActivity.MainActivity;
 import com.mokee.tools.R;
+import com.mokee.widget.CircleProgress.CircleProgress;
 
 public class QueryIdCardInfoActivity extends Activity implements OnClickListener,
 		OnLongClickListener {
@@ -37,9 +39,7 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 			switch (msg.what) {
 			case API.QUERY_IDCARD_INFO://该字段使用gpsso查询，暂时Service代码注销了
 				if (msg.obj == null) {
-					Toast.makeText(getApplicationContext(),
-							"Query IdCard Information Failed!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "Query IdCard Information Failed!", 0).show();
 				} else {
 					tv_IdCardInfo.setText(msg.obj.toString());
 				}
@@ -47,7 +47,7 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 				break;
 			case API.BAIDU_QUERY_IDCARD_INFO://该字段使用百度接口查询
 				if (msg.obj == null) {
-					Toast.makeText(getApplicationContext(), "Query IdCard Information Failed!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "Query IdCard Information Failed!", 0).show();
 				} else {
 					tv_IdCardInfo.setText(msg.obj.toString());
 				}
@@ -89,31 +89,18 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 		case R.id.ib_QueryIdCard:
 			idCardNumber = et_IdCard.getText().toString().trim();
 			if (idCardNumber == null || idCardNumber.equals("")) {
-				Toast.makeText(getApplicationContext(),
-						"Please input IdCard number!", Toast.LENGTH_SHORT)
-						.show();
-
+				Toast.makeText(getApplicationContext(), "Please input IdCard number!", 0).show();
 			} else if (idCardNumber.length() < 18) {
-				Toast.makeText(getApplicationContext(),
-						"Please enter 18 digit ID number!", Toast.LENGTH_SHORT)
-						.show();
-			} else if (!(API.StringISNum(idCardNumber.substring(0,
-					idCardNumber.length() - 2)))) {
-				Toast.makeText(getApplicationContext(),
-						"Can't contain letters before 17!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getApplicationContext(), "Please enter 18 digit ID number!", 0).show();
+			} else if (!(API.StringISNum(idCardNumber.substring(0, idCardNumber.length() - 2)))) {
+				Toast.makeText(getApplicationContext(), "Can't contain letters before 17!", 0).show();
 			} else {
 				// IdCardService service = new IdCardService(MyQueryIdCardInfo, idCardNumber);
 				// service.start();
-				
 				BaiduIDCardService service = new BaiduIDCardService(MyQueryIdCardInfo, idCardNumber);
 				service.start();
 			}
 			break;
-//		case R.id.btn_QueryIdCardCancle:
-//			finish();
-//			onDestroy();
-//			break;
 			
 		case R.id.btn_Return:
 			finish();
@@ -137,9 +124,7 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 						.show();
 			} else {
 				cbm.setText(idCardInfo);
-				Toast.makeText(getApplicationContext(),
-						"IdCard information has been copied!",
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "IdCard information has been copied!", 0).show();
 			}
 			break;
 

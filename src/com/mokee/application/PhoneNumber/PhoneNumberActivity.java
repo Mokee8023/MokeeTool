@@ -1,6 +1,7 @@
 package com.mokee.application.PhoneNumber;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +24,9 @@ import android.widget.Toast;
 
 import com.mokee.application.API.API;
 import com.mokee.tools.R;
+import com.mokee.widget.CircleProgress.CircleProgress;
 
-public class PhoneNumber extends Activity implements OnLongClickListener,
+public class PhoneNumberActivity extends Activity implements OnLongClickListener,
 		OnClickListener {
 
 	private EditText et_PhoneNumbers;
@@ -32,10 +34,13 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 //	private Button btn_QueryPhoneCancle;
 	private TextView tv_PhoneInformation;
 	private ImageView iv_Contact;
+	
+	private Dialog queryDialog;
 
 	private Handler MyPhoneHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
+			queryDialog.dismiss();
 			super.handleMessage(msg);
 
 			switch (msg.what) {
@@ -62,6 +67,8 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 		setContentView(R.layout.activity_phone);
 
 		initView();
+		
+		queryDialog = CircleProgress.createCircleProgressDialog(this, "Query...");
 	}
 
 	private void initView() {
@@ -95,9 +102,9 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 						"Please Input 11-digit Number!", Toast.LENGTH_SHORT)
 						.show();
 			} else {
-				MobileService getPhoneInfo = new MobileService(MyPhoneHandler,
-						phoneNumbers);
+				MobileService getPhoneInfo = new MobileService(MyPhoneHandler, phoneNumbers);
 				getPhoneInfo.start();
+				queryDialog.show();
 			}
 			break;
 		case R.id.iv_Contact:
@@ -113,6 +120,9 @@ public class PhoneNumber extends Activity implements OnLongClickListener,
 //			onDestroy();
 //			break;
 		case R.id.btn_Return:
+			if(queryDialog.isShowing()){
+				queryDialog.dismiss();
+			}
 			finish();
 			onDestroy();
 			break;

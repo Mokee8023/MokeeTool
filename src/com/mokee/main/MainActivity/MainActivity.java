@@ -3,6 +3,7 @@ package com.mokee.main.MainActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.mokee.main.Fragment.HomeFragment;
 import com.mokee.main.Fragment.OtherFragment;
 import com.mokee.main.Help.HelpActivity;
 import com.mokee.tools.R;
+import com.mokee.widget.CircleProgress.CircleProgress;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
 	private final String TAG = "MainActivity";
@@ -44,7 +46,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	private List<Fragment> list;
 	private Long exitTime = 0L;
 	private static final int EXITINTERVAL = 2000;// 退出间隔
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

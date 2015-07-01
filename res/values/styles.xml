@@ -37,4 +37,9 @@
         <item name="android:windowBackground">@android:color/transparent</item>
  <!-- 背景透明 -->
     </style>
+    
+    <style name="circle_progress_loading_dialog" parent="android:style/Theme.Translucent">  
+        <item name="android:windowNoTitle">true</item>   
+        <item name="android:windowIsFloating">true</item>  
+    </style> 
 </resources>
