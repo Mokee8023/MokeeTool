@@ -31,6 +31,7 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 	private TextView tv_IdCardInfo;
 
 	String idCardNumber = null;
+	private Dialog process;
 
 	private Handler MyQueryIdCardInfo = new Handler() {
 		@Override
@@ -43,6 +44,8 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 				} else {
 					tv_IdCardInfo.setText(msg.obj.toString());
 				}
+				
+				process.dismiss();
 
 				break;
 			case API.BAIDU_QUERY_IDCARD_INFO://该字段使用百度接口查询
@@ -95,10 +98,13 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 			} else if (!(API.StringISNum(idCardNumber.substring(0, idCardNumber.length() - 2)))) {
 				Toast.makeText(getApplicationContext(), "Can't contain letters before 17!", 0).show();
 			} else {
-				// IdCardService service = new IdCardService(MyQueryIdCardInfo, idCardNumber);
-				// service.start();
-				BaiduIDCardService service = new BaiduIDCardService(MyQueryIdCardInfo, idCardNumber);
-				service.start();
+				 IdCardService service = new IdCardService(MyQueryIdCardInfo, idCardNumber);
+				 service.start();
+//				BaiduIDCardService service = new BaiduIDCardService(MyQueryIdCardInfo, idCardNumber);
+//				service.start();
+				 process = CircleProgress.createCircleProgressDialog(this, "Query");
+				 process.show();
+				 
 			}
 			break;
 			
@@ -119,9 +125,7 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 			ClipboardManager cbm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 			String idCardInfo = tv_IdCardInfo.getText().toString().trim();
 			if (idCardInfo == null || idCardInfo.equals("")) {
-				Toast.makeText(getApplicationContext(),
-						"IdCard Information is Empty!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getApplicationContext(), "IdCard Information is Empty!", Toast.LENGTH_SHORT).show();
 			} else {
 				cbm.setText(idCardInfo);
 				Toast.makeText(getApplicationContext(), "IdCard information has been copied!", 0).show();

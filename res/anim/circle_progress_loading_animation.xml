@@ -2,7 +2,8 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:shareInterpolator="false" >
 
-    <!-- 1.duration:动画持续时间,以毫秒为单位
+    <!--
+         1.duration:动画持续时间,以毫秒为单位
     	 2.fromDegrees:动画起始时物件的角度
     	 3.interpolator:动画的插入器 
     		1).accelerate_decelerate_interpolator:加速-减速插入器
@@ -20,7 +21,7 @@
     	 	1).重新开始  
     	 	2).plays backward
     	 8.startOffset:动画之间的时间间隔，从上次动画停多少时间开始执行下个动画
-    	 9.toDegrees:动画结束时物件旋转的角度
+    	 9.toDegrees:动画结束时物件旋转的角度
     -->
     <rotate
         android:duration="1500"
@@ -28,7 +29,7 @@
         android:interpolator="@android:anim/linear_interpolator"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:repeatCount="-1" 
+        android:repeatCount="-1"
         android:repeatMode="restart"
         android:startOffset="-1"
         android:toDegrees="+360" />

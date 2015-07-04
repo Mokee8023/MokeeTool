@@ -1,25 +1,27 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialog_view"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center"
-    android:minHeight="60dp"
-    android:minWidth="180dp"
-    android:orientation="vertical"
-    android:padding="10dp" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center" >
 
     <ImageView
         android:id="@+id/iv_CircleProgress_Image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
         android:src="@drawable/circle_progress" />
 
     <TextView
         android:id="@+id/tv_CircleProgress_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="" />
+        android:layout_gravity="center"
+        android:text="Dialog"
+        android:background="@android:color/transparent"
+        android:textColor="@android:color/holo_red_light"
+        android:textStyle="bold" />
 
-</LinearLayout>
+</FrameLayout>

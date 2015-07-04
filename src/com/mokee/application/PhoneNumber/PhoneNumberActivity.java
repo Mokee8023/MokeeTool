@@ -35,6 +35,8 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 	private TextView tv_PhoneInformation;
 	private ImageView iv_Contact;
 	
+	private Dialog process;
+	
 	private Handler MyPhoneHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -48,6 +50,8 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 				} else {
 					tv_PhoneInformation.setText(msg.obj.toString());
 				}
+				
+				process.dismiss();
 				break;
 			default:
 				break;
@@ -89,16 +93,15 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 			String phoneNumbers;
 			phoneNumbers = et_PhoneNumbers.getText().toString().trim();
 			if (phoneNumbers == null || phoneNumbers.isEmpty()) {
-				Toast.makeText(getApplicationContext(),
-						"Please Input Phone Numbers!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getApplicationContext(), "Please Input Phone Numbers!", Toast.LENGTH_SHORT).show();
 			} else if (phoneNumbers.length() < 11 || phoneNumbers.length() > 11) {
-				Toast.makeText(getApplicationContext(),
-						"Please Input 11-digit Number!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getApplicationContext(), "Please Input 11-digit Number!", Toast.LENGTH_SHORT).show();
 			} else {
 				MobileService getPhoneInfo = new MobileService(MyPhoneHandler, phoneNumbers);
 				getPhoneInfo.start();
+				
+				process = CircleProgress.createCircleProgressDialog(this, "Query");
+				process.show();
 			}
 			break;
 		case R.id.iv_Contact:
@@ -133,13 +136,9 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 
 			if (!phone_Information.equals("")) {
 				cbm.setText(phone_Information);
-				Toast.makeText(getApplicationContext(),
-						"Phone information has been copied!",
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Phone information has been copied!", Toast.LENGTH_SHORT).show();
 			} else {
-				Toast.makeText(getApplicationContext(),
-						"Phone information is Empty!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getApplicationContext(), "Phone information is Empty!", Toast.LENGTH_SHORT).show();
 			}
 
 			break;
@@ -163,13 +162,10 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 				cursor.moveToFirst();
 				String phone_Numbers = getContactPhone(cursor);
 				if (phone_Numbers.equals("")) {
-					Toast.makeText(getApplicationContext(),
-							"This contact no phone number!", Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(getApplicationContext(), "This contact no phone number!", Toast.LENGTH_SHORT).show();
 				} else {
 					et_PhoneNumbers.setText(phone_Numbers);
-					MobileService getPhoneInfo = new MobileService(
-							MyPhoneHandler, phone_Numbers);
+					MobileService getPhoneInfo = new MobileService(MyPhoneHandler, phone_Numbers);
 					getPhoneInfo.start();
 				}
 			}
@@ -189,10 +185,8 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 			String contactId = cursor.getString(idColumn);
 			// 获取联系人的电话
 			Cursor phone = getContentResolver().query(
-					ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-					null,
-					ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "="
-							+ contactId, null, null);
+					ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+					ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactId, null, null);
 			if (phone.moveToFirst()) {
 				for (; !phone.isAfterLast(); phone.moveToNext()) {
 					int index = phone
