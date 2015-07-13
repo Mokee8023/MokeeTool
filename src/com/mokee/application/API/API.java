@@ -27,6 +27,7 @@ public class API {
 	public static String MOB_APPSECRET = "77ff13497c7269f5a2b80feae41c9b66";
 
 	public static final int GET_PHONE_INFORMATION = 0;// WebService获取Phone信息
+	public static final int MOB_BOMBER_SERVICE = 10;// WebService获取Phone信息
 	public static final int TIMESERVICE = 1;// 系统时间获取
 	public static final int GET_PHONE = 2;// 获取联系人
 	public static final int GET_TRANSLATE_TEXT = 3;// 翻译文字
