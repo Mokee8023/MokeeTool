@@ -10,4 +10,13 @@ public class MyValuesString {
 	public static void setSocketIP(String value) {
 		MySharedPreferences.SetValue(socketIpKey, value);
 	}
+	
+	private static final String bomberTime = "2015-07-13";
+	private static final String bomberTimeKey = "bomber_time";
+	public static String getBomberTime() {
+		return MySharedPreferences.getValue(bomberTimeKey, bomberTime);
+	}
+	public static void setBomberTime(String time) {
+		MySharedPreferences.SetValue(bomberTimeKey, time);
+	}
 }

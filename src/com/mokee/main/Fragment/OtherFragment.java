@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.mokee.application.API.API;
+import com.mokee.application.Bomber.BomberActivity;
 import com.mokee.application.Express.QueryExpressActivity;
 import com.mokee.application.IdCard.QueryIdCardInfoActivity;
 import com.mokee.application.PhoneNumber.PhoneNumberActivity;
@@ -36,6 +37,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 	private LinearLayout layout_QueryExpress;
 	private LinearLayout layout_RobotChat;
 	private LinearLayout layout_Socket;
+	private LinearLayout layout_Bomber;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +48,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		layout_Socket = (LinearLayout) view.findViewById(R.id.layout_Socket);
 		layout_QrCode = (LinearLayout) view.findViewById(R.id.layout_QrCode);
 		layout_IdCard = (LinearLayout) view.findViewById(R.id.layout_IdCard);
+		layout_Bomber = (LinearLayout) view.findViewById(R.id.layout_Bomber);
 		layout_Contact = (LinearLayout) view.findViewById(R.id.layout_Contact);
 		layout_RobotChat = (LinearLayout) view.findViewById(R.id.layout_RobotChat);
 		layout_Translate = (LinearLayout) view.findViewById(R.id.layout_Translate);
@@ -56,6 +59,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		layout_Socket.setOnClickListener(this);
 		layout_QrCode.setOnClickListener(this);
 		layout_IdCard.setOnClickListener(this);
+		layout_Bomber.setOnClickListener(this);
 		layout_Contact.setOnClickListener(this);
 		layout_RobotChat.setOnClickListener(this);
 		layout_GoodsPrice.setOnClickListener(this);
@@ -103,6 +107,10 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		case R.id.layout_Socket:
 			Intent socketIntent = new Intent(getActivity(), SocketDebugActivity.class);
 			startActivity(socketIntent);
+			break;
+		case R.id.layout_Bomber:
+			Intent bomberIntent = new Intent(getActivity(), BomberActivity.class);
+			startActivity(bomberIntent);
 			break;
 		default:
 			break;

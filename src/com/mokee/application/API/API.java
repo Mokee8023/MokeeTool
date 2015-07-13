@@ -22,6 +22,9 @@ public class API {
 	//https://www.showapi.com/app/editApp     ShowAPI(易源)的接口
 	public static String ShOWAPI_KUAIDI_secret = "8f4e447a431e4fe8bbbe28ff1ad29eb4";
 	public static String ShOWAPI_KUAIDI_appid = "106";
+	
+	public static String MOB_APPKEY = "8bfac99f2757";
+	public static String MOB_APPSECRET = "77ff13497c7269f5a2b80feae41c9b66";
 
 	public static final int GET_PHONE_INFORMATION = 0;// WebService获取Phone信息
 	public static final int TIMESERVICE = 1;// 系统时间获取

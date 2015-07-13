@@ -16,6 +16,7 @@
     <string name="idcard_information">IDCard Information...</string>
     <string name="translation">Translation</string>
     <string name="socket">Socket Debug</string>
+    <string name="bomber">Hacker Bomber</string>
     <string name="express_query">Express Query</string>
     <string name="robot_chat">Robot Chat</string>
     <string name="express_num">Num:</string>
@@ -55,5 +56,9 @@
     <string name="price2_et_hint">Price two</string>
     <string name="price3_et_hint">Price three</string>
     <string name="info_tv">Goods Info:</string>
+    
+    <string name="bomber_phone">Bomber Phone</string>
+    <string name="bomber_number">Bomber Number</string>
+    <string name="bomber_start">Bomber Start</string>
 
 </resources>

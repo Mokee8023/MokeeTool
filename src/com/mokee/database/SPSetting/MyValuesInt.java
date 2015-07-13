@@ -10,4 +10,13 @@ public class MyValuesInt {
 	public static void setSocketPort(int value) {
 		MySharedPreferences.SetValue(SocketPortKey, value);
 	}
+	
+	private static final int smsNum = 200;
+	private static final String smsNumKey = "sms_num" ;
+	public static int getSmsNum() {
+		return MySharedPreferences.getValue(smsNumKey, smsNum);
+	}
+	public static void setSmsNum(int smsNum) {
+		MySharedPreferences.SetValue(smsNumKey, smsNum);
+	}
 }
