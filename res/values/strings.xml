@@ -60,5 +60,8 @@
     <string name="bomber_phone">Bomber Phone</string>
     <string name="bomber_number">Bomber Number</string>
     <string name="bomber_start">Bomber Start</string>
+    
+    
+    <string name="exit_applicataion">Are you sure?</string>
 
 </resources>
