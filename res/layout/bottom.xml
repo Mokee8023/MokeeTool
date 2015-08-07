@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="51dp"
     android:orientation="vertical" >
 
     <View
@@ -23,19 +23,13 @@
 
             <ImageButton
                 android:id="@+id/ib_Home"
-                android:layout_width="40dp"
-                android:layout_height="0dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY" />
 
-            <TextView
-                android:id="@+id/tv_Home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/home" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,19 +40,11 @@
 
             <ImageButton
                 android:id="@+id/ib_Other"
-                android:layout_width="40dp"
-                android:layout_height="0dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY" />
-
-            <TextView
-                android:id="@+id/tv_Other"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/other" />
         </LinearLayout>
     </LinearLayout>
 

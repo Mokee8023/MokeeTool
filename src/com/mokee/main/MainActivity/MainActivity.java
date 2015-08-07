@@ -41,13 +41,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	private ImageButton ib_Other;
 	private ImageButton ib_Setting;
 
-	private TextView tv_Home;
-	private TextView tv_Other;
-	
-	// private HomeFragment homeFragment;
-	// private TranslationFragment translationFragment;
-	// private OtherFragment otherFragment;
-
 	private List<Fragment> list;
 	private Long exitTime = 0L;
 	private static final int EXITINTERVAL = 2000;// 退出间隔
@@ -79,9 +72,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		ib_Home = (ImageButton) findViewById(R.id.ib_Home);
 		ib_Other = (ImageButton) findViewById(R.id.ib_Other);
 		ib_Setting = (ImageButton) findViewById(R.id.ib_Setting);
-
-		tv_Home = (TextView) findViewById(R.id.tv_Home);
-		tv_Other = (TextView) findViewById(R.id.tv_Other);
 
 		ib_Home.setOnClickListener(this);
 		ib_Other.setOnClickListener(this);
@@ -138,20 +128,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	public void setOriginState() {
 		ib_Home.setBackgroundResource(R.drawable.home_nomal_gray);
 		ib_Other.setBackgroundResource(R.drawable.other_normal_gray);
-
-		tv_Home.setTextColor(Color.BLACK);
-		tv_Other.setTextColor(Color.BLACK);
 	}
 
 	public void setSelectedPager(int position) {
 		switch (position) {
 		case 0:
 			ib_Home.setBackgroundResource(R.drawable.home_nomal_bright);
-			tv_Home.setTextColor(Color.BLUE);
 			break;
 		case 1:
 			ib_Other.setBackgroundResource(R.drawable.other_nomal_bright);
-			tv_Other.setTextColor(Color.BLUE);
 			break;
 		default:
 			break;
@@ -187,29 +172,17 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
 			if(MyValuesBool.isQuitWindow()){
 				builderExitWindow();
-			} else {
-				finish();
-				System.exit(0);
+			} else {// 按两次退出的代码
+				if (System.currentTimeMillis() - exitTime > EXITINTERVAL) {// 2s
+					Toast.makeText(getApplicationContext(), "Press again to exit the program！", Toast.LENGTH_SHORT).show();
+					exitTime = System.currentTimeMillis();
+				} else {
+					finish();
+					System.exit(0);
+				}
 			}
-			
 			return true;
 		}
-		
-//	按两次退出的代码
-//		if (keyCode == KeyEvent.KEYCODE_BACK
-//				&& event.getAction() == KeyEvent.ACTION_DOWN) {
-//			if (System.currentTimeMillis() - exitTime > EXITINTERVAL) {// 2s
-//				Toast.makeText(getApplicationContext(),
-//						"Press again to exit the program！", Toast.LENGTH_SHORT)
-//						.show();
-//				exitTime = System.currentTimeMillis();
-//			} else {
-//				finish();// 将活动推向后台，并没有立即释放内存
-//				System.exit(0);// 杀死了整个Application，活动所占的资源被释放
-//			}
-//			return true;
-//		}
-
 		return super.onKeyDown(keyCode, event);
 	}
 	

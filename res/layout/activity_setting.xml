@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="#EBEBEB"
     android:orientation="vertical" >
-    <include layout="@layout/sub_layout_top"/>
+
+    <include layout="@layout/sub_layout_top" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,21 +15,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
-            
-            <TextView 
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_background_gradient"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:textStyle="bold"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="@string/display_setting_tip"
                 android:textSize="20sp"
-                android:text="@string/display_setting_tip"/>
-            
-            <View 
+                android:textStyle="bold" />
+
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="3px"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/textview_background_gradient"/>
+                android:background="@drawable/textview_background_gradient" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,7 +52,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/sweep" />
+                        android:text="@string/sweep"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_Sweep"
@@ -77,7 +81,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/generate_qrcode" />
+                        android:text="@string/generate_qrcode"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_GenerateQrCode"
@@ -110,7 +115,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/numbers_attribution" />
+                        android:text="@string/numbers_attribution"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_PhoneNumber"
@@ -138,7 +144,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/idcard" />
+                        android:text="@string/idcard"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_IdCard"
@@ -166,7 +173,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/goods_price" />
+                        android:text="@string/goods_price"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_GoodsPrice"
@@ -199,7 +207,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/translation" />
+                        android:text="@string/translation"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_Translation"
@@ -227,7 +236,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/express_query" />
+                        android:text="@string/express_query"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_Express"
@@ -255,7 +265,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/robot_chat" />
+                        android:text="@string/robot_chat"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_RobotChat"
@@ -288,7 +299,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/socket" />
+                        android:text="@string/socket"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_Socket"
@@ -316,7 +328,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/bomber" />
+                        android:text="@string/bomber"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_Bomber"
@@ -328,6 +341,7 @@
                         android:textOn="@string/layout_show_text" />
                 </RelativeLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -348,7 +362,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:text="@string/switch_is_show_quit_window" />
+                        android:text="@string/switch_is_show_quit_window"
+                        android:textStyle="bold" />
 
                     <Switch
                         android:id="@+id/sw_QuitWindow"
@@ -356,8 +371,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:checked="true"
-                        android:textOff="@string/layout_no_text"
-                        android:textOn="@string/layout_yes_text" />
+                        android:textOff="@string/layout_hide_text"
+                        android:textOn="@string/layout_show_text" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
