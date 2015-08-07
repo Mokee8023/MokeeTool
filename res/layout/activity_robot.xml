@@ -9,32 +9,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Chat with the robot："
-            android:textColor="#FF00FF"
-            android:layout_alignParentLeft="true"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/ib_ClearChat"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/clear_xml"
-            android:visibility="invisible" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/sv_ScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="10dp"
@@ -43,10 +21,9 @@
         android:layout_weight="1"
         android:background="@drawable/edittext_shap" >
 
-        <ScrollView
-            android:id="@+id/sv_ScrollView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="match_parent" >
 
             <TextView
                 android:id="@+id/tv_RobotData"
@@ -54,36 +31,55 @@
                 android:layout_height="wrap_content"
                 android:hint="Chat Content List..."
                 android:padding="10dp" />
-        </ScrollView>
-    </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageButton
+                    android:id="@+id/ib_ClearChat"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:color/transparent"
+                    android:padding="4dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/clear_xml" />
+            </RelativeLayout>
+        </FrameLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp" >
 
         <EditText
             android:id="@+id/et_ChatData"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginBottom="3dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="3dp"
             android:layout_marginTop="3dp"
             android:layout_weight="1"
-            android:background="@drawable/edittext_shap"
             android:hint="Chat Content..."
             android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
+            android:paddingRight="10dp"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btn_SendChat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_width="55dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/button_shap"
-            android:text="Send" />
+            android:text="Send"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 </LinearLayout>

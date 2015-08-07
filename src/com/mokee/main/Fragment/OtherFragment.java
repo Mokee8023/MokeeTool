@@ -110,6 +110,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		}
 		if(!MyValuesBool.isGoodsPrice()){
 			layout_GoodsPrice.setVisibility(View.GONE);
+			idCard_down_view.setVisibility(View.GONE);
 		}
 		if(!MyValuesBool.isTranslation()){
 			layout_Translate.setVisibility(View.GONE);
@@ -128,6 +129,7 @@ public class OtherFragment extends Fragment implements OnClickListener {
 		}
 		if(!MyValuesBool.isHackerBomber()){
 			layout_Bomber.setVisibility(View.GONE);
+			socket_down_view.setVisibility(View.GONE);
 		}
 		
 		if(!MyValuesBool.isSweep() && !MyValuesBool.isGenerateQrCode()){

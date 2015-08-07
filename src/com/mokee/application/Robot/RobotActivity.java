@@ -1,12 +1,8 @@
 package com.mokee.application.Robot;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,7 +14,6 @@ import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -58,6 +53,7 @@ public class RobotActivity extends Activity implements OnClickListener, OnLongCl
 				// Html.fromHtml("<font color='blue'><b>" + text + "</b></font>");
 				sb_Robot.append("Robot: ").append(text).append("\n\n");
 				tv_RobotData.setText(sb_Robot.toString());
+				ib_ClearChat.setVisibility(View.VISIBLE);
 				scrollToBottom(sv_ScrollView, tv_RobotData);
 				break;
 				
@@ -100,6 +96,8 @@ public class RobotActivity extends Activity implements OnClickListener, OnLongCl
 		et_ChatData.setOnClickListener(this);
 		
 		tv_RobotData.setOnLongClickListener(this);
+		
+		ib_ClearChat.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -137,7 +135,6 @@ public class RobotActivity extends Activity implements OnClickListener, OnLongCl
 			
 		case R.id.ib_Return:
 			finish();
-			onDestroy();
 			break;
 			
 		case R.id.ib_ClearChat:
@@ -146,6 +143,7 @@ public class RobotActivity extends Activity implements OnClickListener, OnLongCl
 			sb_Robot.delete(0, sb_Robot.length());
 			ib_ClearChat.setVisibility(View.INVISIBLE);
 			tv_RobotData.setText(sb_Robot.toString());
+			ib_ClearChat.setVisibility(View.INVISIBLE);
 			break;
 			
 		case R.id.et_ChatData:
