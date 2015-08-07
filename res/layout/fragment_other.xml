@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@drawable/textview_background_gradient" />
 
                 <LinearLayout
                     android:id="@+id/layout_QrCode"
@@ -116,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@drawable/textview_background_gradient" />
 
                 <LinearLayout
                     android:id="@+id/layout_IdCard"
@@ -147,7 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@drawable/textview_background_gradient" />
 
                 <LinearLayout
                     android:id="@+id/layout_GoodsPrice"
@@ -211,7 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@drawable/textview_background_gradient" />
 
                 <LinearLayout
                     android:id="@+id/layout_QueryExpress"
@@ -242,7 +242,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@drawable/textview_background_gradient" />
 
                 <LinearLayout
                     android:id="@+id/layout_RobotChat"
@@ -306,7 +306,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
-                    android:background="@android:color/darker_gray" />
+                    android:background="@drawable/textview_background_gradient" />
 
                 <LinearLayout
                     android:id="@+id/layout_Bomber"
