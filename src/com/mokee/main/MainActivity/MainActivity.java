@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mokee.database.SPSetting.MySharedPreferences;
+import com.mokee.database.SPSetting.MyValuesBool;
 import com.mokee.main.Fragment.HomeFragment;
 import com.mokee.main.Fragment.OtherFragment;
 import com.mokee.main.Help.HelpActivity;
@@ -38,7 +39,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	private ImageButton ib_Home;
 	private ImageButton ib_Other;
-	private ImageButton ib_Help;
+	private ImageButton ib_Setting;
 
 	private TextView tv_Home;
 	private TextView tv_Other;
@@ -59,6 +60,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 
 		initView();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
 		initViewPager();
 		setOriginState();
 		setSelectedPager(1);
@@ -71,14 +78,14 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
 		ib_Home = (ImageButton) findViewById(R.id.ib_Home);
 		ib_Other = (ImageButton) findViewById(R.id.ib_Other);
-		ib_Help = (ImageButton) findViewById(R.id.ib_Help);
+		ib_Setting = (ImageButton) findViewById(R.id.ib_Setting);
 
 		tv_Home = (TextView) findViewById(R.id.tv_Home);
 		tv_Other = (TextView) findViewById(R.id.tv_Other);
 
 		ib_Home.setOnClickListener(this);
 		ib_Other.setOnClickListener(this);
-		ib_Help.setOnClickListener(this);
+		ib_Setting.setOnClickListener(this);
 
 	}
 
@@ -155,9 +162,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
-		case R.id.ib_Help:
+		case R.id.ib_Setting:
 			Intent intent = new Intent();
-			intent.setClass(MainActivity.this, HelpActivity.class);
+			// intent.setClass(MainActivity.this, HelpActivity.class);
+			intent.setClass(MainActivity.this, SettingActivity.class);
 			startActivity(intent);
 			break;
 		case R.id.ib_Home:
@@ -177,7 +185,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
-			builderExitWindow();
+			if(MyValuesBool.isQuitWindow()){
+				builderExitWindow();
+			} else {
+				finish();
+				System.exit(0);
+			}
+			
 			return true;
 		}
 		

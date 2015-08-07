@@ -16,6 +16,7 @@
             android:orientation="vertical" >
 
             <LinearLayout
+                android:id="@+id/layout_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -47,6 +48,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/sweep_down_view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
@@ -78,6 +80,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -109,6 +112,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/contact_down_view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
@@ -139,6 +143,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/idCard_down_view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
@@ -170,6 +175,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -201,6 +207,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/translate_down_view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
@@ -231,6 +238,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/express_down_view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"
@@ -262,6 +270,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -293,6 +302,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/socket_down_view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="5dp"

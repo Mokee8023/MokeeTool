@@ -1,95 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/layout_HomeFragment"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_SystemTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp" >
+        android:background="@drawable/textview_background_gradient"
+        android:gravity="center_horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@android:color/holo_orange_light"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="System Time: "
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/tv_SystemTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_blue_bright"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp" >
+        android:layout_height="2px"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/textview_background_gradient" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Wifi Info: " />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/tv_Wifi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </ScrollView>
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp" >
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SIM Info: " />
+            android:orientation="vertical" >
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/tv_SIM"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </ScrollView>
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp" >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_background_gradient"
+                    android:paddingLeft="10dp"
+                    android:text="Wifi Info: "
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="System Info: " />
+                <TextView
+                    android:id="@+id/tv_Wifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp" />
+            </LinearLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/tv_System"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </ScrollView>
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_background_gradient"
+                    android:paddingLeft="10dp"
+                    android:text="SIM Info: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_SIM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_background_gradient"
+                    android:paddingLeft="10dp"
+                    android:text="System Info: "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_System"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

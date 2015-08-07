@@ -33,12 +33,12 @@
             android:layout_alignParentRight="true" >
 
             <ImageButton
-                android:id="@+id/ib_Help"
+                android:id="@+id/ib_Setting"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                android:src="@drawable/help" />
+                android:src="@drawable/setting_xml" />
         </LinearLayout>
     </RelativeLayout>
 

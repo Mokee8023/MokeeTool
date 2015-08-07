@@ -63,5 +63,13 @@
     
     
     <string name="exit_applicataion">Are you sure?</string>
+    
+    <string name="layout_show_text">Show</string>
+    <string name="layout_hide_text">Hide</string>
+    <string name="layout_yes_text">Yes</string>
+    <string name="layout_no_text">No</string>
+    <string name="switch_is_show_quit_window">Show Exit Window ?</string>
+    
+    <string name="display_setting_tip">Display Settings</string>
 
 </resources>

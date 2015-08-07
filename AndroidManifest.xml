@@ -78,6 +78,7 @@
         </activity>
         <activity android:name="com.mokee.application.Socket.SocketSingleImageActivity"></activity>
         <activity android:name="com.mokee.application.Bomber.BomberActivity"></activity>
+        <activity android:name="com.mokee.main.MainActivity.SettingActivity"></activity>
     </application>
 
 </manifest>
