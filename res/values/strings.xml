@@ -7,10 +7,10 @@
     <string name="action_settings">Settings</string>
     <string name="phone_attribution">Phone Numbers</string>
     <string name="phone_information">Phone Information...</string>
-    <string name="numbers_attribution">Phone Numbers Attribution</string>
+    <string name="numbers_attribution">Query Phone</string>
     <string name="idcard">ID Card Query</string>
     <string name="goods_price">Goods Price</string>
-    <string name="tv_query_number_attribution">Query Number Attribution</string>
+    <string name="tv_query_number_attribution">Query Phone Number</string>
     <string name="tv_query_idcard">Query IDCard Information</string>
     <string name="input_idcard_number">Input IDCard Number...</string>
     <string name="idcard_information">IDCard Information...</string>

@@ -67,6 +67,7 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 		sw_RobotChat.setChecked(MyValuesBool.isRobotChat());
 		sw_Socket.setChecked(MyValuesBool.isSocketDebug());
 		sw_Bomber.setChecked(MyValuesBool.isHackerBomber());
+		sw_QuitWindow.setChecked(MyValuesBool.isQuitWindow());
 		
 		ib_Return.setOnClickListener(new OnClickListener() {
 			
