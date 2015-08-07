@@ -7,6 +7,7 @@ import com.mokee.tools.R;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -38,6 +39,7 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 	private ImageButton ib_Return;
 	private ImageButton ib_ClearChat;
 	private TextView activity_Text;
+	private TextView tv_SubTopText;
 	
 	private ScrollView sv_Translate;
 	
@@ -88,6 +90,7 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 		ib_Return = (ImageButton) findViewById(R.id.ib_Return);
 		ib_ClearChat = (ImageButton) findViewById(R.id.ib_ClearChat);
 		activity_Text = (TextView) findViewById(R.id.activity_Text);
+		tv_SubTopText = (TextView) findViewById(R.id.tv_SubTopText);
 		sv_Translate = (ScrollView) findViewById(R.id.sv_Translate);
 		
 		String[] items = getResources().getStringArray(R.array.Language);
@@ -101,6 +104,9 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 		sp_SourceLang.setSelection(1);
 		sp_TargetLang.setSelection(2);
 		activity_Text.setText(R.string.translation);
+		tv_SubTopText.setText(R.string.translate_from_textview);
+		tv_SubTopText.setVisibility(View.VISIBLE);
+		tv_SubTopText.setTextColor(Color.WHITE);
 		
 		sp_SourceLang.setOnItemSelectedListener(new OnItemSelectedListener() {
 

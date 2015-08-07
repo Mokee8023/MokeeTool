@@ -69,5 +69,6 @@
     <string name="switch_is_show_quit_window">Show Exit Window ?</string>
     
     <string name="display_setting_tip">Display Settings</string>
+    <string name="translate_from_textview">基于百度翻译</string>
 
 </resources>

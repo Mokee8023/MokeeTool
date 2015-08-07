@@ -35,7 +35,8 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="20dp"
                 android:paddingTop="10dp"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"
+                android:textSize="15sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -75,9 +76,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:longClickable="true"
                     android:gravity="left|top"
                     android:hint="@string/result_text_hint"
+                    android:longClickable="true"
                     android:padding="10dp"
                     android:textSize="15sp" />
             </ScrollView>
@@ -89,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="horizontal" >
@@ -114,8 +115,8 @@
 
         <ImageButton
             android:id="@+id/ib_tranlate"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:background="@android:color/transparent"
             android:scaleType="fitXY"
