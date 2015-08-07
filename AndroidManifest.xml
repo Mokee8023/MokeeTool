@@ -62,7 +62,7 @@
         </activity>
         <activity
             android:name="com.mokee.application.Translate.TranslateActivity"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity android:name="com.mokee.application.Express.QueryExpressActivity" >
         </activity>

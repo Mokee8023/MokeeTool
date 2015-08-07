@@ -25,7 +25,7 @@
     <string name="home">Home</string>
     <string name="other">Other</string>
     <string name="btn_tranlate">Tranlate</string>
-    <string name="translate_text_hint">Please enter the text to be translated...</string>
+    <string name="translate_text_hint">Enter text translation...</string>
     <string name="result_text_hint">The results of translation...</string>
     <string name="sweep">Sweep</string>
     <string name="generate_qrcode">Generate Qrcode</string>

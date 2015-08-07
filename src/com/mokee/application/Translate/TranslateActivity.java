@@ -10,6 +10,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -18,6 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +38,9 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 	private ImageButton ib_Return;
 	private ImageButton ib_ClearChat;
 	private TextView activity_Text;
-
+	
+	private ScrollView sv_Translate;
+	
 	private String sourceLang = "auto";// 默认情况下是自动识别
 	private String targetLang = "auto";
 
@@ -47,9 +53,15 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 			case API.GET_TRANSLATE_TEXT:
 				if (msg.obj != null) {
 					tv_ResultText.setText(msg.obj.toString());
+					MyTranslateHandler.post(new Runnable() {
+						
+						@Override
+						public void run() {
+							sv_Translate.fullScroll(ScrollView.FOCUS_DOWN);
+						}
+					});
 				} else {
-					Toast.makeText(getApplicationContext(),
-							"Result text is NULL!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "Result text is NULL!", Toast.LENGTH_SHORT).show();
 				}
 				break;
 			default:
@@ -76,7 +88,8 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 		ib_Return = (ImageButton) findViewById(R.id.ib_Return);
 		ib_ClearChat = (ImageButton) findViewById(R.id.ib_ClearChat);
 		activity_Text = (TextView) findViewById(R.id.activity_Text);
-
+		sv_Translate = (ScrollView) findViewById(R.id.sv_Translate);
+		
 		String[] items = getResources().getStringArray(R.array.Language);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				getApplicationContext(),
@@ -118,6 +131,23 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 		ib_Return.setOnClickListener(this);
 		ib_ClearChat.setOnClickListener(this);
 		tv_ResultText.setOnLongClickListener(this);
+		
+		ib_ClearChat.setVisibility(View.INVISIBLE);
+		et_TranslateText.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				if(s.length() == 0){
+					ib_ClearChat.setVisibility(View.INVISIBLE);
+				} else {
+					ib_ClearChat.setVisibility(View.VISIBLE);
+				}
+			}
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+			@Override
+			public void afterTextChanged(Editable s) { }
+		});
 	}
 
 	@Override

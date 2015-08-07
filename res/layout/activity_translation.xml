@@ -14,12 +14,28 @@
         android:layout_below="@id/include_Top"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/et_TranslateText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edittext_shap"
+                android:gravity="left|top"
+                android:hint="@string/translate_text_hint"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:scrollbars="vertical" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -30,34 +46,28 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
+                    android:padding="4dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/clear" />
+                    android:src="@drawable/clear_xml" />
             </RelativeLayout>
-
-            <EditText
-                android:id="@+id/et_TranslateText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/edittext_shap"
-                android:gravity="left|top"
-                android:hint="@string/translate_text_hint"
-                android:padding="10dp" />
-        </LinearLayout>
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:orientation="vertical" >
 
             <ScrollView
+                android:id="@+id/sv_Translate"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_shap" >
 
                 <TextView
@@ -65,6 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:longClickable="true"
                     android:gravity="left|top"
                     android:hint="@string/result_text_hint"
                     android:padding="10dp"
@@ -81,7 +92,6 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal" >
 
         <LinearLayout
