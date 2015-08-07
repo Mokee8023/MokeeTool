@@ -25,16 +25,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="For Translation:"
-                    android:textColor="#0000ff"
-                    android:gravity="center_vertical"
-                    android:layout_alignParentLeft="true"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
                 <ImageButton
                     android:id="@+id/ib_ClearChat"
                     android:layout_width="20dp"
@@ -63,14 +53,6 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Translate Result:"
-                android:textColor="#0000ff"
-                android:textSize="20sp"
-                android:textStyle="bold" />
 
             <ScrollView
                 android:layout_width="match_parent"
