@@ -108,8 +108,7 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 			et_PhoneNumbers.setText("");
 			tv_PhoneInformation.setText("");
 
-			Intent intent = new Intent(Intent.ACTION_PICK,
-					ContactsContract.Contacts.CONTENT_URI);
+			Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 			startActivityForResult(intent, API.GET_PHONE);
 			break;
 //		case R.id.btn_QueryPhoneCancle:
@@ -167,6 +166,9 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 					et_PhoneNumbers.setText(phone_Numbers);
 					MobileService getPhoneInfo = new MobileService(MyPhoneHandler, phone_Numbers);
 					getPhoneInfo.start();
+					
+					process = CircleProgress.createCircleProgressDialog(this, "Query");
+					process.show();
 				}
 			}
 			break;
@@ -176,8 +178,7 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 	}
 
 	private String getContactPhone(Cursor cursor) {
-		int hasPhoneColumn = cursor
-				.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER);
+		int hasPhoneColumn = cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER);
 		int hasPhone = cursor.getInt(hasPhoneColumn);
 		String result = "";
 		if (hasPhone > 0) {// 有联系人

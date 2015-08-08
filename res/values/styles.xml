@@ -39,6 +39,7 @@
     </style>
 
     <style name="circle_progress_loading_dialog" parent="android:style/Theme.Translucent">
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item><!--无标题-->
         <item name="android:windowIsTranslucent">false</item><!-- 半透明 -->
         <item name="android:windowBackground">@android:color/transparent</item><!--背景透明-->

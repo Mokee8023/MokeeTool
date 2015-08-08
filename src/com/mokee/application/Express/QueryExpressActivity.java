@@ -1,6 +1,7 @@
 package com.mokee.application.Express;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.mokee.application.API.API;
 import com.mokee.application.API.APIExpressName;
 import com.mokee.tools.R;
+import com.mokee.widget.CircleProgress.CircleProgress;
 import com.zxing.activity.CaptureActivity;
 
 public class QueryExpressActivity extends Activity implements OnClickListener, OnLongClickListener {
@@ -41,6 +43,8 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 
 	private String expressName = "shunfeng";
 	
+	private Dialog process;
+	
 	private Handler MyQueryExpressHandler = new Handler() {
 
 		@Override
@@ -54,6 +58,9 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 				} else {
 					tv_ExpressQueryResult.setText(result);
 				}
+				
+				process.dismiss();
+				break;
 				
 //			case API.QUERY_EXPRESS_LIST_INFO:
 //				Log.i(TAG, "返回的 Query Result：" + msg.obj);
@@ -94,8 +101,6 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 //					e.printStackTrace();
 //				}
 //				
-//				break;
-
 			default:
 				break;
 			}
@@ -173,6 +178,9 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 				QueryShowAPIExpressInfo query = new QueryShowAPIExpressInfo(MyQueryExpressHandler, queryNumber, expressName);
 				query.start();
 			}
+			
+			process = CircleProgress.createCircleProgressDialog(this, "Query");
+			process.show();
 			break;
 
 		default:

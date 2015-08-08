@@ -4,7 +4,6 @@ import com.mokee.tools.R;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -33,9 +32,10 @@ public class CircleProgress {
         TextView text = (TextView) v.findViewById(R.id.tv_CircleProgress_Text);
         
         /** Loading animation */
-        Animation animation = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.circle_progress_loading_animation);  
+        Animation animationRotate = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.circle_progress_loading_animation);
+        
         /** Show animation and text*/
-        image.startAnimation(animation);  
+        image.startAnimation(animationRotate);  
         text.setText(msg);
   
         /** Create dialog and define the style */

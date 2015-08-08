@@ -3,8 +3,10 @@ package com.mokee.application.Translate;
 import com.mokee.application.API.API;
 import com.mokee.application.API.ApiLanguage;
 import com.mokee.tools.R;
+import com.mokee.widget.CircleProgress.CircleProgress;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Color;
@@ -45,6 +47,8 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 	
 	private String sourceLang = "auto";// 默认情况下是自动识别
 	private String targetLang = "auto";
+	
+	private Dialog process;
 
 	private Handler MyTranslateHandler = new Handler() {
 		@Override
@@ -65,6 +69,8 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 				} else {
 					Toast.makeText(getApplicationContext(), "Result text is NULL!", Toast.LENGTH_SHORT).show();
 				}
+				
+				process.dismiss();
 				break;
 			default:
 				break;
@@ -168,6 +174,9 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 						MyTranslateHandler, text, sourceLang, targetLang);
 				translate.start();
 			}
+			
+			process = CircleProgress.createCircleProgressDialog(this, "Query");
+			process.show();
 			break;
 			
 		case R.id.ib_Return:

@@ -21,9 +21,10 @@
     	 	1).重新开始  
     	 	2).plays backward
     	 8.startOffset:动画之间的时间间隔，从上次动画停多少时间开始执行下个动画
-    	 9.toDegrees:动画结束时物件旋转的角度
+    	 9.toDegrees:动画结束时物件旋转的角度
     -->
     <rotate
+        android:background="@android:color/transparent"
         android:duration="1500"
         android:fromDegrees="0"
         android:interpolator="@android:anim/linear_interpolator"
