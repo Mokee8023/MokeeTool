@@ -22,8 +22,7 @@ public class QueryShowAPIExpressInfo extends Thread {
 	private String expressNumber;
 	private String expressName;
 
-	public QueryShowAPIExpressInfo(Handler handler, String expressNumber,
-			String expressName) {
+	public QueryShowAPIExpressInfo(Handler handler, String expressNumber, String expressName) {
 		this.handler = handler;
 		this.expressNumber = expressNumber;
 		this.expressName = expressName;
@@ -34,8 +33,7 @@ public class QueryShowAPIExpressInfo extends Thread {
 		Message msg = new Message();
 		msg.what = API.QUERY_EXPRESS_INFO;
 
-		String repuestURL = QueryExpressAPI.GetShowAPIQueryExpressURL(expressNumber,
-				expressName);
+		String repuestURL = QueryExpressAPI.GetShowAPIQueryExpressURL(expressNumber, expressName);
 		Log.i(TAG, "Request Url：" + repuestURL);
 
 		HttpGet request = new HttpGet(repuestURL);

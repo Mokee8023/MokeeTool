@@ -1,7 +1,6 @@
 package com.mokee.application.Express;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.text.format.DateFormat;
@@ -22,8 +21,7 @@ public class QueryExpressAPI {
 	 * @return 生成的url
 	 */
 	public static String GetShowAPIQueryExpressURL(String number, String name) {
-		StringBuilder sb = new StringBuilder(
-				"http://route.showapi.com/64-19?showapi_appid=");
+		StringBuilder sb = new StringBuilder("http://route.showapi.com/64-19?showapi_appid=");
 		sb.append(API.ShOWAPI_KUAIDI_appid);
 		sb.append("&showapi_sign=");
 		sb.append("simple_");
@@ -111,33 +109,39 @@ public class QueryExpressAPI {
 				JSONObject originJSON = new JSONObject(data);
 				
 				if(originJSON.getInt("showapi_res_code") == 0){
-					originJSON.getJSONObject("showapi_res_body").getString("expTextName");
-					sb.append(originJSON.getJSONObject("showapi_res_body").getString("expTextName"));
+					JSONObject dataBody = originJSON.getJSONObject("showapi_res_body");
+					sb.append("Company：").append(dataBody.getString("expSpellName"));
 					sb.append("\n\n");
 					
-					JSONObject dataBody = originJSON.getJSONObject("showapi_res_body");
-					JSONArray dataArray = dataBody.getJSONArray("data");
-					sb.append("Express Status: ");
+					sb.append("Express Status: ").append(GetExpressStatus(dataBody.getInt("status")));
 					sb.append("\n\n");
-					if(dataBody.getBoolean("flag") && dataArray.length() > 0){
-						for (int i = 0; i < dataArray.length(); i++) {
-							JSONObject item = dataArray.getJSONObject(i);
-							// sb.append(i);
-							// sb.append(".");
-							sb.append(item.getString("time"));
-							sb.append(":");
-							sb.append(item.getString("context"));
-							sb.append("\n\n");
+					if (dataBody.getBoolean("flag")) {
+						JSONArray dataArray = dataBody.getJSONArray("data");
+						if (dataArray.length() > 0) {
+							for (int i = 0; i < dataArray.length(); i++) {
+								JSONObject item = dataArray.getJSONObject(i);
+								// sb.append(i);
+								// sb.append(".");
+								sb.append(item.getString("time"));
+								sb.append(":");
+								sb.append(item.getString("context"));
+								sb.append("\n\n");
+							}
+						} else {
+							sb.append("无运转记录");
 						}
 					} else {
-						sb.append("Query Failed, Reason：");
-						sb.append(dataBody.getString("message"));
-						sb.append("\n\n");
+//						sb.append("Query Failed, Reason：");
+//						sb.append(dataBody.getString("msg"));
+//						sb.append("\n\n");
 					}
 					
-					sb.append("Company Tel: ");
-					sb.append(dataBody.getString("tel"));
-					sb.append("\n\n");
+//					sb.append("Update Time：" + DateFormat.format("yyyy-MM-dd HH:mm:ss", dataBody.getLong("update")));
+//					sb.append("\n\n");
+					
+//					sb.append("Company Tel: ");
+//					sb.append(dataBody.getString("tel"));
+//					sb.append("\n\n");
 					Log.i(TAG, "JSONData:" + sb.toString());
 					return sb.toString();
 				} else {

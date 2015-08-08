@@ -28,6 +28,8 @@ import com.zxing.activity.CaptureActivity;
 
 public class QueryExpressActivity extends Activity implements OnClickListener, OnLongClickListener {
 	private static final String TAG = "QueryExpressActivity";
+	
+	public static Context expressContext;
 
 	private ImageButton ib_Return;
 	private ImageButton ib_QueryExpress;
@@ -48,9 +50,7 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 				Log.i(TAG, "返回的 Query Result：" + msg.obj);
 				String result = (String) msg.obj;
 				if (result == null || result.equals("")) {
-					Toast.makeText(getApplicationContext(),
-							"Query Result Information is Empty!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(),"Query Result Information is Empty!", Toast.LENGTH_SHORT).show();
 				} else {
 					tv_ExpressQueryResult.setText(result);
 				}
@@ -113,6 +113,8 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 		
 		QueryExpressCompList compList = new QueryExpressCompList(MyQueryExpressHandler);
 		compList.start();
+		
+		expressContext = QueryExpressActivity.this;
 	}
 
 	private void initView() {
@@ -138,15 +140,13 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 		sp_ExpressName.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				expressName = APIExpressName.GetExpressCode(position);
 				Log.i(TAG, "expressName:" + expressName);
 			}
 
 			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-			}
+			public void onNothingSelected(AdapterView<?> arg0) {}
 		});
 	}
 
@@ -159,21 +159,16 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 			break;
 
 		case R.id.ib_QueryExpress_GetNum:
-			Intent sweepIntent = new Intent(getApplicationContext(),
-					CaptureActivity.class);
+			Intent sweepIntent = new Intent(getApplicationContext(), CaptureActivity.class);
 			startActivityForResult(sweepIntent, API.SWEEP);
 			break;
 
 		case R.id.ib_QueryExpress:
-			String queryNumber = et_QueryExpressNumber.getText().toString()
-					.trim();
+			String queryNumber = et_QueryExpressNumber.getText().toString().trim();
 			if (queryNumber == null || queryNumber.equals("")) {
-				Toast.makeText(getApplicationContext(),
-						"Please input express number", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getApplicationContext(), "Please input express number", Toast.LENGTH_SHORT).show();
 			} else if (expressName == null || expressName.equals("")) {
-				Toast.makeText(getApplicationContext(),
-						"Please choice express!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Please choice express!", Toast.LENGTH_SHORT).show();
 			} else {
 				QueryShowAPIExpressInfo query = new QueryShowAPIExpressInfo(MyQueryExpressHandler, queryNumber, expressName);
 				query.start();
@@ -193,14 +188,10 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 			String expressInfo = tv_ExpressQueryResult.getText().toString().trim();
 
 			if (expressInfo == null || expressInfo.equals("")) {
-				Toast.makeText(getApplicationContext(),
-						"Express Information is Empty!", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getApplicationContext(), "Express Information is Empty!", Toast.LENGTH_SHORT).show();
 			} else {
 				cbm.setText(expressInfo);
-				Toast.makeText(getApplicationContext(),
-						"Express information has been copied!",
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Express information has been copied!", Toast.LENGTH_SHORT).show();
 			}
 			break;
 
@@ -219,9 +210,7 @@ public class QueryExpressActivity extends Activity implements OnClickListener, O
 				String result = bundle.getString("result");
 
 				if (result == null || result.equals("")) {
-					Toast.makeText(getApplicationContext(),
-							"Scan results is empty!", Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(getApplicationContext(), "Scan results is empty!", Toast.LENGTH_SHORT).show();
 				} else {
 					et_QueryExpressNumber.setText(result);
 				}

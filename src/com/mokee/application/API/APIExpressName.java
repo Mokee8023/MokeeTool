@@ -1,5 +1,8 @@
 package com.mokee.application.API;
 
+import com.mokee.application.Express.QueryExpressActivity;
+import com.mokee.tools.R;
+
 public class APIExpressName {
 	
 	public static String GetExpressCode(int position) {
@@ -63,4 +66,8 @@ public class APIExpressName {
 		return codeLang;
 	}
 
+	public static String getCompanyName(String companyCode) {
+		QueryExpressActivity.expressContext.getResources().getTextArray(R.array.Express_Name);
+		return companyCode;
+	}
 }
