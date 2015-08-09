@@ -112,7 +112,6 @@ public class TranslateActivity extends Activity implements OnClickListener, OnLo
 		activity_Text.setText(R.string.translation);
 		tv_SubTopText.setText(R.string.translate_from_textview);
 		tv_SubTopText.setVisibility(View.VISIBLE);
-		tv_SubTopText.setTextColor(Color.WHITE);
 		
 		sp_SourceLang.setOnItemSelectedListener(new OnItemSelectedListener() {
 
