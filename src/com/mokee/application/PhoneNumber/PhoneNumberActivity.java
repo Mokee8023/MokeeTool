@@ -74,14 +74,11 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 	private void initView() {
 		et_PhoneNumbers = (EditText) findViewById(R.id.et_PhoneNumbers);
 		ib_QueryPhone = (ImageButton) findViewById(R.id.ib_QueryPhone);
-//		btn_QueryPhoneCancle = (Button) findViewById(R.id.btn_QueryPhoneCancle);
 		btn_Return = (ImageButton) findViewById(R.id.btn_Return);
 		tv_PhoneInformation = (TextView) findViewById(R.id.tv_PhoneInformation);
 		tv_PhoneStyle = (TextView) findViewById(R.id.tv_PhoneStyle);
 		iv_Contact = (ImageView) findViewById(R.id.iv_Contact);
 
-		tv_PhoneStyle.setVisibility(View.VISIBLE);
-		
 		tv_PhoneInformation.setOnLongClickListener(this);
 		tv_PhoneStyle.setOnLongClickListener(this);
 		
@@ -94,7 +91,6 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 
 		ib_QueryPhone.setOnClickListener(this);
 		iv_Contact.setOnClickListener(this);
-//		btn_QueryPhoneCancle.setOnClickListener(this);
 		btn_Return.setOnClickListener(this);
 	}
 
@@ -190,6 +186,7 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 			break;
 		}
 	}
+	
 	private void selectPhoneStyle(String phone){
 		if (MyValuesInt.getPhoneStyle() == 0) {
 			BaiduAPIMobileInformation getPhoneInfo = new BaiduAPIMobileInformation(MyPhoneHandler, phone);

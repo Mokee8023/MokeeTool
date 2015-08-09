@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mokee.application.API.API;
+import com.mokee.application.PhoneNumber.BaiduAPIMobileInformation;
+import com.mokee.application.PhoneNumber.MobileService;
+import com.mokee.database.SPSetting.MyValuesInt;
 import com.mokee.main.MainActivity.MainActivity;
 import com.mokee.tools.R;
 import com.mokee.widget.CircleProgress.CircleProgress;
@@ -26,14 +29,14 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 	private static final String TAG = "QueryIdCardInfoActivity";
 
 	private EditText et_IdCard;
-//	private Button btn_QueryIdCardCancle;
 	private ImageButton ib_QueryIdCard, btn_Return;
 	private TextView tv_IdCardInfo;
+	private TextView tv_IdCardStyle;
 
 	String idCardNumber = null;
 	private Dialog process;
 
-	private Handler MyQueryIdCardInfo = new Handler() {
+	private Handler queryIdCardInfoHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
@@ -44,9 +47,6 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 				} else {
 					tv_IdCardInfo.setText(msg.obj.toString());
 				}
-				
-				process.dismiss();
-
 				break;
 			case API.BAIDU_QUERY_IDCARD_INFO://该字段使用百度接口查询
 				if (msg.obj == null) {
@@ -59,6 +59,7 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 			default:
 				break;
 			}
+			process.dismiss();
 		}
 	};
 
@@ -75,15 +76,23 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 
 	private void initView() {
 		et_IdCard = (EditText) findViewById(R.id.et_IdCard);
-//		btn_QueryIdCardCancle = (Button) findViewById(R.id.btn_QueryIdCardCancle);
 		ib_QueryIdCard = (ImageButton) findViewById(R.id.ib_QueryIdCard);
 		btn_Return = (ImageButton) findViewById(R.id.btn_Return);
 		tv_IdCardInfo = (TextView) findViewById(R.id.tv_IdCardInfo);
+		tv_IdCardStyle = (TextView) findViewById(R.id.tv_IdCardStyle);
 
 		ib_QueryIdCard.setOnClickListener(this);
-//		btn_QueryIdCardCancle.setOnClickListener(this);
 		btn_Return.setOnClickListener(this);
 		tv_IdCardInfo.setOnLongClickListener(this);
+		tv_IdCardStyle.setOnLongClickListener(this);
+		
+
+		if(MyValuesInt.getIDCardStyle() == 0){
+			tv_IdCardStyle.setText("基于百度API");
+		} else if(MyValuesInt.getIDCardStyle() == 1){
+			tv_IdCardStyle.setText("基于GPSSO");
+		}
+		tv_IdCardStyle.setTag(MyValuesInt.getIDCardStyle());
 	}
 
 	@Override
@@ -98,13 +107,7 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 			} else if (!(API.StringISNum(idCardNumber.substring(0, idCardNumber.length() - 2)))) {
 				Toast.makeText(getApplicationContext(), "Can't contain letters before 17!", 0).show();
 			} else {
-				 IdCardService service = new IdCardService(MyQueryIdCardInfo, idCardNumber);
-				 service.start();
-//				BaiduIDCardService service = new BaiduIDCardService(MyQueryIdCardInfo, idCardNumber);
-//				service.start();
-				 process = CircleProgress.createCircleProgressDialog(this, "Query");
-				 process.show();
-				 
+				selectPhoneStyle(idCardNumber);
 			}
 			break;
 			
@@ -131,10 +134,33 @@ public class QueryIdCardInfoActivity extends Activity implements OnClickListener
 				Toast.makeText(getApplicationContext(), "IdCard information has been copied!", 0).show();
 			}
 			break;
+		case R.id.tv_IdCardStyle:
+			if ((Integer) tv_IdCardStyle.getTag() == 0) {
+				MyValuesInt.setIDCardStyle(1);
+				tv_IdCardStyle.setText("基于GPSSO");
+			} else if((Integer) tv_IdCardStyle.getTag() == 1) {
+				MyValuesInt.setIDCardStyle(0);
+				tv_IdCardStyle.setText("基于百度API");
+			}
+			tv_IdCardStyle.setTag(MyValuesInt.getIDCardStyle());
+			break;
 
 		default:
 			break;
 		}
 		return true;
+	}
+	
+	private void selectPhoneStyle(String idcard){
+		if (MyValuesInt.getIDCardStyle() == 0) {
+			BaiduIDCardService baiDuService = new BaiduIDCardService(queryIdCardInfoHandler, idcard);
+			baiDuService.start();
+			
+		} else if (MyValuesInt.getIDCardStyle() == 1) {
+			IdCardService gpssoService = new IdCardService(queryIdCardInfoHandler, idcard);
+			gpssoService.start();
+		}
+		process = CircleProgress.createCircleProgressDialog(this, "Query");
+		process.show();
 	}
 }

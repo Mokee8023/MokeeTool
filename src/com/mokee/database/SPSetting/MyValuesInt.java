@@ -29,4 +29,14 @@ public class MyValuesInt {
 	public static void setPhoneStyle(int phoneStyle) {
 		MySharedPreferences.SetValue(getPhoneStyleKey, phoneStyle);
 	}
+	
+	/** 0表示基于百度APIStore, 1表示基于GPSSo */
+	private static final int getIDCardStyle = 0;
+	private static final String getIDCardStyleKey = "phone_style";
+	public static int getIDCardStyle() {
+		return MySharedPreferences.getValue(getIDCardStyleKey, getIDCardStyle);
+	}
+	public static void setIDCardStyle(int idCardStyle) {
+		MySharedPreferences.SetValue(getIDCardStyleKey, idCardStyle);
+	}
 }

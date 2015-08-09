@@ -90,7 +90,7 @@ public class BaiduIDCardService extends Thread{
 				JSONObject idInfo = data.getJSONObject("retData");
 				buffer.append("Address: ").append(idInfo.getString("address")).append("\n\n");
 				buffer.append("Sex: ").append(BaiduIDCardUtil.getSexChina(idInfo.getString("sex"))).append("\n\n");
-				buffer.append("Birthday: ").append(idInfo.getString("birthday")).append("\n\n");
+				buffer.append("Birthday: ").append(idInfo.getString("birthday")).append("\n");
 			} else if(data.getInt("errNum") == -1){
 				buffer.append(data.getString("retMsg"));
 			} else {
