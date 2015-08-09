@@ -19,4 +19,14 @@ public class MyValuesInt {
 	public static void setSmsNum(int smsNum) {
 		MySharedPreferences.SetValue(smsNumKey, smsNum);
 	}
+	
+	/** 0表示基于百度APIStore, 1表示基于WebService */
+	private static final int getPhoneStyle = 0;
+	private static final String getPhoneStyleKey = "phone_style";
+	public static int getPhoneStyle() {
+		return MySharedPreferences.getValue(getPhoneStyleKey, getPhoneStyle);
+	}
+	public static void setPhoneStyle(int phoneStyle) {
+		MySharedPreferences.SetValue(getPhoneStyleKey, phoneStyle);
+	}
 }

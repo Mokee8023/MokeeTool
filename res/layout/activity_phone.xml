@@ -25,18 +25,28 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
                 android:src="@drawable/btn_return" />
-            
+
             <View
-            android:layout_width="1dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@android:color/holo_blue_light" />
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/holo_blue_light" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tv_query_number_attribution" />
+
+            <TextView
+                android:id="@+id/tv_PhoneStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="10sp" />
+
         </LinearLayout>
 
         <View

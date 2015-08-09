@@ -1,4 +1,4 @@
-package com.mokee.application.PhoneNumber;
+  package com.mokee.application.PhoneNumber;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mokee.application.API.API;
+import com.mokee.database.SPSetting.MyValuesInt;
 import com.mokee.tools.R;
 import com.mokee.widget.CircleProgress.CircleProgress;
 
@@ -33,6 +34,7 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 	private ImageButton ib_QueryPhone,btn_Return;
 //	private Button btn_QueryPhoneCancle;
 	private TextView tv_PhoneInformation;
+	private TextView tv_PhoneStyle;
 	private ImageView iv_Contact;
 	
 	private Dialog process;
@@ -45,8 +47,7 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 			switch (msg.what) {
 			case API.GET_PHONE_INFORMATION:
 				if (msg.obj == null) {
-					Toast.makeText(getApplicationContext(), "Query failed!",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "Query failed!", Toast.LENGTH_SHORT).show();
 				} else {
 					tv_PhoneInformation.setText(msg.obj.toString());
 				}
@@ -76,9 +77,20 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 //		btn_QueryPhoneCancle = (Button) findViewById(R.id.btn_QueryPhoneCancle);
 		btn_Return = (ImageButton) findViewById(R.id.btn_Return);
 		tv_PhoneInformation = (TextView) findViewById(R.id.tv_PhoneInformation);
+		tv_PhoneStyle = (TextView) findViewById(R.id.tv_PhoneStyle);
 		iv_Contact = (ImageView) findViewById(R.id.iv_Contact);
 
+		tv_PhoneStyle.setVisibility(View.VISIBLE);
+		
 		tv_PhoneInformation.setOnLongClickListener(this);
+		tv_PhoneStyle.setOnLongClickListener(this);
+		
+		if(MyValuesInt.getPhoneStyle() == 0){
+			tv_PhoneStyle.setText("基于百度API");
+		} else if(MyValuesInt.getPhoneStyle() == 1){
+			tv_PhoneStyle.setText("基于WebService");
+		}
+		tv_PhoneStyle.setTag(MyValuesInt.getPhoneStyle());
 
 		ib_QueryPhone.setOnClickListener(this);
 		iv_Contact.setOnClickListener(this);
@@ -97,11 +109,7 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 			} else if (phoneNumbers.length() < 11 || phoneNumbers.length() > 11) {
 				Toast.makeText(getApplicationContext(), "Please Input 11-digit Number!", Toast.LENGTH_SHORT).show();
 			} else {
-				MobileService getPhoneInfo = new MobileService(MyPhoneHandler, phoneNumbers);
-				getPhoneInfo.start();
-				
-				process = CircleProgress.createCircleProgressDialog(this, "Query");
-				process.show();
+				selectPhoneStyle(phoneNumbers);
 			}
 			break;
 		case R.id.iv_Contact:
@@ -141,6 +149,16 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 			}
 
 			break;
+		case R.id.tv_PhoneStyle:
+			if ((Integer) tv_PhoneStyle.getTag() == 0) {
+				MyValuesInt.setPhoneStyle(1);
+				tv_PhoneStyle.setText("基于WebService");
+			} else if((Integer) tv_PhoneStyle.getTag() == 1) {
+				MyValuesInt.setPhoneStyle(0);
+				tv_PhoneStyle.setText("基于百度API");
+			}
+			tv_PhoneStyle.setTag(MyValuesInt.getPhoneStyle());
+			break;
 		default:
 			break;
 
@@ -164,17 +182,25 @@ public class PhoneNumberActivity extends Activity implements OnLongClickListener
 					Toast.makeText(getApplicationContext(), "This contact no phone number!", Toast.LENGTH_SHORT).show();
 				} else {
 					et_PhoneNumbers.setText(phone_Numbers);
-					MobileService getPhoneInfo = new MobileService(MyPhoneHandler, phone_Numbers);
-					getPhoneInfo.start();
-					
-					process = CircleProgress.createCircleProgressDialog(this, "Query");
-					process.show();
+					selectPhoneStyle(phone_Numbers);
 				}
 			}
 			break;
 		default:
 			break;
 		}
+	}
+	private void selectPhoneStyle(String phone){
+		if (MyValuesInt.getPhoneStyle() == 0) {
+			BaiduAPIMobileInformation getPhoneInfo = new BaiduAPIMobileInformation(MyPhoneHandler, phone);
+			getPhoneInfo.start();
+			
+		} else if (MyValuesInt.getPhoneStyle() == 1) {
+			MobileService getPhoneService = new MobileService(MyPhoneHandler, phone);
+			getPhoneService.start();
+		}
+		process = CircleProgress.createCircleProgressDialog(this, "Query");
+		process.show();
 	}
 
 	private String getContactPhone(Cursor cursor) {

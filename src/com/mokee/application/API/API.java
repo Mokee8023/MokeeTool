@@ -39,6 +39,11 @@ public class API {
 	public static final int QUERY_EXPRESS_INFO = 7;// 查詢快递
 	public static final int QUERY_EXPRESS_LIST_INFO = 8;// 查詢快递名称列表
 	public static final int SHOWAPI_ROBOT_CHAT = 9;// 查詢快递名称列表
+	
+	
+	// url
+	public static final String BaiDuPhoneInfoUrl = "http://apis.baidu.com/apistore/mobilephoneservice/mobilephone";
+	public static final String BaidDuApiStoreApiKey = "4ba872837b81fcc2da69201bdf90c328";
 
 	// Error code
 	public static final String URL_ERROR = "URL Error";
